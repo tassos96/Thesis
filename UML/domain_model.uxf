@@ -1,0 +1,79 @@
+<diagram program="umletino" version="15.1"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>570</x><y>260</y><w>150</w><h>160</h></coordinates><panel_attributes>User
+--
+id: int
+fullName: string
+email: string
+password: string
+phoneNumber: string
+institution: string
+userRole: UserRole </panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>480</x><y>310</y><w>110</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;20;90;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1220</x><y>540</y><w>150</w><h>160</h></coordinates><panel_attributes>Question
+--
+id: int
+subject: string
+difficulty: Difficulty
+description: string
+correctAnswerId: int</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>890</y><w>200</w><h>120</h></coordinates><panel_attributes>&lt;&lt;enumerator&gt;&gt;
+Difficutly
+--
+EASY
+MEDIUM
+HARD
+VERY HARD
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1360</x><y>590</y><w>160</w><h>40</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;&lt;-
+</panel_attributes><additional_attributes>10;20;140;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>770</x><y>530</y><w>150</w><h>160</h></coordinates><panel_attributes>Repository
+--
+id: int
+title: string
+desctiption: string</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>640</x><y>410</y><w>150</w><h>230</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes><additional_attributes>10;10;10;200;130;200</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1220</x><y>260</y><w>150</w><h>160</h></coordinates><panel_attributes>Test
+--
+id: int
+title: string
+subject: string
+difficulty: Difficulty
+questions_number: int</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1290</x><y>410</y><w>30</w><h>150</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;130</additional_attributes></element><element><id>Relation</id><coordinates><x>710</x><y>310</y><w>150</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes><additional_attributes>10;20;130;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>840</x><y>260</y><w>150</w><h>160</h></coordinates><panel_attributes>Assignment
+--
+id: int
+assignment_date: DateTime
+resolved_date: DateTime
+grade: double
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>980</x><y>310</y><w>260</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=1
+</panel_attributes><additional_attributes>10;20;240;20</additional_attributes></element><element><id>Relation</id><coordinates><x>910</x><y>600</y><w>330</w><h>30</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;310;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>320</x><y>720</y><w>200</w><h>120</h></coordinates><panel_attributes>&lt;&lt;enumerator&gt;&gt;
+UserRole
+--
+EXAMINER
+EXAMINEE
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>1500</x><y>540</y><w>150</w><h>160</h></coordinates><panel_attributes>possibleAnswersList
+--
+id: int
+description: string
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>340</x><y>260</y><w>150</w><h>160</h></coordinates><panel_attributes>ContactsList
+--
+id: int
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>1290</x><y>690</y><w>40</w><h>180</h></coordinates><panel_attributes>lt=-
+m1=1
+m2=*
+</panel_attributes><additional_attributes>10;10;10;160</additional_attributes></element><element><id>Relation</id><coordinates><x>1050</x><y>910</y><w>200</w><h>50</h></coordinates><panel_attributes>lt=-
+m1=*
+m2=1
+</panel_attributes><additional_attributes>10;20;180;20</additional_attributes></element><element><id>UMLClass</id><coordinates><x>1230</x><y>850</y><w>150</w><h>160</h></coordinates><panel_attributes>QuestionsCategory
+--
+id: int
+QuestionID: int
+CategoryID: int
+
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>910</x><y>850</y><w>150</w><h>160</h></coordinates><panel_attributes>Categories
+--
+id: int
+description: string
+
+
+</panel_attributes><additional_attributes></additional_attributes></element></diagram>

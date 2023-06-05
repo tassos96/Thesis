@@ -1,0 +1,12 @@
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\bin\Debug\net6.0\Controllers.deps.json
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\bin\Debug\net6.0\Controllers.dll
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\bin\Debug\net6.0\Controllers.pdb
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\Controllers.csproj.AssemblyReference.cache
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\Controllers.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\Controllers.AssemblyInfoInputs.cache
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\Controllers.AssemblyInfo.cs
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\Controllers.csproj.CoreCompileInputs.cache
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\Controllers.dll
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\refint\Controllers.dll
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\Controllers.pdb
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Controllers\obj\Debug\net6.0\ref\Controllers.dll

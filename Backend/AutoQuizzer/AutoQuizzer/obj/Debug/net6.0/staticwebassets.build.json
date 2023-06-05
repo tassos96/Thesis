@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "Hash": "TOFzgGOKpvgHXdEG5R7YBUbouIrLEymjA95ad6A3nuc=",
+  "Source": "AutoQuizzer",
+  "BasePath": "_content/AutoQuizzer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "AutoQuizzer\\wwwroot",
+      "Source": "AutoQuizzer",
+      "ContentRoot": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\wwwroot\\",
+      "BasePath": "_content/AutoQuizzer",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\wwwroot\\index.html",
+      "SourceId": "AutoQuizzer",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\wwwroot\\",
+      "BasePath": "_content/AutoQuizzer",
+      "RelativePath": "index.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    }
+  ]
+}
