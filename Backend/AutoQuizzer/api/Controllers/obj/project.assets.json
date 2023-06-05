@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
+      "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
       "projectName": "Controllers",
-      "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
+      "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
       "packagesPath": "C:\\Users\\Aantonopoulos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\obj\\",
+      "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aantonopoulos\\AppData\\Roaming\\NuGet\\NuGet.Config",

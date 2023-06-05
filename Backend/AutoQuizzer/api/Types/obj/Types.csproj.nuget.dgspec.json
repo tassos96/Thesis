@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {}
+    "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {
+    "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
+        "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
         "projectName": "Types",
-        "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
+        "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
         "packagesPath": "C:\\Users\\Aantonopoulos\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\obj\\",
+        "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aantonopoulos\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "WtZyuvfM/nRGn9yH8fPshasSClEt2ajiVBjSKxTCxmLIMIGFflkGgcH1g/rwtHGc10dy3kmesSC7afgl9AUNFQ==",
+  "dgSpecHash": "B077iVTSqXHZXERRGVnQ5jaofkWnxZKY2xZLbNEfoFcq+dil2eOOxq2g+8cv0hWwswNl0P1kEsNm3dGlRw9ZYg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
+  "projectFilePath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

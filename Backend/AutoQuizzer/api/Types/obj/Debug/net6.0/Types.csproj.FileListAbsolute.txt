@@ -12,3 +12,17 @@ C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Types\obj\D
 C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.pdb
 C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.genruntimeconfig.cache
 C:\Users\Aantonopoulos\Desktop\Master\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\ref\Types.dll
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\bin\Debug\net6.0\Types.deps.json
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\bin\Debug\net6.0\Types.runtimeconfig.json
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\bin\Debug\net6.0\Types.dll
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\bin\Debug\net6.0\Types.pdb
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.csproj.AssemblyReference.cache
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.AssemblyInfoInputs.cache
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.AssemblyInfo.cs
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.csproj.CoreCompileInputs.cache
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.dll
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\refint\Types.dll
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.pdb
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\Types.genruntimeconfig.cache
+C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\api\Types\obj\Debug\net6.0\ref\Types.dll

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
+      "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
       "projectName": "Interfaces",
-      "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
+      "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
       "packagesPath": "C:\\Users\\Aantonopoulos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\obj\\",
+      "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aantonopoulos\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\AutoQuizzer.csproj",
+      "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\AutoQuizzer.csproj",
       "projectName": "AutoQuizzer",
-      "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\AutoQuizzer.csproj",
+      "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\AutoQuizzer.csproj",
       "packagesPath": "C:\\Users\\Aantonopoulos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\obj\\",
+      "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Aantonopoulos\\AppData\\Roaming\\NuGet\\NuGet.Config",

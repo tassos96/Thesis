@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mL5u+NJeSq29Wj1kaYNgvrPn2vbGupV8Lw70tfNDolFNnAKV4cooO3lNzVJ9YGCpDDBnDEHXx4HhY3YmQbXcGA==",
+  "dgSpecHash": "lGJFvSap+tw9EsReIFiIwi0RPjT1n79Iaw/NYf4VHiHFx+Dsq0YP0bQEegdfHEC5WekZC1LtNFotSZ/X1/0yyA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
+  "projectFilePath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aantonopoulos\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Aantonopoulos\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
