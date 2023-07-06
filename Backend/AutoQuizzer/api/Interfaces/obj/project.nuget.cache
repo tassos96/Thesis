@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AKz9ITaQzLoyfp8Rvp4EAfgckIftZFGWL9/PwAM4u4dptl1krogTOaHsrGX34Pth21gI/FSnyR9RsGyxuBOYFQ==",
+  "dgSpecHash": "+Onlt0iq8cuQ8s4O0mz7NrKHCyZ3afF1BhemTffS7AaigamMX2pdDA2GD5z+XPuQpcvmncXoxIOdBnb3ixMGCA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
+  "projectFilePath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

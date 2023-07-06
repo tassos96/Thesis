@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "08ChDKXgzqve0fDsUO79Y6Ng7/q4l9DPsbHkRlAHHlb29buZX3kOUBo/Qswwyb6VY0uqEUwpuUOmQ665RMTDsA==",
+  "dgSpecHash": "hhij/n/sKhPWXKbhkZ/gu1qGgvNKkIRwYNqgwauv44TjjvkANol7L/WPLQiG+PBHajM9y/r7EXbcsMbMLNRjGQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\UserService\\UserService.csproj",
+  "projectFilePath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\UserService\\UserService.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

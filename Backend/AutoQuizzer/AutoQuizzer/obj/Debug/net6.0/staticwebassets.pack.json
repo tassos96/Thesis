@@ -1,0 +1,25 @@
+{
+  "Files": [
+    {
+      "Id": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.AutoQuizzer.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.build.AutoQuizzer.props",
+      "PackagePath": "build\\AutoQuizzer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildMultiTargeting.AutoQuizzer.props",
+      "PackagePath": "buildMultiTargeting\\AutoQuizzer.props"
+    },
+    {
+      "Id": "obj\\Debug\\net6.0\\staticwebassets\\msbuild.buildTransitive.AutoQuizzer.props",
+      "PackagePath": "buildTransitive\\AutoQuizzer.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

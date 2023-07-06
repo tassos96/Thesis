@@ -8,19 +8,19 @@
     "net6.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Aantonopoulos\\.nuget\\packages\\": {}
+    "C:\\Users\\tasso\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
+      "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
       "projectName": "Interfaces",
-      "projectPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
-      "packagesPath": "C:\\Users\\Aantonopoulos\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Aantonopoulos\\Desktop\\Master\\Thesis\\Development\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\obj\\",
+      "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
+      "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Aantonopoulos\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -51,7 +51,8 @@
           "net47",
           "net471",
           "net472",
-          "net48"
+          "net48",
+          "net481"
         ],
         "assetTargetFallback": true,
         "warn": true,
@@ -60,7 +61,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
       }
     }
   }
