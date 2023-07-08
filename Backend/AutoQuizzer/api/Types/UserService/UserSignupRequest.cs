@@ -12,8 +12,11 @@ namespace Types.UserService
         [DataMember(Name = "username")]
         public string Username { get; set; } = string.Empty;
 
-        [DataMember(Name = "fullName")]
-        public string FullName { get; set; } = string.Empty;
+        [DataMember(Name = "firstname")]
+        public string FirstName { get; set; } = string.Empty;
+
+        [DataMember(Name = "lastname")]
+        public string LastName { get; set; } = string.Empty;
 
         [DataMember(Name = "password")]
         public string Password { get; set; } = string.Empty;

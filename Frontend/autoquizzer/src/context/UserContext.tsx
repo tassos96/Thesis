@@ -57,7 +57,7 @@ export const UserContextProvider = (props: UserProviderProps) => {
   };
 
   const isUserLoggedIn = () => {
-    if((currentUser && currentUser.id> 0)){
+    if((currentUser && currentUser.userId> 0)){
         return true;
       }
       return false;

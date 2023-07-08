@@ -1,15 +1,12 @@
+import { IUserRoleEnum } from "../IUserRoleEnum";
+
 export interface IUserSignupDTO {
-    email: string,
-    username: string,
-    firstname: string,
-    lastname: string,
-    age: number,
-    genderId: number,
-    password: string,
-    street: string,
-    streetNumber: string,
-    city: string,
-    lat: string,
-    lng: string,
-    addressDescription: string
+    email: string;
+    username: string;
+    firstname: string;
+    lastname: string;
+    password: string;
+    phoneNumber: string;
+    institution: string;
+    userRole: IUserRoleEnum;
 }

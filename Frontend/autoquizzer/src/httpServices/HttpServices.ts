@@ -40,8 +40,8 @@ export const signUpUser = async (body: IUserSignupDTO) => {
 };
 
 export const loginUser = async (body: IUserLoginRequestDTO) => {
-  console.log(Appsettings.BaseUrl + "User/Login");
-  return await axios.post<IUserDTO>(Appsettings.BaseUrl + "User/Login", body);
+  console.log(Appsettings.BaseUrl + "User/LoginUser");
+  return await axios.post<IUserDTO>(Appsettings.BaseUrl + "User/LoginUser", body);
 };
 
 // export const getCategories = async () => {

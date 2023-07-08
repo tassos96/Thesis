@@ -22,7 +22,8 @@ namespace Repositories
             {
                 Username = request.Username,
                 Email = request.Email,
-                FullName = request.FullName,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
                 Password = EncryptionHelper.Encrypt(request.Password),
                 Institution = request.Institution,
                 PhoneNumber = request.PhoneNumber,
@@ -31,6 +32,20 @@ namespace Repositories
 
             await _context.Users.AddAsync(user);
             return true;
+        }
+
+        public async Task<User> GetUserAsync(string username, string password)
+        {
+            var user = await _context.Users.FirstOrDefaultAsync(x => x.Username == username || x.Email == username);
+            if (user == null)
+            {
+                return null;
+            }
+            if (!EncryptionHelper.IsValidPassword(password, user.Password))
+            {
+                return null;
+            }
+            return user;
         }
     }
 }

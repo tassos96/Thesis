@@ -1,4 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace Types.DatabaseContext
 {
@@ -156,9 +159,11 @@ namespace Types.DatabaseContext
 
                 entity.Property(e => e.Email).HasMaxLength(100);
 
-                entity.Property(e => e.FullName).HasMaxLength(250);
+                entity.Property(e => e.FirstName).HasMaxLength(250);
 
                 entity.Property(e => e.Institution).HasMaxLength(250);
+
+                entity.Property(e => e.LastName).HasMaxLength(250);
 
                 entity.Property(e => e.Password).HasMaxLength(250);
 

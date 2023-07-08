@@ -1,15 +1,14 @@
-import { IUserRoleDTO } from "./IUserRoleDTO";
+import { IUserRoleEnum } from "./IUserRoleEnum";
 
 export interface IUserDTO{
-    id: number;
-    roleId: number;
+    userId: number;
     firstName: string;
     lastName: string;
-    age: number;
-    genderId: number;
-    email: string;
     userName: string;
+    email: string;
     password: string;
-    role?: IUserRoleDTO;
+    phoneNumber: string;
+    role?: IUserRoleEnum;
+    institution: string;
     securityToken: string;
 }

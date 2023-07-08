@@ -1,21 +1,16 @@
 import { AutoComplete, Button, Col, Form, Input, InputNumber, message, Result, Row, Select, Space } from "antd";
 import { useState } from "react";
-// import AppBreadcrumb from "../../../components/AppBreadcrumb";
-//import { IUserSignupDTO } from "../../../DTO/IUserSignupDTO";
 import { showErrorMessage } from "../../../helpers/AppConstants";
 import { signUpUser } from "../../../httpServices/HttpServices";
-//import { getCoordinatesFromAddress } from "../../../httpServices/HttpServices";
-
-
-import "./SignupPage.css";
 import AppBreadcrumb from "../../../components/Breadcrumb/AppBreadcrumb";
 import { IUserSignupDTO } from "../../../DTO/SignupPage/IUserSignupDTO";
+import "./SignupPage.css";
+import { IUserRoleEnum } from "../../../DTO/IUserRoleEnum";
 
 const { Option } = Select;
 
-
 const SignupPage = () => {
-  
+
   const [messageApi, contextHolder] = message.useMessage();
   const [autoCompleteResult, setAutoCompleteResult] = useState<string[]>([]);
   const [isSignupSuccessfull, setIsSignupSuccessfull] = useState(false);
@@ -23,21 +18,15 @@ const SignupPage = () => {
 
   const onFinish = async (values: any) => {
     console.log('Received values of form: ', values);
-    const address = values.street + " " + values.streetNumber + " " + values.city; 
-    // const googleResult = await getCoordinatesFromAddress(address);
-    // const lat = googleResult.lat;
-    // const lng = googleResult.lng;
     let signUpDTO: IUserSignupDTO = values as IUserSignupDTO;
-    // signUpDTO.lat = lat.toString();
-    // signUpDTO.lng = lng.toString();
     console.log(signUpDTO);
     signUpUser(signUpDTO).then((resp) => {
       setIsSignupSuccessfull(true);
     })
-    .catch((error) => {
-      showErrorMessage(messageApi, "Η εγγραφή απέτυχε");
-      setIsSignupSuccessfull(false);
-    });
+      .catch((error) => {
+        showErrorMessage(messageApi, "Η εγγραφή απέτυχε");
+        setIsSignupSuccessfull(false);
+      });
   };
 
   const onWebsiteChange = (value: string) => {
@@ -52,6 +41,14 @@ const SignupPage = () => {
     label: website,
     value: website
   }));
+
+  const prefixSelector = (
+    <Form.Item name="prefix" noStyle>
+      <Select style={{ width: 70 }}>
+        <Option value="30">+30</Option>
+      </Select>
+    </Form.Item>
+  );
 
   return (
     <>
@@ -71,10 +68,10 @@ const SignupPage = () => {
             name="register"
             className="registration-form"
             onFinish={onFinish}
+            initialValues={{ prefix: "30" }}
             layout="vertical"
             scrollToFirstError
           >
-
             <Row className="row">
               <Col className="column" >
                 <Form.Item
@@ -151,28 +148,42 @@ const SignupPage = () => {
 
               <Col className="column" >
                 <Form.Item
-                  name="age"
-                  label="Ηλικία"
-                  rules={[
-                    {
-                      required: true,
-                      message: "Συμπλήρωσε την ηλικία σου"
-                    }
-                  ]}>
-                  <InputNumber className="input-number" min={18} max={130} />
+                  name="phoneNumber"
+                  label="Κινητό τηλέφωνο"
+                  rules={[{ required: true, message: "Συμπλήρωσε το κινητό τηλέφωνό σου" }]}
+                >
+                  <Input addonBefore={prefixSelector} style={{ width: "100%" }} />
+                </Form.Item>
+              </Col>
+            </Row>
+
+            <Row>
+              <Col className="column" >
+                <Form.Item
+                  name="userRole"
+                  label="Τύπος χρήστη"
+                  rules={[{ required: true, message: "Επέλεξε το τύπο χρήστη σου" }]}
+                >
+                  <Select placeholder="Επέλεξε το τύπο χρήστη σου">
+                    <Option value={IUserRoleEnum.Student}>Student</Option>
+                    <Option value={IUserRoleEnum.Teacher}>Teacher</Option>
+                  </Select>
                 </Form.Item>
               </Col>
 
               <Col className="column" >
                 <Form.Item
-                  name="genderId"
-                  label="Φύλο"
-                  rules={[{ required: true, message: "Επέλεξε το φύλο σου" }]}
+                  className="form-input"
+                  name="institution"
+                  label="Εταιρεία/Ίδρυμα"
+                  rules={[
+                    {
+                      required: true,
+                      message: "Συμπλήρωσε την εταιρεία/ίδρυμα σου"
+                    }
+                  ]}
                 >
-                  <Select placeholder="Επέλεξε το φύλο σου">
-                    <Option value={1}>Άνδρας</Option>
-                    <Option value={2}>Γυναίκα</Option>
-                  </Select>
+                  <Input />
                 </Form.Item>
               </Col>
             </Row>
@@ -193,10 +204,11 @@ const SignupPage = () => {
                   <Input.Password />
                 </Form.Item>
               </Col>
+
               <Col className="column" >
                 <Form.Item
                   name="confirm"
-                  label="Επιβεβαίωση Κωδικού"
+                  label="Επιβεβαίωση κωδικού"
                   dependencies={["password"]}
                   hasFeedback
                   rules={[
@@ -217,48 +229,6 @@ const SignupPage = () => {
                   ]}
                 >
                   <Input.Password />
-                </Form.Item>
-              </Col>
-            </Row>
-
-            <Row className="row">
-              <Col className="column">
-                <Form.Item
-                  name="street"
-                  label="Οδός"
-                  rules={[{ required: true, message: "Συμπλήρωσε την οδό σου" }]}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-
-              <Col className="column">
-                <Form.Item
-                  name="streetNumber"
-                  label="Αριθμός"
-                  rules={[{ required: true, message: "Συμπλήρωσε τον αριθμό της οδού σου" }]}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-
-              <Col className="column">
-                <Form.Item
-                  name="city"
-                  label="Πόλη"
-                  rules={[{ required: true, message: "Συμπλήρωσε την πόλη σου" }]}
-                >
-                  <Input />
-                </Form.Item>
-              </Col>
-
-              <Col className="column">
-                <Form.Item
-                  name="addressDescription"
-                  label="Φιλική Ονομασία Διεύθυνσης"
-                  rules={[{ required: true, message: "Συμπλήρωσε την φιλική ονομασία της διεύθυνσης σου" }]}
-                >
-                  <Input />
                 </Form.Item>
               </Col>
             </Row>

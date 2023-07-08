@@ -1,4 +1,7 @@
-﻿namespace Types.DatabaseContext
+﻿using System;
+using System.Collections.Generic;
+
+namespace Types.DatabaseContext
 {
     public partial class Category
     {
