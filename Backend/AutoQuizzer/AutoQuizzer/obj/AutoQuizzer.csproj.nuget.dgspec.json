@@ -4,6 +4,467 @@
     "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\AutoQuizzer.csproj": {}
   },
   "projects": {
+    "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Automapper\\Automapper\\Mapper.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Automapper\\Automapper\\Mapper.csproj",
+        "projectName": "Mapper",
+        "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Automapper\\Automapper\\Mapper.csproj",
+        "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Automapper\\Automapper\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
+        "projectName": "Controllers",
+        "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj",
+        "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
+        "projectName": "Interfaces",
+        "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj",
+        "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Repositories\\Repositories\\Repositories.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Repositories\\Repositories\\Repositories.csproj",
+        "projectName": "Repositories",
+        "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Repositories\\Repositories\\Repositories.csproj",
+        "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Repositories\\Repositories\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj"
+              },
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Security\\Security\\Security.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Security\\Security\\Security.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Security\\Security\\Security.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Security\\Security\\Security.csproj",
+        "projectName": "Security",
+        "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Security\\Security\\Security.csproj",
+        "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Security\\Security\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "BCrypt.Net-Core": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\ApplicationService\\ApplicationService\\ApplicationService.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\ApplicationService\\ApplicationService\\ApplicationService.csproj",
+        "projectName": "ApplicationService",
+        "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\ApplicationService\\ApplicationService\\ApplicationService.csproj",
+        "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\ApplicationService\\ApplicationService\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Automapper\\Automapper\\Mapper.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Automapper\\Automapper\\Mapper.csproj"
+              },
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[12.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
+        "projectName": "Types",
+        "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj",
+        "packagesPath": "C:\\Users\\tasso\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\tasso\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.16, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.16, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.304\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
     "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\AutoQuizzer.csproj": {
       "version": "1.0.0",
       "restore": {
@@ -28,7 +489,23 @@
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Controllers\\Controllers.csproj"
+              },
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Interfaces\\Interfaces.csproj"
+              },
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Repositories\\Repositories\\Repositories.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Repositories\\Repositories\\Repositories.csproj"
+              },
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\ApplicationService\\ApplicationService\\ApplicationService.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Services\\ApplicationService\\ApplicationService\\ApplicationService.csproj"
+              },
+              "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj": {
+                "projectPath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\api\\Types\\Types.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -40,6 +517,32 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "BCrypt.Net-Core": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
+            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
+              "target": "Package",
+              "version": "[6.0.19, )"
+            },
+            "Microsoft.Extensions.DependencyInjection": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.5.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

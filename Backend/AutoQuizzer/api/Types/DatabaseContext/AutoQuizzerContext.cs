@@ -28,7 +28,7 @@ namespace Types.DatabaseContext
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseSqlServer("Server=AANTONOPOULOS-P\\SQLEXPRESS;database=AutoQuizzer;User=aantonopoulos;Password=1234;Trust Server Certificate=true");
+                optionsBuilder.UseSqlServer("Server=DESKTOP-ASJECBU\\SQLEXPRESS;database=AutoQuizzer;User=aantonopoulos;Password=1234;Trust Server Certificate=true");
             }
         }
 
@@ -165,6 +165,8 @@ namespace Types.DatabaseContext
                 entity.Property(e => e.PhoneNumber).HasMaxLength(15);
 
                 entity.Property(e => e.UserRole).HasMaxLength(10);
+
+                entity.Property(e => e.Username).HasMaxLength(50);
             });
 
             modelBuilder.Entity<UserContact>(entity =>

@@ -1,0 +1,30 @@
+.login-form {
+    max-width: 300px;
+    margin: auto;
+}
+
+.login-form > h1 {
+    font-size: xx-large;
+    text-align: center;
+    color: #10239e
+}
+
+.login-form-forgot {
+    float: right;
+    color: #10239e;
+}
+
+.ant-col-rtl .login-form-forgot {
+    float: left;
+}
+  
+.login-form-button {
+    width: 100%;
+    background-color: #10239e;
+    border-color: #10239e;
+    margin-bottom: 5%;
+}
+
+.blue-color {
+    color: #10239e
+}

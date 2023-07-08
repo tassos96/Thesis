@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Types.DatabaseContext
+﻿namespace Types.DatabaseContext
 {
     public partial class UsersRepository
     {

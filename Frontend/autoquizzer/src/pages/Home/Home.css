@@ -1,0 +1,36 @@
+.contentStyle {
+    margin: 0;
+    height: auto;
+    color: #fff;
+    text-align: center;
+    background: #EFF5F5;
+    padding: 2%;
+    margin-top: 5px;
+  };
+  
+  .bannerWrapper {
+    padding: 25px 50px
+  };
+  
+  .bannerButton {
+    margin: 10% 0%
+  };
+  
+  
+  .imageStyle {
+    max-width: 50px;
+    padding: 4%
+  };
+  
+  .mainBanner {
+    text-align: center;
+    width: 15% !important
+  }
+  
+  .titleStyle {
+    font-size: 40px
+  };
+  
+  .titleDescription {
+    font-size: 20px
+  };

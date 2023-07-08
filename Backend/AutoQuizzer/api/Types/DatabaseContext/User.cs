@@ -12,11 +12,13 @@
 
         public int UserId { get; set; }
         public string FullName { get; set; } = null!;
+        public string Username { get; set; } = null!;
         public string Email { get; set; } = null!;
         public string Password { get; set; } = null!;
         public string PhoneNumber { get; set; } = null!;
         public string Institution { get; set; } = null!;
         public string UserRole { get; set; } = null!;
+        
 
         public virtual ICollection<Assignment> Assignments { get; set; }
         public virtual ICollection<UserContact> UserContactContacts { get; set; }

@@ -15,7 +15,7 @@
 
 .App-header {
   background-color: #282c34;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -34,5 +34,38 @@
   }
   to {
     transform: rotate(360deg);
+  }
+}
+
+.layout-wrapper{
+  padding: 20px; 
+  min-height: 100vh; 
+}
+
+.footer_c {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  vertical-align: baseline;
+  box-shadow: 5px 0px 20px rgb(6 6 6 / 40%);
+}
+
+@media screen and (max-width: 768px) {
+  .footer_c {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    vertical-align: baseline;
+  }
+}
+
+.drop-down-width{
+  width: 250px;
+}
+
+@media screen and (max-width: 768px) {
+  .drop-down-width{
+    width: 180px;
   }
 }

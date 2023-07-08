@@ -1,0 +1,46 @@
+.registration-form > h1 {
+    font-size: xx-large;
+    text-align: center;
+    color: #10239e
+}
+
+.registration-form > h3 {
+    text-align: center;
+}
+
+.registration-form-button {
+    width: 100%;
+    background-color: #10239e;
+    border-color: #10239e;
+    margin-bottom: 5%;
+}
+
+.blue-color {
+    color: #10239e
+}
+
+.registration-form {
+    margin: auto;
+    width: 50%;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.column {
+    flex: 25%;
+    padding: 5px;
+}
+
+.input-number {
+    width: 100%;
+}
+
+@media screen and (max-width: 800px) {
+    .column {
+      flex: 100% !important; /* !important so that it overrides the inline style because by default it has higher priority */
+      padding: 0px;
+    }
+}
