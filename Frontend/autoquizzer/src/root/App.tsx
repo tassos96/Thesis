@@ -19,6 +19,7 @@ import NoPage from "../pages/NoPage/NoPage";
 import LoginPage from "../pages/AccountPage/LoginPage/LoginPage";
 import SignupPage from "../pages/AccountPage/SignupPage/SignupPage";
 import LogOutPage from "../pages/AccountPage/LogoutPage/LogOutPage";
+import AccountInfoPage from "../pages/AccountPage/AccountInfo/AccountInfoPage";
 // import LogOutPage from "../pages/LogoutPage/LogOutPage";
 // import CompleteOrderPage from "../pages/Cart/CompleteOrderPage";
 
@@ -34,10 +35,11 @@ const App = () => {
             {/* <Route path={AppRoutes.FavoriteProducts} element={<FavoriteOrderPage />} /> */}
               {/* <Route path={AppRoutes.HistoryProducts} element={<HistoryOrderPage />} /> */}
               {/* <Route path={AppRoutes.Cart} element={<Cart />} /> */}
-              {/* <Route path={AppRoutes.AccountInfo} element={<AccountInfoPage />} /> */}
+              
               <Route path={AppRoutes.Login} element={<LoginPage />} />
               <Route path={AppRoutes.Signup} element={<SignupPage />} />
               <Route path={AppRoutes.Logout} element={<LogOutPage />} />
+              <Route path={AppRoutes.AccountInfo} element={<AccountInfoPage />} />
               {/* <Route path={AppRoutes.CompleteOrder} element={<CompleteOrderPage />} /> */}
               <Route path="*" element={<NoPage />} />
           </Route>

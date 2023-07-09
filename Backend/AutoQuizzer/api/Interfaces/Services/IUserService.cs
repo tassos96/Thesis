@@ -8,5 +8,7 @@ namespace Interfaces.Services
         Task SignUpUserAsync(UserSignupRequest request);
         Task<UserDTO> LoginUserAsync(UserLoginRequest credentials);
         string CreateUserToken(int userId, string userName, string email, string securityKey);
+
+        Task<UserDTO> UpdateUserAccountInfoAsync(UserSignupRequest request, int userId);
     }
 }

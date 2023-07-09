@@ -54,5 +54,13 @@ namespace ApplicationService
 
             return "Bearer " + userToken;
         }
+
+        public async Task<UserDTO> UpdateUserAccountInfoAsync(UserSignupRequest request, int userId)
+        {
+            var user = await _unitOfWork.UserRepository.UpdateUserAsync(request, userId);
+            await _unitOfWork.SaveAsync();
+
+            return _mapper.Map<UserDTO>(user);
+        }
     }
 }

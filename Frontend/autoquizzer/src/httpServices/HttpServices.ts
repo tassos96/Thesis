@@ -44,6 +44,13 @@ export const loginUser = async (body: IUserLoginRequestDTO) => {
   return await axios.post<IUserDTO>(Appsettings.BaseUrl + "User/LoginUser", body);
 };
 
+export const updateUserInfo = async (body: IUserSignupDTO) => {
+  console.log(Appsettings.BaseUrl + "User/UpdateUserAccountInfo");
+  return await axios.post<IUserDTO>(Appsettings.BaseUrl + "User/UpdateUserAccountInfo", body, {
+    headers: authorizationHeader(),
+  });
+};
+
 // export const getCategories = async () => {
 //   console.log(Appsettings.BaseUrl + "Category/GetCategories");
 //   return await axios.get<ICategoryFilterDTO>(

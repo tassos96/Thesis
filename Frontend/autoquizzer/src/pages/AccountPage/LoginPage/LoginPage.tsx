@@ -21,7 +21,7 @@ const LoginPage = () => {
     };
     loginUser(userCredentials)
       .then((resp) => {
-        currentUserContext.setLogedinUser(resp.data);
+        currentUserContext.setLoggedinUser(resp.data);
       })
       .catch((error) => {
         showErrorMessage(messageApi, "Λάθος στοιχεία χρήστη");

@@ -1,4 +1,5 @@
 ﻿using Interfaces.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Types.DTOs;
@@ -34,6 +35,15 @@ namespace Controllers
             user.SecurityToken = userToken;
 
             return Ok(user);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ActionResult<UserDTO>> UpdateUserAccountInfoAsync(UserSignupRequest request)
+        {
+            var userId = base.AppUser.Id;
+            var userDTO = await _applicationService.UserService.UpdateUserAccountInfoAsync(request, userId);
+            return Ok(userDTO);
         }
     }
 }

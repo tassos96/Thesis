@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "U44PODD9ksspyW7/BakM3Lkd6PdArt+3H9p0VAVbP6NY9QiEwxLnYoRNyTCW943tWjxIB7TymA7ufHxZzkQMLg==",
+  "dgSpecHash": "07M19BAXIY7kpWadyW9WIEQfCeXZwzPH+XD8fmcw+rO9bQ0H0WHlxHPOaJ/1HsviOKGjzciXKpUkyseOku0XIg==",
   "success": true,
   "projectFilePath": "C:\\Users\\tasso\\Desktop\\Master_Thesis\\Thesis\\Backend\\AutoQuizzer\\AutoQuizzer\\AutoQuizzer.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\tasso\\.nuget\\packages\\automapper\\12.0.1\\automapper.12.0.1.nupkg.sha512",
     "C:\\Users\\tasso\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
-    "C:\\Users\\tasso\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.19\\microsoft.aspnetcore.authentication.jwtbearer.6.0.19.nupkg.sha512",
+    "C:\\Users\\tasso\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\6.0.11\\microsoft.aspnetcore.authentication.jwtbearer.6.0.11.nupkg.sha512",
     "C:\\Users\\tasso\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\6.0.19\\microsoft.aspnetcore.jsonpatch.6.0.19.nupkg.sha512",
     "C:\\Users\\tasso\\.nuget\\packages\\microsoft.aspnetcore.mvc.newtonsoftjson\\6.0.19\\microsoft.aspnetcore.mvc.newtonsoftjson.6.0.19.nupkg.sha512",
     "C:\\Users\\tasso\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

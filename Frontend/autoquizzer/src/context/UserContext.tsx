@@ -15,7 +15,7 @@ export const getUserDataFromLocalStorage = () => {
 export const getUserTokenFromLocalStorage = () => {
   const userData = getUserDataFromLocalStorage();
   if (userData == null) {
-    return null;
+    return "";
   }
   const userToken = userData.securityToken;
   return userToken;
@@ -28,7 +28,7 @@ type UserProviderProps = {
 type UserContextType = {
   getCurrentUser: () => IUserDTO | null;
   logOutCurrentUser: () => void;
-  setLogedinUser: (IUserDTO: IUserDTO) => void;
+  setLoggedinUser: (IUserDTO: IUserDTO) => void;
   isUserLoggedIn: ()=>boolean;
 };
 
@@ -52,7 +52,7 @@ export const UserContextProvider = (props: UserProviderProps) => {
     setCurrentUser(null);
   };
 
-  const setLogedinUser = (user: IUserDTO) => {
+  const setLoggedinUser = (user: IUserDTO) => {
     setCurrentUser(user);
   };
 
@@ -69,7 +69,7 @@ export const UserContextProvider = (props: UserProviderProps) => {
       value={{
         getCurrentUser,
         logOutCurrentUser,
-        setLogedinUser,
+        setLoggedinUser,
         isUserLoggedIn
       }}
     >

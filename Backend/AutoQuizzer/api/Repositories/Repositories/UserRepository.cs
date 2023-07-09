@@ -47,5 +47,19 @@ namespace Repositories
             }
             return user;
         }
+
+        public async Task<User> UpdateUserAsync(UserSignupRequest request, int userId)
+        {
+            var user = await _context.Users.Where(x => x.UserId == userId)
+                                           .FirstAsync();
+
+            user.Email = request.Email;
+            user.Password = EncryptionHelper.Encrypt(request.Password);
+            user.PhoneNumber = request.PhoneNumber;
+
+            _context.Users.Update(user);
+
+            return user;
+        }
     }
 }

@@ -1,7 +1,7 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useUserContext } from "../../context/UserContext";
 import { AppRoutes, ImagesUrl } from "../../helpers/AppConstants";
 //import CartMenuButton from "./CartMenuButton";
@@ -13,7 +13,8 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const [menuClasses, setMenuClasses] = useState("c_nav-menu c_nav-nav-menu ");
   const isUserLogedIn = currentUserContext.isUserLoggedIn();
-  const userName = currentUserContext?.getCurrentUser()?.userName;
+  const userName = currentUserContext?.getCurrentUser()?.username;
+  const navigate = useNavigate();
   const toggleMobileMenu = () => {
     if(window.innerWidth > 768){
       return;
@@ -38,7 +39,7 @@ const Navbar = () => {
       <nav className="c_nav-navbar">
         <div className="c_nav-logo">
           <span>
-            <img src={ImagesUrl + "/AutoQuizzer_logo.png"} alt="AutoQuizzer" style={{ "height": "5%", "width": "35%"}}></img>  
+            <img onClick={() => navigate("/")} src={ImagesUrl + "/AutoQuizzer_logo.png"} alt="AutoQuizzer" style={{ "height": "5%", "width": "35%"}}></img>  
           </span>
         </div>
         <div className="c_nav-push-left">

@@ -4,11 +4,11 @@ export interface IUserDTO{
     userId: number;
     firstName: string;
     lastName: string;
-    userName: string;
+    username: string;
     email: string;
     password: string;
     phoneNumber: string;
-    role?: IUserRoleEnum;
+    userRole?: IUserRoleEnum;
     institution: string;
     securityToken: string;
 }

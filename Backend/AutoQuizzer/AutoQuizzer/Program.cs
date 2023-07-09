@@ -34,6 +34,7 @@ builder.Services.AddAuthentication(x =>
 })
     .AddJwtBearer(x =>
     {
+        x.IncludeErrorDetails = true;
         x.SaveToken = true;
         x.TokenValidationParameters = new TokenValidationParameters
         {
@@ -101,8 +102,8 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseAuthorization();
 app.UseAuthentication();
+app.UseAuthorization();
 
 app.UseMiddleware<ErrorHandlerMiddleware>();
 
