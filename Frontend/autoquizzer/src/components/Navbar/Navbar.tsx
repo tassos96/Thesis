@@ -7,13 +7,15 @@ import { AppRoutes, ImagesUrl } from "../../helpers/AppConstants";
 //import CartMenuButton from "./CartMenuButton";
 //import * as _ from "lodash";
 import "./navbar.css";
+import { IUserRoleEnum } from "../../DTO/IUserRoleEnum";
 
 const Navbar = () => {
   const currentUserContext = useUserContext();
   const [showMenu, setShowMenu] = useState(false);
   const [menuClasses, setMenuClasses] = useState("c_nav-menu c_nav-nav-menu ");
-  const isUserLogedIn = currentUserContext.isUserLoggedIn();
+  const isUserLoggedIn = currentUserContext.isUserLoggedIn();
   const userName = currentUserContext?.getCurrentUser()?.username;
+  const isUserTeacher = currentUserContext.isUserTeacher();
   const navigate = useNavigate();
   const toggleMobileMenu = () => {
     if(window.innerWidth > 768){
@@ -66,37 +68,39 @@ const Navbar = () => {
                 Αρχική
               </Link>
             </li>
+            {isUserLoggedIn && (
             <li className="c_nav-menu-item c_nav-current-menu-item">
               <Link
-                to="/products"
+                to={AppRoutes.Test}
                 className="c_nav-nav__link"
                 onClick={() => toggleMobileMenu()}
               >
-                Προϊόντα
+                Τεστ
               </Link>
             </li>
-            {isUserLogedIn && (
+            )}
+            {isUserLoggedIn && isUserTeacher && (
             <li className="c_nav-menu-item c_nav-dropdown">
               <Link to={{}} className="c_nav-nav__link">
-                Παραγγελίες
+                Τράπεζες θεμάτων
               </Link>
               <ul className="c_nav-sub-nav">
                 <li>
                   <Link
-                    to={AppRoutes.FavoriteProducts}
+                    to={AppRoutes.Questions}
                     className="c_nav-sub-nav__link"
                     onClick={() => toggleMobileMenu()}
                   >
-                    Αγαπημένες Παραγγελίες
+                    Ερωτήσεις
                   </Link>
                 </li>
                 <li>
                   <Link
-                    to={AppRoutes.HistoryProducts}
+                    to={AppRoutes.Repositories}
                     className="c_nav-sub-nav__link"
                     onClick={() => toggleMobileMenu()}
                   >
-                    Ιστορικό παραγελιών
+                    Αποθετήρια
                   </Link>
                 </li>
               </ul>
@@ -106,7 +110,7 @@ const Navbar = () => {
                 Λογαριασμός
               </Link>
               <ul className="c_nav-sub-nav">
-              {!isUserLogedIn && (
+              {!isUserLoggedIn && (
               <li>
                   <Link
                     to={AppRoutes.Login}
@@ -116,7 +120,7 @@ const Navbar = () => {
                     Σύνδεση
                   </Link>
                 </li>)}
-                {!isUserLogedIn && (
+                {!isUserLoggedIn && (
                 <li>
                   <Link
                     to={AppRoutes.Signup}
@@ -126,7 +130,7 @@ const Navbar = () => {
                     Εγγραφή
                   </Link>
                 </li>)}
-                {isUserLogedIn && 
+                {isUserLoggedIn && 
                 (<li>
                   <Link
                     to={AppRoutes.AccountInfo}
@@ -136,7 +140,7 @@ const Navbar = () => {
                     Πληροφορίες Λογαριασμού
                   </Link>
                 </li>)}
-                {isUserLogedIn && 
+                {isUserLoggedIn && 
                 (<li>
                   <Link
                     to={AppRoutes.Logout}
@@ -148,16 +152,8 @@ const Navbar = () => {
                 </li>)}
               </ul>
             </li>
-            <li className="c_nav-menu-item c_nav-current-menu-item">
-              <Link
-                to={AppRoutes.Cart}
-                className="c_nav-nav__link"
-                onClick={() =>{openCart();}}
-              >
-                {/* <CartMenuButton /> */}
-              </Link>
-            </li>
-            {isUserLogedIn && (<li className="c_nav-menu-item c_nav-current-menu-item">
+            {isUserLoggedIn && 
+            (<li className="c_nav-menu-item c_nav-current-menu-item">
               <span><FontAwesomeIcon icon={faUser}/> {userName}</span>
             </li>)}
           </ul>

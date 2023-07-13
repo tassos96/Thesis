@@ -6,31 +6,37 @@
     background: #EFF5F5;
     padding: 2%;
     margin-top: 5px;
-  };
+  }
   
   .bannerWrapper {
-    padding: 25px 50px
-  };
+    padding: 25px 50px;
+  }
   
   .bannerButton {
-    margin: 10% 0%
-  };
+    margin: 10% 0%;
+  }
   
   
   .imageStyle {
     max-width: 50px;
-    padding: 4%
-  };
+    padding: 4%;
+  }
   
   .mainBanner {
     text-align: center;
-    width: 15% !important
+    width: 15% !important;
   }
   
   .titleStyle {
-    font-size: 40px
-  };
+    font-size: 30px;
+  }
   
   .titleDescription {
-    font-size: 20px
-  };
+    font-size: 20px;
+  }
+  
+  .title {
+    font-size: xx-large;
+    text-align: center;
+    color: #10239e;
+  }

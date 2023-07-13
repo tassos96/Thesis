@@ -2,15 +2,13 @@ import { MessageInstance } from "antd/es/message/interface";
 
 export const AppRoutes = {
     Home: "home",
-    Products: "products",
-    FavoriteProducts: "favorite-products",
-    HistoryProducts: "history-products",
-    Cart: "cart",
+    Test: "tests",
+    Questions: "questions",
+    Repositories: "repositories",
     AccountInfo: "account-info",
     Login: "login",
     Signup: "signup",
     Logout: "logout",
-    CompleteOrder: "complete-order"
 }
 
 export const GoogleApiKey = "AIzaSyDvsZeg-SYJ5brphnTl1w_Zi9H994uT-w0";

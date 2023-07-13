@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useContext } from "react";
 import { IUserDTO } from "../DTO/IUserDTO";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+import { IUserRoleEnum } from "../DTO/IUserRoleEnum";
 
 const userInfoFromLogin = "user-info";
 
@@ -29,7 +30,8 @@ type UserContextType = {
   getCurrentUser: () => IUserDTO | null;
   logOutCurrentUser: () => void;
   setLoggedinUser: (IUserDTO: IUserDTO) => void;
-  isUserLoggedIn: ()=>boolean;
+  isUserLoggedIn: ()=> boolean;
+  isUserTeacher: ()=> boolean;
 };
 
 const UserContext = createContext({} as UserContextType);
@@ -63,6 +65,13 @@ export const UserContextProvider = (props: UserProviderProps) => {
       return false;
   };
 
+  const isUserTeacher = () => {
+    if((currentUser && currentUser.userRole === IUserRoleEnum.Teacher)){
+        return true;
+      }
+      return false;
+  };
+
   const { children } = props;
   return (
     <UserContext.Provider
@@ -70,7 +79,8 @@ export const UserContextProvider = (props: UserProviderProps) => {
         getCurrentUser,
         logOutCurrentUser,
         setLoggedinUser,
-        isUserLoggedIn
+        isUserLoggedIn,
+        isUserTeacher
       }}
     >
       {children}

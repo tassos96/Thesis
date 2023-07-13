@@ -16,7 +16,7 @@ const LogOutPage = () => {
     <>
     <AppBreadcrumb path="Αρχική/Αποσύνδεση" />
     <div className="login-form">
-    <h1 className="geek-blue">e-Supermarket</h1>
+    <h1 className="geek-blue">AutoQuizzer</h1>
     <p>Θέλετε να αποσυνδεθείτε από την εφαρμογή και να συνεχίσετε σαν επισκέπτης;</p>
     <Button type="primary" className="login-form-button" onClick={()=>{logOut()}}>Αποσύνδεση</Button>
     </div>

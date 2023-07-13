@@ -1,8 +1,9 @@
-import { Button, Col, Row } from 'antd';
+import { Button, Col, List, Row, Space } from 'antd';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ImagesUrl } from '../../helpers/AppConstants';
 import './Home.css'
+import { CheckCircleTwoTone } from '@ant-design/icons';
 
 const mainBanner: React.CSSProperties = {
   textAlign: 'center',
@@ -14,40 +15,78 @@ const imageStyle: React.CSSProperties = {
   padding: '4%'
 };
 
+const studentProsData = [
+  {
+    title: 'Λύσε εύκολα και γρήγορα τα τεστ που σου έχουν ανατεθεί.',
+  },
+  {
+    title: 'Μάθε άμεσα τα αποτελέσματα σου.',
+  },
+  {
+    title: 'Δες την κατάταξη σου ανάμεσα σε άλλους.',
+  }
+];
+
+const teacherProsData = [
+  {
+    title: 'Οργάνωσε τις ερωτήσεις σου.',
+  },
+  {
+    title: 'Αποθήκευσε ερωτήσεις εύκολα και γρήγορα.',
+  },
+  {
+    title: 'Δημιούργησε τεστ αυτόματα.',
+  },
+  {
+    title: 'Aνέθεσε τα τεστ που δημιούργησες σε άτομα για να δεις τις ικανότητες τους.'
+  }
+];
 
 const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
-      {/* <AppBreadcrumb path="Home"/> */}
+    <>
+      <h1 className="title">AutoQuizzer</h1>
       <Row className="bannerWrapper">
-        <Col span={8}>
-          <h1 className="titleStyle">Ψωνίστε στις καλύτερες τιμές της αγοράς</h1>
 
-          <p className="titleDescription">Σας βοηθάμε να συγκρίνετε τις τιμές από όλες τις μεγάλες αλυσίδες super-market και να κάνετε την παραγγελία σας συνδιάζοντας τις καλύτερες τιμές</p>
+        <Col span={12}>
+          <h2 className="titleStyle" style={{textAlign:'center'}}>Είσαι εργαζόμενος ή μαθητής;</h2>
 
-          <Button type="primary" onClick={()=>navigate("/products")} block={true} size={"large"} className="bannerButton">Παράγγειλε Τώρα</Button>
+          <List
+            itemLayout="horizontal"
+            split = {false}
+            dataSource={studentProsData}
+            renderItem={(item) => (
+              <List.Item>
+                <List.Item.Meta
+                  title={<Space><CheckCircleTwoTone twoToneColor="#52c41a"/> <h3>{item.title}</h3></Space>}
+                />
+              </List.Item>
+            )}
+          />
           
+          {/* <Button type="primary" onClick={()=>navigate("/tests")} block={true} size={"large"} className="bannerButton">Τεστ</Button> */}
         </Col>
-        <Col span={16} style={{textAlign:'center'}}>
-          <img style={mainBanner} src={ImagesUrl + "grocery.jpg"} alt="NA"></img>
+        
+        <Col span={12}>
+        <h2 className="titleStyle" style={{textAlign:'center'}}>Είσαι εκπαιδευτής;</h2>
+        <List
+            style={{textAlign:'left'}}
+            itemLayout="horizontal"
+            split = {false}
+            dataSource={teacherProsData}
+            renderItem={(item) => (
+              <List.Item>
+                <List.Item.Meta
+                  title={<Space><CheckCircleTwoTone twoToneColor="#52c41a"/> <h3>{item.title}</h3></Space>}
+                />
+              </List.Item>
+            )}
+          />
         </Col>
       </Row>
-
-      <Row className="contentStyle">
-        <Col span={24}>
-          <h1>Μας εμπιστεύονται οι καλύτερες αλυσίδες supermarket</h1>
-          <div>
-            <img src={ImagesUrl + "/ab_stores.png"} style = {imageStyle} alt="NA"></img>
-            <img src={ImagesUrl + "sklavenitis_stores.png"} style = {imageStyle}  alt="NA"></img>
-            <img src={ImagesUrl + "lidl_stores.png"} style = {imageStyle}  alt="NA"></img>
-            <img src={ImagesUrl + "kritikos_stores.png"} style = {imageStyle}  alt="NA"></img>
-          </div>
-        </Col>
-      </Row>
-      
-    </div>
+    </>
   );
 }
 
