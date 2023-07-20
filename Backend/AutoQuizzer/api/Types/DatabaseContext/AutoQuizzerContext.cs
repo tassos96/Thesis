@@ -19,7 +19,6 @@ namespace Types.DatabaseContext
         public virtual DbSet<Assignment> Assignments { get; set; } = null!;
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<Question> Questions { get; set; } = null!;
-        public virtual DbSet<QuestionsCategory> QuestionsCategories { get; set; } = null!;
         public virtual DbSet<Test> Tests { get; set; } = null!;
         public virtual DbSet<TestQuestion> TestQuestions { get; set; } = null!;
         public virtual DbSet<User> Users { get; set; } = null!;
@@ -41,9 +40,7 @@ namespace Types.DatabaseContext
             {
                 entity.ToTable("Assignment");
 
-                entity.Property(e => e.AssignmentId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("AssignmentID");
+                entity.Property(e => e.AssignmentId).HasColumnName("AssignmentID");
 
                 entity.Property(e => e.AssignmentDate).HasColumnType("datetime");
 
@@ -56,66 +53,53 @@ namespace Types.DatabaseContext
                 entity.HasOne(d => d.Test)
                     .WithMany(p => p.Assignments)
                     .HasForeignKey(d => d.TestId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK_Assignment_Tests");
+                    .HasConstraintName("FK_Assignment_Test");
 
                 entity.HasOne(d => d.User)
                     .WithMany(p => p.Assignments)
                     .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK_Assignments_Users");
+                    .HasConstraintName("FK_Assignment_User");
             });
 
             modelBuilder.Entity<Category>(entity =>
             {
-                entity.Property(e => e.CategoryId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("CategoryID");
+                entity.ToTable("Category");
+
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
                 entity.Property(e => e.Description).HasMaxLength(50);
+
+                entity.Property(e => e.UserId).HasColumnName("UserID");
+
+                entity.HasOne(d => d.User)
+                    .WithMany(p => p.Categories)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Category_User");
             });
 
             modelBuilder.Entity<Question>(entity =>
             {
-                entity.Property(e => e.QuestionId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("QuestionID");
-
-                entity.Property(e => e.Difficulty).HasMaxLength(20);
-            });
-
-            modelBuilder.Entity<QuestionsCategory>(entity =>
-            {
-                entity.HasKey(e => e.QuestionCategoryId);
-
-                entity.ToTable("QuestionsCategory");
-
-                entity.Property(e => e.QuestionCategoryId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("QuestionCategoryID");
-
-                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
+                entity.ToTable("Question");
 
                 entity.Property(e => e.QuestionId).HasColumnName("QuestionID");
 
-                entity.HasOne(d => d.Category)
-                    .WithMany(p => p.QuestionsCategories)
-                    .HasForeignKey(d => d.CategoryId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK_QuestionsCategory_Categories");
+                entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.HasOne(d => d.Question)
-                    .WithMany(p => p.QuestionsCategories)
-                    .HasForeignKey(d => d.QuestionId)
-                    .OnDelete(DeleteBehavior.SetNull)
-                    .HasConstraintName("FK_QuestionsCategory_Questions");
+                entity.Property(e => e.Difficulty).HasMaxLength(20);
+
+                entity.HasOne(d => d.Category)
+                    .WithMany(p => p.Questions)
+                    .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Question_Category");
             });
 
             modelBuilder.Entity<Test>(entity =>
             {
-                entity.Property(e => e.TestId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("TestID");
+                entity.ToTable("Test");
+
+                entity.Property(e => e.TestId).HasColumnName("TestID");
 
                 entity.Property(e => e.Difficulty).HasMaxLength(20);
 
@@ -129,9 +113,9 @@ namespace Types.DatabaseContext
                 entity.HasKey(e => e.TestQuestionsId)
                     .HasName("PK_TestQuestions_1");
 
-                entity.Property(e => e.TestQuestionsId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("TestQuestionsID");
+                entity.ToTable("TestQuestion");
+
+                entity.Property(e => e.TestQuestionsId).HasColumnName("TestQuestionsID");
 
                 entity.Property(e => e.QuestionId).HasColumnName("QuestionID");
 
@@ -152,6 +136,8 @@ namespace Types.DatabaseContext
 
             modelBuilder.Entity<User>(entity =>
             {
+                entity.ToTable("User");
+
                 entity.HasIndex(e => e.Email, "IX_Users")
                     .IsUnique();
 
@@ -185,25 +171,20 @@ namespace Types.DatabaseContext
                 entity.Property(e => e.UserId).HasColumnName("UserID");
 
                 entity.HasOne(d => d.Contact)
-                    .WithMany(p => p.UserContactContacts)
+                    .WithMany(p => p.UserContacts)
                     .HasForeignKey(d => d.ContactId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserContacts");
-
-                entity.HasOne(d => d.User)
-                    .WithMany(p => p.UserContactUsers)
-                    .HasForeignKey(d => d.UserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserContacts_Users");
             });
 
             modelBuilder.Entity<UsersRepository>(entity =>
             {
-                entity.HasKey(e => e.RepositoryId);
+                entity.HasKey(e => e.RepositoryId)
+                    .HasName("PK_UsersRepositories");
 
-                entity.Property(e => e.RepositoryId)
-                    .ValueGeneratedNever()
-                    .HasColumnName("RepositoryID");
+                entity.ToTable("UsersRepository");
+
+                entity.Property(e => e.RepositoryId).HasColumnName("RepositoryID");
 
                 entity.Property(e => e.Description).HasMaxLength(50);
 

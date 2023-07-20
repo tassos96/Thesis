@@ -10,6 +10,5 @@ namespace Types.DatabaseContext
         public int ContactId { get; set; }
 
         public virtual User Contact { get; set; } = null!;
-        public virtual User User { get; set; } = null!;
     }
 }

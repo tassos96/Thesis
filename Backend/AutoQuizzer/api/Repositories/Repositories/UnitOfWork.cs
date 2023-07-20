@@ -7,6 +7,7 @@ namespace Repositories
     {
         private readonly AutoQuizzerContext _context;
         public IUserRepository UserRepository => new UserRepository(_context);
+        public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
 
         public UnitOfWork(AutoQuizzerContext context)
         {

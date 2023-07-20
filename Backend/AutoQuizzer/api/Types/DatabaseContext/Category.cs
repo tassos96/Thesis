@@ -7,12 +7,14 @@ namespace Types.DatabaseContext
     {
         public Category()
         {
-            QuestionsCategories = new HashSet<QuestionsCategory>();
+            Questions = new HashSet<Question>();
         }
 
         public int CategoryId { get; set; }
         public string Description { get; set; } = null!;
+        public int UserId { get; set; }
 
-        public virtual ICollection<QuestionsCategory> QuestionsCategories { get; set; }
+        public virtual User User { get; set; } = null!;
+        public virtual ICollection<Question> Questions { get; set; }
     }
 }
