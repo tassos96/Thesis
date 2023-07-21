@@ -1,6 +1,6 @@
 ﻿namespace Types.DTOs
 {
-    public class AssignmentDTO
+    public class ExamDTO
     {
         public int AssignmentId { get; set; }
         public DateTime AssignmentDate { get; set; }

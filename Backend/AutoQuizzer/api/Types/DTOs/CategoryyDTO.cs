@@ -1,6 +1,6 @@
 ﻿namespace Types.DTOs
 {
-    public class RepositoryDTO
+    public class CategoryyDTO
     {
         public int RepositoryId { get; set; }
         public string Title { get; set; } = null!;

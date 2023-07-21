@@ -1,6 +1,6 @@
 ﻿namespace Types.DTOs
 {
-    public class CategoryDTO
+    public class SubcategoryDTO
     {
         public int CategoryId { get; set; }
         public string Description { get; set; }

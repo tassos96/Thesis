@@ -7,7 +7,7 @@ namespace Types.DatabaseContext
     {
         public Test()
         {
-            Assignments = new HashSet<Assignment>();
+            Exams = new HashSet<Exam>();
             TestQuestions = new HashSet<TestQuestion>();
         }
 
@@ -16,8 +16,9 @@ namespace Types.DatabaseContext
         public string Subject { get; set; } = null!;
         public string Difficulty { get; set; } = null!;
         public int QuestionsNumber { get; set; }
+        public string Categories { get; set; } = null!;
 
-        public virtual ICollection<Assignment> Assignments { get; set; }
+        public virtual ICollection<Exam> Exams { get; set; }
         public virtual ICollection<TestQuestion> TestQuestions { get; set; }
     }
 }

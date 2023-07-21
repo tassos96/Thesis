@@ -3,9 +3,14 @@ using System.Collections.Generic;
 
 namespace Types.DatabaseContext
 {
-    public partial class Assignment
+    public partial class Exam
     {
-        public int AssignmentId { get; set; }
+        public Exam()
+        {
+            ExamDetails = new HashSet<ExamDetail>();
+        }
+
+        public int ExamId { get; set; }
         public DateTime AssignmentDate { get; set; }
         public DateTime? ResolvedDate { get; set; }
         public int? Grade { get; set; }
@@ -14,5 +19,6 @@ namespace Types.DatabaseContext
 
         public virtual Test? Test { get; set; }
         public virtual User? User { get; set; }
+        public virtual ICollection<ExamDetail> ExamDetails { get; set; }
     }
 }

@@ -15,6 +15,6 @@ namespace Types.DTOs
         public UserRole UserRole { get; set; }
         public string SecurityToken { get; set; }
 
-        public List<AssignmentDTO> Assignments { get; set; }
+        public List<ExamDTO> Assignments { get; set; }
     }
 }

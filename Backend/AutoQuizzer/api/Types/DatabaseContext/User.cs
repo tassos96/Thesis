@@ -7,10 +7,8 @@ namespace Types.DatabaseContext
     {
         public User()
         {
-            Assignments = new HashSet<Assignment>();
             Categories = new HashSet<Category>();
-            UserContacts = new HashSet<UserContact>();
-            UsersRepositories = new HashSet<UsersRepository>();
+            Exams = new HashSet<Exam>();
         }
 
         public int UserId { get; set; }
@@ -23,9 +21,7 @@ namespace Types.DatabaseContext
         public string Institution { get; set; } = null!;
         public string UserRole { get; set; } = null!;
 
-        public virtual ICollection<Assignment> Assignments { get; set; }
         public virtual ICollection<Category> Categories { get; set; }
-        public virtual ICollection<UserContact> UserContacts { get; set; }
-        public virtual ICollection<UsersRepository> UsersRepositories { get; set; }
+        public virtual ICollection<Exam> Exams { get; set; }
     }
 }

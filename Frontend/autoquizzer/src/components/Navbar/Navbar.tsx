@@ -85,6 +85,24 @@ const Navbar = () => {
                 Τράπεζες θεμάτων
               </Link>
               <ul className="c_nav-sub-nav">
+              <li>
+                  <Link
+                    to={AppRoutes.Questions}
+                    className="c_nav-sub-nav__link"
+                    onClick={() => toggleMobileMenu()}
+                  >
+                    Κατηγορίες
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to={AppRoutes.Questions}
+                    className="c_nav-sub-nav__link"
+                    onClick={() => toggleMobileMenu()}
+                  >
+                    Υπόκατηγορίες
+                  </Link>
+                </li>
                 <li>
                   <Link
                     to={AppRoutes.Questions}
@@ -92,15 +110,6 @@ const Navbar = () => {
                     onClick={() => toggleMobileMenu()}
                   >
                     Ερωτήσεις
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    to={AppRoutes.Repositories}
-                    className="c_nav-sub-nav__link"
-                    onClick={() => toggleMobileMenu()}
-                  >
-                    Αποθετήρια
                   </Link>
                 </li>
               </ul>

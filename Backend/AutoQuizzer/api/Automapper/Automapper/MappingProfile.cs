@@ -9,8 +9,8 @@ namespace Mapper
         public MappingProfile()
         {
             CreateMap<User, UserDTO>();
-            CreateMap<Assignment, AssignmentDTO>();
-            CreateMap<UsersRepository, RepositoryDTO>();
+            CreateMap<Exam, ExamDTO>();
+            CreateMap<Category, CategoryyDTO>();
             //CreateMap<Category, CategoryDTO>();
             //CreateMap<SubCategory, SubCategoryDTO>();
             //CreateMap<Order, OrderDTO>().ReverseMap();
