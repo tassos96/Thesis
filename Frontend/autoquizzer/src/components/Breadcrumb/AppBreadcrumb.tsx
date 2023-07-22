@@ -12,6 +12,8 @@ const breadcrumbNameMap: Record<string, string> = {
   '/signup': 'Εγγραφή',
   '/logout': 'Αποσύνδεση',
   '/account-info': 'Πληροφορίες Λογαριασμού',
+  '/categories': 'Κατηγορίες',
+  '/subcategories': 'Υπόκατηγορίες'
 };
 
 const AppBreadcrumb = (props: IAppBreadcrumbProps) => {

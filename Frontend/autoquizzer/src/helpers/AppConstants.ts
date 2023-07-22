@@ -9,6 +9,9 @@ export const AppRoutes = {
     Login: "login",
     Signup: "signup",
     Logout: "logout",
+    Categories: "categories",
+    DeleteCategory: "delete-category",
+    Subcategories: "subcategories"
 }
 
 export const GoogleApiKey = "AIzaSyDvsZeg-SYJ5brphnTl1w_Zi9H994uT-w0";

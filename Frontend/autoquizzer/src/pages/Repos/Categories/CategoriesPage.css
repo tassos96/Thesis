@@ -1,0 +1,27 @@
+.cardListWrapper {
+    margin-top: 2%;
+}
+
+.add-category-button {
+    background-color: #10239e;
+    border-color: #10239e;
+}
+
+.ant-card-actions > li > span > button {
+    text-align: end;
+    color: #eb2f96 !important;
+}
+
+.ant-card-actions > li > span {
+    text-align: end;
+}
+
+.ant-card-head-title > a {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.ant-card-body > a {
+    text-decoration: inherit;
+    color: inherit;
+}

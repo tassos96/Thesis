@@ -87,7 +87,7 @@ const Navbar = () => {
               <ul className="c_nav-sub-nav">
               <li>
                   <Link
-                    to={AppRoutes.Questions}
+                    to={AppRoutes.Categories}
                     className="c_nav-sub-nav__link"
                     onClick={() => toggleMobileMenu()}
                   >
@@ -96,7 +96,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to={AppRoutes.Questions}
+                    to={AppRoutes.Subcategories}
                     className="c_nav-sub-nav__link"
                     onClick={() => toggleMobileMenu()}
                   >

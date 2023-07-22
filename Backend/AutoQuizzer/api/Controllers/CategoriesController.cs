@@ -22,7 +22,7 @@ namespace Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<List<SubcategoryDTO>> FetchCategoriesAsync()
+        public async Task<List<CategoryDTO>> FetchCategoriesAsync()
         {
             var list = await _applicationService.CategoryService.GetCategoriesAsync(base.AppUser.Id);
             return list;

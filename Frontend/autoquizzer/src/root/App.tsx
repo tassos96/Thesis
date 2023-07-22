@@ -20,6 +20,7 @@ import LoginPage from "../pages/AccountPage/LoginPage/LoginPage";
 import SignupPage from "../pages/AccountPage/SignupPage/SignupPage";
 import LogOutPage from "../pages/AccountPage/LogoutPage/LogOutPage";
 import AccountInfoPage from "../pages/AccountPage/AccountInfo/AccountInfoPage";
+import CategoriesPage from "../pages/Repos/Categories/CategoriesPage";
 // import LogOutPage from "../pages/LogoutPage/LogOutPage";
 // import CompleteOrderPage from "../pages/Cart/CompleteOrderPage";
 
@@ -31,6 +32,8 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path={AppRoutes.Home} element={<Home />} />
+            <Route path={AppRoutes.Categories} element={<CategoriesPage />} />
+            <Route path={AppRoutes.Subcategories} element={<CategoriesPage />} />
             {/* <Route path={AppRoutes.Products} element={<Products />} /> */}
             {/* <Route path={AppRoutes.FavoriteProducts} element={<FavoriteOrderPage />} /> */}
               {/* <Route path={AppRoutes.HistoryProducts} element={<HistoryOrderPage />} /> */}

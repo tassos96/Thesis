@@ -9,6 +9,7 @@ import Appsettings from "../helpers/AppSettings";
 import { IUserSignupDTO } from "../DTO/SignupPage/IUserSignupDTO";
 import { IUserLoginRequestDTO } from "../DTO/LoginPage/IUserLoginRequestDTO";
 import { IUserDTO } from "../DTO/IUserDTO";
+import { ICategoryDTO } from "../DTO/CategoriesPage/ICategoryDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -51,12 +52,11 @@ export const updateUserInfo = async (body: IUserSignupDTO) => {
   });
 };
 
-// export const getCategories = async () => {
-//   console.log(Appsettings.BaseUrl + "Category/GetCategories");
-//   return await axios.get<ICategoryFilterDTO>(
-//     Appsettings.BaseUrl + "Category/GetCategories"
-//   );
-// };
+export const getCategories = async () => {
+  console.log(Appsettings.BaseUrl + "categories/fetchCategories");
+  return await axios.get<ICategoryDTO[]>(
+    Appsettings.BaseUrl + "categories/fetchCategories", {headers: authorizationHeader()});
+};
 
 // export const getProductsPaged = async (body: IRequestProductPage) => {
 //   console.log(Appsettings.BaseUrl + "Product/GetSubCategoryProductsPaged");

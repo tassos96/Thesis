@@ -28,13 +28,14 @@ namespace Repositories
             return true;
         }
 
-        public async Task<List<SubcategoryDTO>> GetCategoriesAsync(int userId)
+        public async Task<List<CategoryDTO>> GetCategoriesAsync(int userId)
         {
-            var result = new List<SubcategoryDTO>();
+            var result = new List<CategoryDTO>();
             var categories = await GetListAsync();
 
-            result.AddRange(categories.Where(x=> x.UserId == userId).Select(x => new SubcategoryDTO 
+            result.AddRange(categories.Where(x=> x.UserId == userId).Select(x => new CategoryDTO 
                 { CategoryId = x.CategoryId,
+                  Title = x.Title,
                   Description = x.Description
                 })
              );

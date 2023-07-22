@@ -23,7 +23,7 @@ namespace ApplicationService
             return await _unitOfWork.SaveAsync();
         }
 
-        public async Task<List<SubcategoryDTO>> GetCategoriesAsync(int userId)
+        public async Task<List<CategoryDTO>> GetCategoriesAsync(int userId)
         {
             return await _unitOfWork.CategoryRepository.GetCategoriesAsync(userId);
         }
