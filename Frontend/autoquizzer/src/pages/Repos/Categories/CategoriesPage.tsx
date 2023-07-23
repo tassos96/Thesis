@@ -1,22 +1,120 @@
-import { Button, Card, List, Space } from "antd";
+import { Button, Card, Form, FormInstance, Input, List, Modal, Space, message } from "antd";
 import AppBreadcrumb from "../../../components/Breadcrumb/AppBreadcrumb";
 import "./CategoriesPage.css";
-import { AppRoutes } from "../../../helpers/AppConstants";
+import { AppRoutes, showErrorMessage } from "../../../helpers/AppConstants";
 import { ICategoryDTO } from "../../../DTO/CategoriesPage/ICategoryDTO";
 import { useEffect, useState } from "react";
-import { getCategories } from "../../../httpServices/HttpServices";
+import { addCategory, deleteCategoryRequest, getCategories, updateCategory } from "../../../httpServices/HttpServices";
 import Loader from "../../../components/Loader/Loader";
+import TextArea from "antd/es/input/TextArea";
+import FormItem from "antd/es/form/FormItem";
+import React from "react";
 
 export interface ICategoriesPageState {
     categories?: ICategoryDTO[];
     isLoading: boolean;
+    modalLoading: boolean;
+    openModal: boolean;
+    isUpdateCategory: boolean;
+    updateCategoryId: number;
 }
 
 const CategoriesPage = () => {
 
+    const [form] = Form.useForm();
+    const [messageApi, contextHolder] = message.useMessage();
+
     const [state, setState] = useState<ICategoriesPageState>({
         isLoading: true,
+        modalLoading: false,
+        openModal: false,
+        isUpdateCategory: false,
+        updateCategoryId: 0
     });
+
+    const showModal = () => {
+        setState((prev) => {
+            return {
+                ...prev,
+                openModal: true
+            }
+        })
+      };
+
+    const handleOk = (values: any) => {
+        const createNewCategory: ICategoryDTO = {
+            categoryId: state.updateCategoryId,
+            description: values.categoryDescription,
+            title: values.categoryTitle
+        };
+
+        {state.isUpdateCategory === false ? (
+        addCategory(createNewCategory)
+            .then((resp) => {
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        modalLoading: true
+                    }
+                })
+                getCategories().then((res) => {
+                    setState((prev) => {
+                        return {
+                            ...prev,
+                            categories: res.data,
+                            isLoading: false,
+                            isUpdateCategory: false,
+                            updateCategoryId: 0,
+                            modalLoading: false,
+                            openModal: false
+                        };
+                    });
+                });
+            })
+            .catch((error) => {
+                showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+            })
+        ) :
+        (
+            updateCategory(createNewCategory)
+            .then((resp) => {
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        modalLoading: true
+                    }
+                })
+                getCategories().then((res) => {
+                    setState((prev) => {
+                        return {
+                            ...prev,
+                            categories: res.data,
+                            isLoading: false,
+                            isUpdateCategory: false,
+                            updateCategoryId: 0,
+                            modalLoading: false,
+                            openModal: false
+                        };
+                    });
+                });
+            })
+            .catch((error) => {
+                showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+            })
+        )}
+    };
+
+    const handleCancel = () => {
+        form.resetFields();
+        setState((prev) => {
+            return {
+                ...prev,
+                openModal: false,
+                isUpdateCategory: false,
+                updateCategoryId: 0
+            }
+        })
+      };
 
     useEffect(() => {
         getCategories().then((res) => {
@@ -27,44 +125,51 @@ const CategoriesPage = () => {
                     isLoading: false
                 };
             });
+        })
+        .catch((error) => {
+            showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
         });
     }, []);
-    
-    // const data = [
-    //     {
-    //         id: 1,  
-    //         title: 'Title 1',
-    //         description: 'Description'
-    //     },
-    //     {
-    //         id: 2,  
-    //         title: 'Title 2',
-    //         description: 'Description'
-    //     },
-    //     {
-    //         id: 3,
-    //         title: 'Title 3',
-    //         description: 'Description'
-    //     },
-    //     {
-    //         id: 4,
-    //         title: 'Title 4',
-    //         description: 'Description'
-    //     },
-    //     {
-    //         id: 5,
-    //         title: 'Title 5',
-    //         description: 'Description'
-    //     },
-    //     {
-    //         id: 6,
-    //         title: 'Title 6',
-    //         description: 'Description'
-    //     },
-    // ];
 
     const deleteCategory = (id: number) => {
-        console.log(id);
+        deleteCategoryRequest(id)
+            .then((resp) => {
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        modalLoading: true
+                    }
+                })
+                getCategories().then((res) => {
+                    setState((prev) => {
+                        return {
+                            ...prev,
+                            categories: res.data,
+                            isLoading: false,
+                            isUpdateCategory: false,
+                            updateCategoryId: 0,
+                            modalLoading: false,
+                            openModal: false
+                        };
+                    });
+                });
+            })
+            .catch((error) => {
+                showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+            })
+    };
+
+    const editCategory = (id: number, title:string, description: string) => {
+        console.log(id, title, description);
+        form.setFieldsValue({ categoryTitle: title, categoryDescription: description });
+        setState((prev) => {
+            return {
+                ...prev,
+                openModal: true,
+                isUpdateCategory: true,
+                updateCategoryId: id
+            }
+        })
     }
 
     return (
@@ -89,6 +194,7 @@ const CategoriesPage = () => {
                             <Button
                                 type="primary"
                                 className="add-category-button"
+                                onClick={showModal}
                             >
                                 Προσθήκη κατηγορίας
                             </Button>
@@ -102,7 +208,7 @@ const CategoriesPage = () => {
                                 {[
                                     <Space wrap>
                                         <Button onClick={() => deleteCategory(category.categoryId)} danger>Διαγραφή</Button>
-                                        <Button onClick={() => deleteCategory(category.categoryId)}>Επεξεργασία</Button>
+                                        <Button onClick={() => editCategory(category.categoryId, category.title, category.description)}>Επεξεργασία</Button>
                                     </Space>
                                 ]}
                             >
@@ -113,6 +219,68 @@ const CategoriesPage = () => {
                         </List.Item>
                     )}
                 />
+                    <Modal
+                        open={state.openModal}
+                        title="Προσθήκη κατηγορίας"
+                        onOk={handleOk}
+                        onCancel={handleCancel}
+                        footer={[
+                            // <Button key="back" onClick={handleCancel}>
+                            //     Πίσω
+                            // </Button>,
+                            // <Button className="add-category-button" key="submit" htmlType="submit" type="primary" loading={state.modalLoading} onClick={handleOk}>
+                            //     Αποθήκευση
+                            // </Button>
+                        ]}
+                    >
+                        <Form
+                            form={form}
+                            name="createCategory"
+                            className="create-category-form"
+                            onFinish={handleOk}
+                            layout="vertical"
+                            scrollToFirstError
+                        >
+                            <Form.Item
+                                className="form-input"
+                                name="categoryTitle"
+                                label="Τίτλος"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε το τίτλο."
+                                    }
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                className="form-input"
+                                name="categoryDescription"
+                                label="Περιγραφή"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε τη περιγραφή."
+                                    }
+                                ]}
+                            >
+                                <TextArea rows={4} />
+                            </Form.Item>
+                            <Space wrap>
+                            <FormItem>
+                            <Button key="back" onClick={handleCancel}>
+                                Πίσω
+                            </Button>
+                            </FormItem>
+                            <FormItem>
+                            <Button className="add-category-button" key="submit" htmlType="submit" type="primary" loading={state.modalLoading}>
+                                Αποθήκευση
+                            </Button>
+                            </FormItem>
+                            </Space>
+                        </Form>
+                    </Modal>
             </div>
             )
             :

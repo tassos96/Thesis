@@ -27,5 +27,21 @@ namespace Controllers
             var list = await _applicationService.CategoryService.GetCategoriesAsync(base.AppUser.Id);
             return list;
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateCategoryAsync(UpdateCategoryRequest request)
+        {
+            var result = await _applicationService.CategoryService.UpdateCategoryAsync(request, base.AppUser.Id);
+            return result ? Ok(result) : BadRequest();
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> DeleteCategoryAsync(int categoryId)
+        {
+            var result = await _applicationService.CategoryService.DeleteCategoryAsync(categoryId, base.AppUser.Id);
+            return result ? Ok(result) : BadRequest();
+        }
     }
 }

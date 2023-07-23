@@ -58,6 +58,28 @@ export const getCategories = async () => {
     Appsettings.BaseUrl + "categories/fetchCategories", {headers: authorizationHeader()});
 };
 
+export const addCategory = async (body: ICategoryDTO) => {
+  console.log(Appsettings.BaseUrl + "categories/createCategory");
+  return await axios.post<ICategoryDTO>(Appsettings.BaseUrl + "categories/createCategory", body, {
+    headers: authorizationHeader(),
+  });
+}
+
+export const updateCategory = async (body: ICategoryDTO) => {
+  console.log(Appsettings.BaseUrl + "categories/updateCategory");
+  return await axios.post<ICategoryDTO>(Appsettings.BaseUrl + "categories/updateCategory", body, {
+    headers: authorizationHeader(),
+  });
+}
+
+export const deleteCategoryRequest = async (categoryId: number) => {
+  console.log(Appsettings.BaseUrl + "categories/deleteCategory");
+  return await axios.delete<boolean>(Appsettings.BaseUrl + "categories/deleteCategory", {
+    params: {categoryId: categoryId}, 
+    headers: authorizationHeader()}
+  );
+}
+
 // export const getProductsPaged = async (body: IRequestProductPage) => {
 //   console.log(Appsettings.BaseUrl + "Product/GetSubCategoryProductsPaged");
 //   return await axios.post<IProductsPageResponseDTO>(

@@ -27,5 +27,17 @@ namespace ApplicationService
         {
             return await _unitOfWork.CategoryRepository.GetCategoriesAsync(userId);
         }
+
+        public async Task<bool> UpdateCategoryAsync(UpdateCategoryRequest request, int userId)
+        {
+            await _unitOfWork.CategoryRepository.UpdateCategoryAsync(request, userId);
+            return await _unitOfWork.SaveAsync();
+        }
+
+        public async Task<bool> DeleteCategoryAsync(int categoryId, int userId)
+        {
+            await _unitOfWork.CategoryRepository.DeleteCategoryAsync(categoryId, userId);
+            return await _unitOfWork.SaveAsync();
+        }
     }
 }

@@ -42,5 +42,26 @@ namespace Repositories
 
             return result;
         }
+
+        public async Task<bool> UpdateCategoryAsync(UpdateCategoryRequest request, int userId)
+        {
+            var existingCategory = await _context.Categories.FirstOrDefaultAsync(x => x.CategoryId == request.CategoryId && x.UserId == userId);
+            if (existingCategory == null) { return false; }
+
+            existingCategory.Title = request.Title;
+            existingCategory.Description = request.Description;
+
+            _context.Categories.Update(existingCategory);
+            return true;
+        }
+
+        public async Task<bool> DeleteCategoryAsync(int categoryId, int userId)
+        {
+            var category = await _context.Categories.FirstOrDefaultAsync(x => x.CategoryId == categoryId && x.UserId == userId);
+            if (category == null) { return false; }
+
+            _context.Categories.Remove(category);
+            return true;
+        }
     }
 }

@@ -8,5 +8,7 @@ namespace Interfaces.Repositories
     {
         Task<bool> CreateCategoryAsync(CreateCategoryRequest request, int userId);
         Task<List<CategoryDTO>> GetCategoriesAsync(int userId);
+        Task<bool> UpdateCategoryAsync(UpdateCategoryRequest request, int userId);
+        Task<bool> DeleteCategoryAsync(int categoryId, int userId);
     }
 }
