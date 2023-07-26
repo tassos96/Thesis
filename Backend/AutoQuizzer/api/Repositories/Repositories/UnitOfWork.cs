@@ -9,6 +9,8 @@ namespace Repositories
         public IUserRepository UserRepository => new UserRepository(_context);
         public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
 
+        public ISubcategoryRepository SubcategoryRepository => new SubcategoryRepository(_context);
+
         public UnitOfWork(AutoQuizzerContext context)
         {
             _context = context;

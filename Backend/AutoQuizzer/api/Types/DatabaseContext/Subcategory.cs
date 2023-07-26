@@ -11,8 +11,9 @@ namespace Types.DatabaseContext
         }
 
         public int SubcategoryId { get; set; }
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public string Description { get; set; } = null!;
+        public string Title { get; set; } = null!;
 
         public virtual Category? Category { get; set; }
         public virtual ICollection<Question> Questions { get; set; }

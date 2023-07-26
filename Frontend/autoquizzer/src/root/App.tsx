@@ -22,6 +22,7 @@ import LogOutPage from "../pages/AccountPage/LogoutPage/LogOutPage";
 import AccountInfoPage from "../pages/AccountPage/AccountInfo/AccountInfoPage";
 import CategoriesPage from "../pages/Repos/Categories/CategoriesPage";
 import SubcategoriesPage from "../pages/Repos/Subcategories/Subcategories";
+import QuestionsPage from "../pages/Repos/Questions/QuestionsPage";
 // import LogOutPage from "../pages/LogoutPage/LogOutPage";
 // import CompleteOrderPage from "../pages/Cart/CompleteOrderPage";
 
@@ -35,16 +36,12 @@ const App = () => {
             <Route path={AppRoutes.Home} element={<Home />} />
             <Route path={AppRoutes.Categories} element={<CategoriesPage />} />
             <Route path={AppRoutes.Subcategories} element={<SubcategoriesPage />} />
-            {/* <Route path={AppRoutes.Products} element={<Products />} /> */}
-            {/* <Route path={AppRoutes.FavoriteProducts} element={<FavoriteOrderPage />} /> */}
-              {/* <Route path={AppRoutes.HistoryProducts} element={<HistoryOrderPage />} /> */}
-              {/* <Route path={AppRoutes.Cart} element={<Cart />} /> */}
+            <Route path={AppRoutes.Questions} element={<QuestionsPage />} />
               
               <Route path={AppRoutes.Login} element={<LoginPage />} />
               <Route path={AppRoutes.Signup} element={<SignupPage />} />
               <Route path={AppRoutes.Logout} element={<LogOutPage />} />
               <Route path={AppRoutes.AccountInfo} element={<AccountInfoPage />} />
-              {/* <Route path={AppRoutes.CompleteOrder} element={<CompleteOrderPage />} /> */}
               <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>

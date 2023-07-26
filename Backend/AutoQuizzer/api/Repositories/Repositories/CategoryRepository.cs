@@ -14,7 +14,7 @@ namespace Repositories
 
         public async Task<bool> CreateCategoryAsync(CreateCategoryRequest request, int userId)
         {
-            var existingCategory = await _context.Categories.FirstOrDefaultAsync(x => x.Description == request.Description || x.Title == request.Title);
+            var existingCategory = await _context.Categories.FirstOrDefaultAsync(x => (x.Description == request.Description || x.Title == request.Title) && x.UserId == userId);
             if (existingCategory != null) { return false; }
 
             var category = new Category()

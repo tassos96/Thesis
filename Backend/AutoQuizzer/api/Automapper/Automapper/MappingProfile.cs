@@ -10,9 +10,9 @@ namespace Mapper
         {
             CreateMap<User, UserDTO>();
             CreateMap<Exam, ExamDTO>();
-            CreateMap<Category, CategoryyDTO>();
+            CreateMap<Category, CategoryDTO>();
+            CreateMap<Subcategory, SubcategoryDTO>();
             //CreateMap<Category, CategoryDTO>();
-            //CreateMap<SubCategory, SubCategoryDTO>();
             //CreateMap<Order, OrderDTO>().ReverseMap();
             //CreateMap<Address, AddressDTO>();
             //CreateMap<PaymentMethod, PaymentMethodDTO>();

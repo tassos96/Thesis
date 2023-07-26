@@ -4,20 +4,23 @@ import "./Subcategories.css";
 import { AppRoutes, showErrorMessage } from "../../../helpers/AppConstants";
 import { ICategoryDTO } from "../../../DTO/CategoriesPage/ICategoryDTO";
 import { useEffect, useState } from "react";
-import { addCategory, deleteCategoryRequest, getCategories, updateCategory } from "../../../httpServices/HttpServices";
+import { addCategory, addSubcategory, deleteSubcategoryRequest, getCategories, getSubcategories, updateSubcategory } from "../../../httpServices/HttpServices";
 import Loader from "../../../components/Loader/Loader";
 import TextArea from "antd/es/input/TextArea";
 import FormItem from "antd/es/form/FormItem";
 import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { ISubcategoryDTO } from "../../../DTO/SubcategoriesPage/ISubcategoryDTO";
+import { IUpdatesubcategoryDTO } from "../../../DTO/SubcategoriesPage/IUpdateSubcategoryDTO";
 
 export interface ISubcategoriesPageState {
     categories?: ICategoryDTO[];
+    subcategories?: ISubcategoryDTO[];
     isLoading: boolean;
     modalLoading: boolean;
     openModal: boolean;
-    isUpdateCategory: boolean;
-    updateCategoryId: number;
+    isUpdateSubcategory: boolean;
+    updateSubcategoryId: number;
     categoriesOptions: IOption[];
     selectedCategoryId: number;
 }
@@ -39,8 +42,8 @@ const SubcategoriesPage = () => {
         isLoading: true,
         modalLoading: false,
         openModal: false,
-        isUpdateCategory: false,
-        updateCategoryId: 0,
+        isUpdateSubcategory: false,
+        updateSubcategoryId: 0,
         categoriesOptions: [],
         selectedCategoryId: 0
     });
@@ -55,14 +58,24 @@ const SubcategoriesPage = () => {
       };
 
     const handleOk = (values: any) => {
-        const createNewCategory: ICategoryDTO = {
-            categoryId: state.updateCategoryId,
-            description: values.categoryDescription,
-            title: values.categoryTitle
+        const createNewSubcategory: ISubcategoryDTO = {
+            categoryId: values.categoryId,
+            description: values.subcategoryDescription,
+            title: values.subcategoryTitle,
+            subcategoryId: 0
         };
 
-        {state.isUpdateCategory === false ? (
-        addCategory(createNewCategory)
+        const updateSubcategoryDTO: IUpdatesubcategoryDTO = {
+            newCategoryId : values.categoryId,
+            newDescription: values.subcategoryDescription,
+            newTitle: values.subcategoryTitle,
+            subcategoryId: state.updateSubcategoryId
+        }
+
+        console.log(createNewSubcategory);
+
+        {state.isUpdateSubcategory === false ? (
+        addSubcategory(createNewSubcategory)
             .then((resp) => {
                 setState((prev) => {
                     return {
@@ -76,10 +89,18 @@ const SubcategoriesPage = () => {
                             ...prev,
                             categories: res.data,
                             isLoading: false,
-                            isUpdateCategory: false,
-                            updateCategoryId: 0,
+                            isUpdateSubcategory: false,
+                            updateSubcategoryId: 0,
                             modalLoading: false,
                             openModal: false
+                        };
+                    });
+                });
+                getSubcategories(state.selectedCategoryId).then((res) => {
+                    setState((prev) => {
+                        return {
+                            ...prev,
+                            subcategories: res.data,
                         };
                     });
                 });
@@ -89,7 +110,7 @@ const SubcategoriesPage = () => {
             })
         ) :
         (
-            updateCategory(createNewCategory)
+            updateSubcategory(updateSubcategoryDTO)
             .then((resp) => {
                 setState((prev) => {
                     return {
@@ -103,10 +124,18 @@ const SubcategoriesPage = () => {
                             ...prev,
                             categories: res.data,
                             isLoading: false,
-                            isUpdateCategory: false,
-                            updateCategoryId: 0,
+                            isUpdateSubcategory: false,
+                            updateSubcategoryId: 0,
                             modalLoading: false,
                             openModal: false
+                        };
+                    });
+                });
+                getSubcategories(state.selectedCategoryId).then((res) => {
+                    setState((prev) => {
+                        return {
+                            ...prev,
+                            subcategories: res.data,
                         };
                     });
                 });
@@ -123,8 +152,8 @@ const SubcategoriesPage = () => {
             return {
                 ...prev,
                 openModal: false,
-                isUpdateCategory: false,
-                updateCategoryId: 0
+                isUpdateSubcategory: false,
+                updateSubcategoryId: 0
             }
         })
       };
@@ -160,10 +189,22 @@ const SubcategoriesPage = () => {
         .catch((error) => {
             showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
         });
+
+        getSubcategories(selectedCategoryId).then((res) => {
+            setState((prev) => {
+                return {
+                    ...prev,
+                    subcategories: res.data
+                }
+            });
+        })
+        .catch((error) => {
+            showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+        });
     }, []);
 
-    const deleteCategory = (id: number) => {
-        deleteCategoryRequest(id)
+    const deleteSubcategory = (id: number) => {
+        deleteSubcategoryRequest(id)
             .then((resp) => {
                 setState((prev) => {
                     return {
@@ -171,14 +212,14 @@ const SubcategoriesPage = () => {
                         modalLoading: true
                     }
                 });
-                getCategories().then((res) => {
+                getSubcategories(state.selectedCategoryId).then((res) => {
                     setState((prev) => {
                         return {
                             ...prev,
-                            categories: res.data,
+                            subcategories: res.data,
                             isLoading: false,
-                            isUpdateCategory: false,
-                            updateCategoryId: 0,
+                            isUpdateSubcategory: false,
+                            updateSubcategoryId: 0,
                             modalLoading: false,
                             openModal: false
                         };
@@ -190,15 +231,15 @@ const SubcategoriesPage = () => {
             })
     };
 
-    const editCategory = (id: number, title:string, description: string) => {
+    const editSubcategory = (id: number, title:string, description: string) => {
         console.log(id, title, description);
-        form.setFieldsValue({ categoryTitle: title, categoryDescription: description });
+        form.setFieldsValue({ subcategoryTitle: title, subcategoryDescription: description});
         setState((prev) => {
             return {
                 ...prev,
                 openModal: true,
-                isUpdateCategory: true,
-                updateCategoryId: id
+                isUpdateSubcategory: true,
+                updateSubcategoryId: id
             }
         });
     }
@@ -219,6 +260,17 @@ const SubcategoriesPage = () => {
                 ...prev,
                 selectedCategoryId: selectedCategoryId
             }
+        });
+        getSubcategories(selectedCategoryId).then((res) => {
+            setState((prev) => {
+                return {
+                    ...prev,
+                    subcategories: res.data
+                }
+            });
+        })
+        .catch((error) => {
+            showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
         });
       };
 
@@ -241,7 +293,7 @@ const SubcategoriesPage = () => {
                     grid={{
                         gutter: 16,xs: 1,sm: 2,md: 4,lg: 4,xl: 6,xxl: 3
                     }}
-                    dataSource={state.categories}
+                    dataSource={state.subcategories}
                     pagination = {{
                         onChange: (page) => {
                             console.log(page);
@@ -260,20 +312,20 @@ const SubcategoriesPage = () => {
                             </Button>
                         </Space>
                     }
-                    renderItem={(category) => (
+                    renderItem={(subcategory) => (
                         <List.Item>
                             <Card 
-                                title={<a href={AppRoutes.Subcategories + "/" + category.categoryId}>{category.title}</a>} 
+                                title={<a href={AppRoutes.Questions + "?id=" + subcategory.subcategoryId}>{subcategory.title}</a>} 
                                 actions=
                                 {[
                                     <Space wrap>
-                                        <Button onClick={() => deleteCategory(category.categoryId)} danger>Διαγραφή</Button>
-                                        <Button onClick={() => editCategory(category.categoryId, category.title, category.description)}>Επεξεργασία</Button>
+                                        <Button onClick={() => deleteSubcategory(subcategory.subcategoryId)} danger>Διαγραφή</Button>
+                                        <Button onClick={() => editSubcategory(subcategory.subcategoryId, subcategory.title, subcategory.description)}>Επεξεργασία</Button>
                                     </Space>
                                 ]}
                             >
-                                <a href={AppRoutes.Subcategories + "/" + category.categoryId}>
-                                    {category.description}
+                                <a href={AppRoutes.Questions + "?id=" + subcategory.subcategoryId}>
+                                    {subcategory.description}
                                 </a>
                             </Card>
                         </List.Item>

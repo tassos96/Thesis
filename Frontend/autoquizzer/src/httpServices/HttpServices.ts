@@ -10,6 +10,8 @@ import { IUserSignupDTO } from "../DTO/SignupPage/IUserSignupDTO";
 import { IUserLoginRequestDTO } from "../DTO/LoginPage/IUserLoginRequestDTO";
 import { IUserDTO } from "../DTO/IUserDTO";
 import { ICategoryDTO } from "../DTO/CategoriesPage/ICategoryDTO";
+import { ISubcategoryDTO } from "../DTO/SubcategoriesPage/ISubcategoryDTO";
+import { IUpdatesubcategoryDTO } from "../DTO/SubcategoriesPage/IUpdateSubcategoryDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -76,6 +78,37 @@ export const deleteCategoryRequest = async (categoryId: number) => {
   console.log(Appsettings.BaseUrl + "categories/deleteCategory");
   return await axios.delete<boolean>(Appsettings.BaseUrl + "categories/deleteCategory", {
     params: {categoryId: categoryId}, 
+    headers: authorizationHeader()}
+  );
+}
+
+export const getSubcategories = async (categoryId: number) => {
+  console.log(Appsettings.BaseUrl + "subcategories/fetchsubcategories");
+  return await axios.get<ISubcategoryDTO[]>(
+    Appsettings.BaseUrl + "subcategories/fetchsubcategories", {
+      headers: authorizationHeader(),
+      params: {categoryId: categoryId},
+    });
+};
+
+export const addSubcategory = async (body: ISubcategoryDTO) => {
+  console.log(Appsettings.BaseUrl + "subcategories/createSubcategory");
+  return await axios.post<ICategoryDTO>(Appsettings.BaseUrl + "subcategories/createSubcategory", body, {
+    headers: authorizationHeader(),
+  });
+}
+
+export const updateSubcategory = async (body: IUpdatesubcategoryDTO) => {
+  console.log(Appsettings.BaseUrl + "subcategories/updateSubcategory");
+  return await axios.post<IUpdatesubcategoryDTO>(Appsettings.BaseUrl + "subcategories/updateSubcategory", body, {
+    headers: authorizationHeader(),
+  });
+}
+
+export const deleteSubcategoryRequest = async (subcategoryId: number) => {
+  console.log(Appsettings.BaseUrl + "subcategories/deleteSubcategory");
+  return await axios.delete<boolean>(Appsettings.BaseUrl + "subcategories/deleteSubcategory", {
+    params: {subcategoryId: subcategoryId}, 
     headers: authorizationHeader()}
   );
 }

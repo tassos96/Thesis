@@ -17,5 +17,6 @@ namespace ApplicationService
 
         public IUserService UserService => new UserService(_unitOfWork, _mapper);
         public ICategoryService CategoryService => new CategoryService(_unitOfWork, _mapper);
+        public ISubcategoryService SubategoryService => new SubcategoryService(_unitOfWork, _mapper);
     }
 }
