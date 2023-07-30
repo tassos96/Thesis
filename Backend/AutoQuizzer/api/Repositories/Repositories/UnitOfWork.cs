@@ -8,8 +8,8 @@ namespace Repositories
         private readonly AutoQuizzerContext _context;
         public IUserRepository UserRepository => new UserRepository(_context);
         public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
-
         public ISubcategoryRepository SubcategoryRepository => new SubcategoryRepository(_context);
+        public IQuestionRepository QuestionRepository => new QuestionRepository(_context);
 
         public UnitOfWork(AutoQuizzerContext context)
         {

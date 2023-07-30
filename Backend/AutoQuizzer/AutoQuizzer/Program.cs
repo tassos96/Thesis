@@ -12,6 +12,7 @@ using Newtonsoft.Json.Converters;
 using AutoQuizzer.Helpers.GlobalException;
 using AutoQuizzer.Helpers.SwaggerHelpers;
 using Mapper;
+using Controllers;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -47,12 +48,19 @@ builder.Services.AddAuthentication(x =>
         };
     });
 
-builder.Services.AddControllers().AddNewtonsoftJson(options =>
-{
-    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
-    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
-    options.SerializerSettings.Converters.Add(new StringEnumConverter());
-});
+builder.Services.AddControllers()
+    .AddNewtonsoftJson(options =>
+    {
+        options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+        options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+        options.SerializerSettings.Converters.Add(new StringEnumConverter());
+    })
+    .AddApplicationPart(typeof(BaseController).Assembly)
+    .AddApplicationPart(typeof(CategoriesController).Assembly)
+    .AddApplicationPart(typeof(QuestionsController).Assembly)
+    .AddApplicationPart(typeof(SubcategoriesController).Assembly)
+    .AddApplicationPart(typeof(UserController).Assembly);
+    
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

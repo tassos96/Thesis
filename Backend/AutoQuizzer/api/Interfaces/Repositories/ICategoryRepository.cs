@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Types.CategoryService;
 using Types.DTOs;
-using Types.QuestionService;
 
 namespace Interfaces.Repositories
 {

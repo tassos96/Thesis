@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Types.DTOs;
-using Types.QuestionService;
+using Types.SubcategoryService;
 
 namespace Controllers
 {

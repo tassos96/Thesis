@@ -1,8 +1,8 @@
 ﻿using Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Types.CategoryService;
 using Types.DTOs;
-using Types.QuestionService;
 
 namespace Controllers
 {

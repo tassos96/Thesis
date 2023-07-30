@@ -1,4 +1,4 @@
-import { Button, Card, Form, FormInstance, Input, List, Modal, Space, message } from "antd";
+import { Button, Card, Form, Input, List, Modal, Popconfirm, Space, message } from "antd";
 import AppBreadcrumb from "../../../components/Breadcrumb/AppBreadcrumb";
 import "./CategoriesPage.css";
 import { AppRoutes, showErrorMessage } from "../../../helpers/AppConstants";
@@ -8,7 +8,7 @@ import { addCategory, deleteCategoryRequest, getCategories, updateCategory } fro
 import Loader from "../../../components/Loader/Loader";
 import TextArea from "antd/es/input/TextArea";
 import FormItem from "antd/es/form/FormItem";
-import React from "react";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 
 export interface ICategoriesPageState {
     categories?: ICategoryDTO[];
@@ -23,6 +23,7 @@ const CategoriesPage = () => {
 
     const [form] = Form.useForm();
     const [messageApi, contextHolder] = message.useMessage();
+    const { confirm } = Modal;
 
     const [state, setState] = useState<ICategoriesPageState>({
         isLoading: true,
@@ -117,6 +118,7 @@ const CategoriesPage = () => {
       };
 
     useEffect(() => {
+        console.log('i fire once');
         getCategories().then((res) => {
             setState((prev) => {
                 return {
@@ -132,31 +134,44 @@ const CategoriesPage = () => {
     }, []);
 
     const deleteCategory = (id: number) => {
-        deleteCategoryRequest(id)
-            .then((resp) => {
-                setState((prev) => {
-                    return {
-                        ...prev,
-                        modalLoading: true
-                    }
-                })
-                getCategories().then((res) => {
+        confirm({
+            title: 'Προσοχή',
+            icon: <ExclamationCircleFilled />,
+            content: 'Είσαι σίγουρος ότι επιθυμείς να διαγραφτεί αυτή η κατηγορία;',
+            okText: 'Ναί',
+            okType: 'danger',
+            cancelText: 'Όχι',
+            onOk() {
+                deleteCategoryRequest(id)
+                .then((resp) => {
                     setState((prev) => {
                         return {
                             ...prev,
-                            categories: res.data,
-                            isLoading: false,
-                            isUpdateCategory: false,
-                            updateCategoryId: 0,
-                            modalLoading: false,
-                            openModal: false
-                        };
+                            modalLoading: true
+                        }
+                    })
+                    getCategories().then((res) => {
+                        setState((prev) => {
+                            return {
+                                ...prev,
+                                categories: res.data,
+                                isLoading: false,
+                                isUpdateCategory: false,
+                                updateCategoryId: 0,
+                                modalLoading: false,
+                                openModal: false
+                            };
+                        });
                     });
+                })
+                .catch((error) => {
+                    showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
                 });
-            })
-            .catch((error) => {
-                showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
-            })
+            },
+            onCancel() {
+                console.log('Cancel');
+            },
+        });   
     };
 
     const editCategory = (id: number, title:string, description: string) => {
@@ -221,16 +236,10 @@ const CategoriesPage = () => {
                 />
                     <Modal
                         open={state.openModal}
-                        title="Προσθήκη κατηγορίας"
+                        title={state.isUpdateCategory ? "Επεξεργασία κατηγορίας" : "Προσθήκη κατηγορίας"}
                         onOk={handleOk}
                         onCancel={handleCancel}
                         footer={[
-                            // <Button key="back" onClick={handleCancel}>
-                            //     Πίσω
-                            // </Button>,
-                            // <Button className="add-category-button" key="submit" htmlType="submit" type="primary" loading={state.modalLoading} onClick={handleOk}>
-                            //     Αποθήκευση
-                            // </Button>
                         ]}
                     >
                         <Form

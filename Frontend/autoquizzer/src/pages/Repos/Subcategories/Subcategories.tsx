@@ -1,17 +1,17 @@
-import { Button, Card, Form, FormInstance, Input, List, Modal, Select, Space, message } from "antd";
+import { Button, Card, Form, Input, List, Modal, Popconfirm, Select, Space, message } from "antd";
 import AppBreadcrumb from "../../../components/Breadcrumb/AppBreadcrumb";
 import "./Subcategories.css";
 import { AppRoutes, showErrorMessage } from "../../../helpers/AppConstants";
 import { ICategoryDTO } from "../../../DTO/CategoriesPage/ICategoryDTO";
 import { useEffect, useState } from "react";
-import { addCategory, addSubcategory, deleteSubcategoryRequest, getCategories, getSubcategories, updateSubcategory } from "../../../httpServices/HttpServices";
+import { addSubcategory, deleteSubcategoryRequest, getCategories, getSubcategories, updateSubcategory } from "../../../httpServices/HttpServices";
 import Loader from "../../../components/Loader/Loader";
 import TextArea from "antd/es/input/TextArea";
 import FormItem from "antd/es/form/FormItem";
-import React from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { ISubcategoryDTO } from "../../../DTO/SubcategoriesPage/ISubcategoryDTO";
 import { IUpdatesubcategoryDTO } from "../../../DTO/SubcategoriesPage/IUpdateSubcategoryDTO";
+import { ExclamationCircleFilled } from "@ant-design/icons";
 
 export interface ISubcategoriesPageState {
     categories?: ICategoryDTO[];
@@ -37,6 +37,7 @@ const SubcategoriesPage = () => {
 
     const [form] = Form.useForm();
     const [messageApi, contextHolder] = message.useMessage();
+    const { confirm } = Modal;
 
     const [state, setState] = useState<ISubcategoriesPageState>({
         isLoading: true,
@@ -73,6 +74,7 @@ const SubcategoriesPage = () => {
         }
 
         console.log(createNewSubcategory);
+        console.log('Update:' + updateSubcategoryDTO);
 
         {state.isUpdateSubcategory === false ? (
         addSubcategory(createNewSubcategory)
@@ -104,6 +106,7 @@ const SubcategoriesPage = () => {
                         };
                     });
                 });
+                form.resetFields();
             })
             .catch((error) => {
                 showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
@@ -139,6 +142,7 @@ const SubcategoriesPage = () => {
                         };
                     });
                 });
+                form.resetFields();
             })
             .catch((error) => {
                 showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
@@ -204,36 +208,49 @@ const SubcategoriesPage = () => {
     }, []);
 
     const deleteSubcategory = (id: number) => {
-        deleteSubcategoryRequest(id)
-            .then((resp) => {
-                setState((prev) => {
-                    return {
-                        ...prev,
-                        modalLoading: true
-                    }
-                });
-                getSubcategories(state.selectedCategoryId).then((res) => {
+        confirm({
+            title: 'Προσοχή',
+            icon: <ExclamationCircleFilled />,
+            content: 'Είσαι σίγουρος ότι επιθυμείς να διαγραφτεί αυτή η υποκατηγορία;',
+            cancelText: 'Όχι',
+            okText: 'Ναί',
+            okType: 'danger',
+            onOk() {
+                deleteSubcategoryRequest(id)
+                .then((resp) => {
                     setState((prev) => {
                         return {
                             ...prev,
-                            subcategories: res.data,
-                            isLoading: false,
-                            isUpdateSubcategory: false,
-                            updateSubcategoryId: 0,
-                            modalLoading: false,
-                            openModal: false
-                        };
+                            modalLoading: true
+                        }
                     });
+                    getSubcategories(state.selectedCategoryId).then((res) => {
+                        setState((prev) => {
+                            return {
+                                ...prev,
+                                subcategories: res.data,
+                                isLoading: false,
+                                isUpdateSubcategory: false,
+                                updateSubcategoryId: 0,
+                                modalLoading: false,
+                                openModal: false
+                            };
+                        });
+                    });
+                })
+                .catch((error) => {
+                    showErrorMessage(messageApi, "Η διαδικασία απέτυχε.");
                 });
-            })
-            .catch((error) => {
-                showErrorMessage(messageApi, "Η διαδικασία απέτυχε.");
-            })
+            },
+            onCancel() {
+              console.log('Cancel');
+            },
+          });
     };
 
-    const editSubcategory = (id: number, title:string, description: string) => {
+    const editSubcategory = (id: number, title:string, description: string, categoryId: number) => {
         console.log(id, title, description);
-        form.setFieldsValue({ subcategoryTitle: title, subcategoryDescription: description});
+        form.setFieldsValue({ subcategoryTitle: title, subcategoryDescription: description, categoryId: categoryId});
         setState((prev) => {
             return {
                 ...prev,
@@ -276,7 +293,7 @@ const SubcategoriesPage = () => {
 
     return (
         <>
-            <AppBreadcrumb path="Αρχική/Κατηγορίες" />
+            <AppBreadcrumb path="Αρχική/Υποκατηγορίες" />
             {state.isLoading === false ? (
             <div className="cardListWrapper">
                 <Space style={{width: "100%"}}>
@@ -315,16 +332,16 @@ const SubcategoriesPage = () => {
                     renderItem={(subcategory) => (
                         <List.Item>
                             <Card 
-                                title={<a href={AppRoutes.Questions + "?id=" + subcategory.subcategoryId}>{subcategory.title}</a>} 
+                                title={<a href={AppRoutes.Questions + "?categoryId=" + subcategory.categoryId + "&subcategoryId=" + subcategory.subcategoryId}>{subcategory.title}</a>} 
                                 actions=
                                 {[
                                     <Space wrap>
                                         <Button onClick={() => deleteSubcategory(subcategory.subcategoryId)} danger>Διαγραφή</Button>
-                                        <Button onClick={() => editSubcategory(subcategory.subcategoryId, subcategory.title, subcategory.description)}>Επεξεργασία</Button>
+                                        <Button onClick={() => editSubcategory(subcategory.subcategoryId, subcategory.title, subcategory.description, subcategory.categoryId)}>Επεξεργασία</Button>
                                     </Space>
                                 ]}
                             >
-                                <a href={AppRoutes.Questions + "?id=" + subcategory.subcategoryId}>
+                                <a href={AppRoutes.Questions + "?categoryId=" + subcategory.categoryId + "&subcategoryId=" + subcategory.subcategoryId}>
                                     {subcategory.description}
                                 </a>
                             </Card>
@@ -374,13 +391,18 @@ const SubcategoriesPage = () => {
                             </Form.Item>
                             <Form.Item
                                 className="form-input"
-                                name="categoryId">
+                                name="categoryId"
+                                label="Κατηγορία"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Επέλεξε την κατηγορία."
+                                    }
+                                ]}
+                            >
                                 <Select
-                                    //style={{ width: "auto"}}
                                     size={"middle"}
-                                    //value={state.selectedCategoryId}
                                     placeholder="Επέλεξε κατηγορία στην οποία ανήκει."
-                                    //onChange={(values) => handleChange(values)}
                                     options={state.categoriesOptions.slice(1)}
                                 />
                             </Form.Item>
@@ -398,6 +420,7 @@ const SubcategoriesPage = () => {
                             </Space>
                         </Form>
                     </Modal>
+                    {contextHolder}
             </div>
             )
             :

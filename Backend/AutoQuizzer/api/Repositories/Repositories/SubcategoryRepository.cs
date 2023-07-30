@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Types.DatabaseContext;
 using Types.DTOs;
-using Types.QuestionService;
+using Types.SubcategoryService;
 
 namespace Repositories
 {
@@ -49,7 +49,8 @@ namespace Repositories
                 })
              );
 
-            return result;
+            return result.OrderBy(x => x.CategoryId)
+                .ToList();
         }
 
         public async Task<bool> UpdateSubcategoryAsync(UpdateSubcategoryRequest request, int userId)

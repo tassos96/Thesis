@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Interfaces.Repositories;
 using Interfaces.Services;
+using Types.CategoryService;
 using Types.DTOs;
-using Types.QuestionService;
 
 namespace ApplicationService
 {

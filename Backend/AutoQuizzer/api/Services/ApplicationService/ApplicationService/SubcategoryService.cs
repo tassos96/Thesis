@@ -2,7 +2,7 @@
 using Interfaces.Repositories;
 using Interfaces.Services;
 using Types.DTOs;
-using Types.QuestionService;
+using Types.SubcategoryService;
 
 namespace ApplicationService
 {

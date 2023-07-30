@@ -13,7 +13,8 @@ const breadcrumbNameMap: Record<string, string> = {
   '/logout': 'Αποσύνδεση',
   '/account-info': 'Πληροφορίες Λογαριασμού',
   '/categories': 'Κατηγορίες',
-  '/subcategories': 'Υπόκατηγορίες'
+  '/subcategories': 'Υπόκατηγορίες',
+  '/questions': 'Ερωτήσεις'
 };
 
 const AppBreadcrumb = (props: IAppBreadcrumbProps) => {

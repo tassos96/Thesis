@@ -1,8 +1,8 @@
 ﻿using Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Types.CategoryService;
 using Types.DatabaseContext;
 using Types.DTOs;
-using Types.QuestionService;
 
 namespace Repositories
 {

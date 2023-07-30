@@ -12,6 +12,8 @@ import { IUserDTO } from "../DTO/IUserDTO";
 import { ICategoryDTO } from "../DTO/CategoriesPage/ICategoryDTO";
 import { ISubcategoryDTO } from "../DTO/SubcategoriesPage/ISubcategoryDTO";
 import { IUpdatesubcategoryDTO } from "../DTO/SubcategoriesPage/IUpdateSubcategoryDTO";
+import { QuestionDTO } from "../DTO/QuestionsPage/QuestionDTO";
+import { IQuestionUpdateDTO } from "../DTO/QuestionsPage/IQuestionUpdateDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -113,152 +115,40 @@ export const deleteSubcategoryRequest = async (subcategoryId: number) => {
   );
 }
 
-// export const getProductsPaged = async (body: IRequestProductPage) => {
-//   console.log(Appsettings.BaseUrl + "Product/GetSubCategoryProductsPaged");
-//   return await axios.post<IProductsPageResponseDTO>(
-//     Appsettings.BaseUrl + "Product/GetSubCategoryProductsPaged",
-//     body
-//   );
-// };
+export const getQuestions = async (categoryId: number, subcategoryId: number) => {
+  console.log(Appsettings.BaseUrl + "questions/fetchQuestions");
+  return await axios.get<QuestionDTO[]>(
+    Appsettings.BaseUrl + "questions/fetchQuestions", {
+      headers: authorizationHeader(),
+      params: {
+        categoryId: categoryId,
+        subcategoryId: subcategoryId
+      },
+    });
+};
 
-// export const loginUser = async (body: IUserRequestDTO) => {
-//   console.log(Appsettings.BaseUrl + "User/Login");
-//   return await axios.post<IUserDTO>(Appsettings.BaseUrl + "User/Login", body);
-// };
+export const deleteQuestionRequest = async (categoryId:number, subcategoryId: number, questionId: number) => {
+  console.log(Appsettings.BaseUrl + "questions/deleteQuestion");
+  return await axios.delete<boolean>(Appsettings.BaseUrl + "questions/deleteQuestion", {
+    params: {
+      categoryId: categoryId,
+      subcategoryId: subcategoryId,
+      questionId: questionId
+    }, 
+    headers: authorizationHeader()}
+  );
+}
 
-// //with authorization headers
-// export const getUserInfo = async () => {
-//   console.log(Appsettings.BaseUrl + "User/GetUserInfo");
-//   return await axios.get<IUserDTO>(Appsettings.BaseUrl + "User/GetUserInfo", {
-//     headers: authorizationHeader(),
-//   });
-// };
+export const addQuestion = async (body: QuestionDTO) => {
+  console.log(Appsettings.BaseUrl + "questions/createQuestion");
+  return await axios.post<QuestionDTO>(Appsettings.BaseUrl + "questions/createQuestion", body, {
+    headers: authorizationHeader(),
+  });
+}
 
-// export const getCoordinatesFromAddress = async (address : string) => {
-//   let googleResponse : any = {};
-//   const apiCall = await Geocode.fromAddress(address).then(
-//     (response) => {
-//       googleResponse = response.results[0].geometry.location;
-//       return googleResponse;
-//     },
-//     (error) => {
-//       console.error(error);
-//     }
-//   );
-//   return apiCall;
-// }
-
-// export const signUpUser = async (body: IUserSignupDTO) => {
-//   console.log(Appsettings.BaseUrl + "User/SignUpUser");
-//   return await axios.post<IUserSignupDTO>(Appsettings.BaseUrl + "User/SignUpUser", body);
-// };
-
-// export const updateUserInfo = async (body: IUserSignupDTO) => {
-//   console.log(Appsettings.BaseUrl + "User/UpdateUserAccountInfo");
-//   return await axios.post<IUserSignupDTO>(Appsettings.BaseUrl + "User/UpdateUserAccountInfo", body, {
-//     headers: authorizationHeader(),
-//   });
-// };
-
-// export const getAccountInfo = async () => {
-//   console.log(Appsettings.BaseUrl + "User/GetAccountInfo");
-//   return await axios.get<IAccountInfoDTO>(Appsettings.BaseUrl + "User/GetAccountInfo", {
-//     headers: authorizationHeader(),
-//   });
-// };
-
-// export const getUsersAddresses = async () => {
-//   console.log(Appsettings.BaseUrl + "User/GetCurrentUserAddresses");
-//   return await axios.get<IAddressDTO[]>(
-//     Appsettings.BaseUrl + "User/GetCurrentUserAddresses", {
-//       headers: authorizationHeader(),
-//     }
-//   );
-// };
-
-// export const getPaymentMethods = async () => {
-//   console.log(Appsettings.BaseUrl + "ReferenceData/GetPaymentsMethods");
-//   return await axios.get<IPaymentMethodDTO[]>(
-//     Appsettings.BaseUrl + "ReferenceData/GetPaymentsMethods"
-//   );
-// };
-
-// export const getDeliveryMethods = async () => {
-//   console.log(Appsettings.BaseUrl + "ReferenceData/GetDeliveryMethods");
-//   return await axios.get<IDeliveryMethodDTO[]>(
-//     Appsettings.BaseUrl + "ReferenceData/GetDeliveryMethods"
-//   );
-// };
-
-// export const calculateOrderPricing = async (body: IOrderPricingRequestDTO) => {
-//   console.log(Appsettings.BaseUrl + "Order/CalculateOrderPricingInfo");
-//   return await axios.post<IOrderPricingInfoResponseDTO>(Appsettings.BaseUrl + "Order/CalculateOrderPricingInfo", 
-//   body,
-//   {
-//     headers: authorizationHeader(),
-//   });
-  
-// };
-
-// export const getHistoryOrders = async () => {
-//   console.log(Appsettings.BaseUrl + "Order/GetAllOrdersByUser");
-//   return await axios.get<IHistoryOrderDTO[]>(
-//     Appsettings.BaseUrl + "Order/GetAllOrdersByUser", {
-//       headers: authorizationHeader(),
-//     }
-//   );
-// };
-
-// export const saveOrder = async (body: IOrderDTO) => {
-//   console.log(Appsettings.BaseUrl + "Order/SaveOrder");
-//   return await axios.post<number>(Appsettings.BaseUrl + "Order/SaveOrder", 
-//   body,
-//   {
-//     headers: authorizationHeader(),
-//   });
-// };
-
-// export const AddOrderToFavorite = async (id: number) => {
-//   return await axios.get<boolean>(
-//     Appsettings.BaseUrl + "Order/AddOrderToFavorite?id=" +id,
-//     {
-//       headers: authorizationHeader(),
-//     }
-//   );
-// };
-
-// export const RemoveOrderFromFavorite = async (id: number) => {
-//   console.log(Appsettings.BaseUrl + "Order/RemoveOrderFromFavorite?id=" +id);
-//   return await axios.get<boolean>(
-//     Appsettings.BaseUrl + "Order/RemoveOrderFromFavorite?id=" +id,
-//     {
-//       headers: authorizationHeader(),
-//     }
-//   );
-// };
-
-// export const getSuperMarketBrands = async () => {
-//   console.log(Appsettings.BaseUrl + "ReferenceData/GetSuperMarketBrands");
-//   return await axios.get<IBrandDTO[]>(
-//     Appsettings.BaseUrl + "ReferenceData/GetSuperMarketBrands"
-//   );
-// };
-
-// export const sendEmails = async (body: IOrderPricingInfoResponseDTO) => {
-//   console.log(Appsettings.BaseUrl + "Email/SendEmail");
-//   return await axios.post(
-//     Appsettings.BaseUrl + "Email/SendEmail", body, 
-//     {
-//       headers: authorizationHeader(),
-//     }
-//   );
-// };
-
-// export const getFavoriteOrders = async () => {
-//   console.log(Appsettings.BaseUrl + "Order/GetAllFavOrdersByUser");
-//   return await axios.get<IHistoryOrderDTO[]>(
-//     Appsettings.BaseUrl + "Order/GetAllFavOrdersByUser", {
-//       headers: authorizationHeader(),
-//     }
-//   );
-// };
+export const updateQuestion = async (body: IQuestionUpdateDTO) => {
+  console.log(Appsettings.BaseUrl + "questions/updateQuestion");
+  return await axios.post<IQuestionUpdateDTO>(Appsettings.BaseUrl + "questions/updateQuestion", body, {
+    headers: authorizationHeader(),
+  });
+}

@@ -1,4 +1,4 @@
-﻿namespace Types.QuestionService
+﻿namespace Types.SubcategoryService
 {
     public class CreateSubcategoryRequest
     {
