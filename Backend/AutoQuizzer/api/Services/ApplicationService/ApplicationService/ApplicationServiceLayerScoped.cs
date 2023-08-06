@@ -19,5 +19,6 @@ namespace ApplicationService
         public ICategoryService CategoryService => new CategoryService(_unitOfWork, _mapper);
         public ISubcategoryService SubategoryService => new SubcategoryService(_unitOfWork, _mapper);
         public IQuestionService QuestionService => new QuestionService(_unitOfWork, _mapper);
+        public ITestService TestService => new TestService (_unitOfWork, _mapper);
     }
 }

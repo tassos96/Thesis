@@ -25,6 +25,7 @@ export interface IQuestionPageState {
     openModal: boolean;
     formSubcategories?: IOption[];
     isFormSubcategoriesDisabled: boolean;
+    isFormCategoriesDisabled: boolean;
     isQuestionUpdate: boolean;
     updateQuestionId: number;
     updateQuestionCatId: number;
@@ -33,12 +34,15 @@ export interface IQuestionPageState {
     updateAns2Id: number;
     updateAns3Id: number;
     updateAns4Id: number;
+
+    hideModalButtons: boolean;
+    formDisabled: boolean;
 }
 
 export interface IOption {
     value: number;
     label: string;
-  }
+}
 
 const QuestionsPage = () => {
 
@@ -51,6 +55,7 @@ const QuestionsPage = () => {
         modalLoading: false,
         openModal: false,
         isFormSubcategoriesDisabled: true,
+        isFormCategoriesDisabled: true,
         isQuestionUpdate: false,
         updateQuestionId: 0,
         updateQuestionCatId: 0,
@@ -59,6 +64,9 @@ const QuestionsPage = () => {
         updateAns2Id: 0,
         updateAns3Id: 0,
         updateAns4Id: 0,
+
+        hideModalButtons: false,
+        formDisabled: false
     });
 
     const [messageApi, contextHolder] = message.useMessage();
@@ -70,6 +78,7 @@ const QuestionsPage = () => {
     useEffect(() => {
         const selectedCategoryId = Number(searchParams.get('categoryId'));
         const selectedSubcategoryId = Number(searchParams.get('subcategoryId'));
+        console.log(selectedCategoryId)
 
         getCategories().then((res) => {
             const defaultFilter: IOption = {
@@ -91,6 +100,7 @@ const QuestionsPage = () => {
                 return {
                     ...prev,
                     categories: categoriesOptions,
+                    isSubcategoryEnabled: selectedCategoryId === 0
                 };
             });
         })
@@ -228,7 +238,8 @@ const QuestionsPage = () => {
                 return {
                     ...prev,
                     formSubcategories: subcategoriesFormOptions,
-                    isFormSubcategoriesDisabled: false
+                    isFormSubcategoriesDisabled: false,
+                    isFormCategoriesDisabled: false
                 };
             }); 
         });
@@ -320,10 +331,59 @@ const QuestionsPage = () => {
     };
 
     const showModal = () => {
+        if(state.selectedCategoryId !== 0)
+        {
+            form.setFieldsValue({categoryId: state.selectedCategoryId})
+        }
+        if(state.selectedSubcategoryId !== 0)
+        {
+            getSubcategories(Number(state.selectedCategoryId)).then((res) => {
+                const subcategoriesFormOptions = res.data.map((x) => {
+                    const optionDTO: IOption = {
+                        value: x.subcategoryId,
+                        label: x.title,
+                      };
+                      return optionDTO;
+                });
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        formSubcategories: subcategoriesFormOptions,
+                        isFormSubcategoriesDisabled: true,
+                        isFormCategoriesDisabled: true
+                    };
+                }); 
+            });
+            form.setFieldsValue({subcategoryId: state.selectedSubcategoryId})
+        }    
+        
         setState((prev) => {
             return {
                 ...prev,
                 openModal: true
+            }
+        })
+    };
+
+    const showInfo = (question : QuestionDTO) => {
+        form.setFieldsValue({
+            categoryId: question.categoryId,
+            subcategoryId: question.subcategoryId,
+            description: question.description,
+            ans1: question.questionAnswers[0].description,
+            ans2: question.questionAnswers[1].description,
+            ans3: question.questionAnswers[2].description,
+            ans4: question.questionAnswers[3].description,
+            rightAns: setRightAns(question.questionAnswers),
+            difficulty: question.difficulty
+        });
+        
+        setState((prev) => {
+            return {
+                ...prev,
+                openModal: true,
+                hideModalButtons: true,
+                formDisabled: true
             }
         })
     };
@@ -477,6 +537,7 @@ const QuestionsPage = () => {
                 modalLoading: false,
                 openModal: false,
                 isFormSubcategoriesDisabled: true,
+                isFormCategoriesDisabled: true,
                 isQuestionUpdate: false,
                 updateQuestionId: 0,
                 updateQuestionCatId: 0,
@@ -486,6 +547,8 @@ const QuestionsPage = () => {
                 updateAns3Id: 0,
                 updateAns4Id: 0,
                 formSubcategories: [],
+                hideModalButtons: false,
+                formDisabled: false
             }
         })
     };
@@ -505,7 +568,8 @@ const QuestionsPage = () => {
                 return {
                     ...prev,
                     formSubcategories: subcategoriesFormOptions,
-                    isFormSubcategoriesDisabled: false
+                    isFormSubcategoriesDisabled: false,
+                    isFormCategoriesDisabled: false,
                 };
             }); 
         });
@@ -517,25 +581,32 @@ const QuestionsPage = () => {
         <AppBreadcrumb path="Αρχική/Ερωτήσεις" />
         {state.isLoading === false ? (
         <div>
-            <Space style={{width: "100%"}} wrap>
-                    <Select
-                        style={{ width: 300,marginBottom: "20%", marginTop: "5%" }}
-                        size= {"middle"}
-                        value={state.selectedCategoryId}
-                        placeholder="Επέλεξε κατηγορία για να φιλτράρεις"
-                        onChange={(values) => handleCategoryChange(values)}
-                        options={state.categories}
-                    />
-
-                    <Select
-                        style={{ width: 300,marginBottom: "20%", marginTop: "5%" }}
-                        size= {"middle"}
-                        value={state.selectedSubcategoryId}
-                        placeholder="Επέλεξε υπόκατηγορία για να φιλτράρεις"
-                        onChange={(values) => handleSubcategoryChange(values)}
-                        options={state.subcategories}
-                        disabled = {state.isSubcategoryEnabled}
-                    />
+            <Space style={{width: "100%", marginTop: '1%'}} wrap>
+                <Form layout="vertical">
+                    <Form.Item label="Κατηγορία">
+                        <Select
+                            style={{ width: 300,marginBottom: "2%"}}
+                            size= {"middle"}
+                            value={state.selectedCategoryId}
+                            placeholder="Επέλεξε κατηγορία για να φιλτράρεις"
+                            onChange={(values) => handleCategoryChange(values)}
+                            options={state.categories}
+                        />
+                    </Form.Item>
+                </Form>
+                <Form layout="vertical">
+                    <Form.Item label="Υποκατηγορία">
+                        <Select
+                            style={{ width: 300,marginBottom: "2%"}}
+                            size= {"middle"}
+                            value={state.selectedSubcategoryId}
+                            placeholder="Επέλεξε υπόκατηγορία για να φιλτράρεις"
+                            onChange={(values) => handleSubcategoryChange(values)}
+                            options={state.subcategories}
+                            disabled = {state.isSubcategoryEnabled}
+                        />
+                    </Form.Item>
+                </Form>
             </Space>
 
             <div style={{ marginLeft: "5%", marginRight: "5%"}}>
@@ -561,7 +632,7 @@ const QuestionsPage = () => {
                     >
                         <List.Item.Meta
                         avatar={<InfoCircleTwoTone />}
-                        title={<a href="https://ant.design">{item.description}</a>}
+                        title={<a onClick={() => showInfo(item)}>{item.description}</a>}
                         description={"Δυσκολία: " + item.difficulty}
                         />
                     </List.Item>
@@ -595,6 +666,7 @@ const QuestionsPage = () => {
                         onFinish={handleOk}
                         layout="vertical"
                         scrollToFirstError
+                        disabled= {state.formDisabled}
                     >
                         <Form.Item
                             className="form-input"
@@ -612,6 +684,7 @@ const QuestionsPage = () => {
                                     placeholder="Επέλεξε κατηγορία στην οποία ανήκει."
                                     onChange={(value)=> handleCategoriesChangeForm(value)}
                                     options={state.categories?.slice(1)}
+                                    disabled={state.isFormCategoriesDisabled}
                                 />
                         </Form.Item>
                         <Form.Item

@@ -14,6 +14,8 @@ import { ISubcategoryDTO } from "../DTO/SubcategoriesPage/ISubcategoryDTO";
 import { IUpdatesubcategoryDTO } from "../DTO/SubcategoriesPage/IUpdateSubcategoryDTO";
 import { QuestionDTO } from "../DTO/QuestionsPage/QuestionDTO";
 import { IQuestionUpdateDTO } from "../DTO/QuestionsPage/IQuestionUpdateDTO";
+import { IDifficultyEnum } from "../DTO/IDifficultyEnum";
+import { ITestDTO } from "../DTO/TestsPage/ITestDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -152,3 +154,14 @@ export const updateQuestion = async (body: IQuestionUpdateDTO) => {
     headers: authorizationHeader(),
   });
 }
+
+export const fetchTests = async (difficulty: IDifficultyEnum) => {
+  console.log(Appsettings.BaseUrl + "tests/fetchTests");
+  return await axios.get<ITestDTO[]>(
+    Appsettings.BaseUrl + "tests/fetchTests", {
+      headers: authorizationHeader(),
+      params: {
+        difficulty: difficulty
+      },
+    });
+};

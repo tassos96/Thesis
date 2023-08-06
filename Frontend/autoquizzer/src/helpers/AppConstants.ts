@@ -2,7 +2,7 @@ import { MessageInstance } from "antd/es/message/interface";
 
 export const AppRoutes = {
     Home: "home",
-    Test: "tests",
+    Test: "test",
     Questions: "questions",
     Repositories: "repositories",
     AccountInfo: "account-info",

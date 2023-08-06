@@ -43,8 +43,6 @@ namespace Types.DatabaseContext
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.Property(e => e.Description).HasMaxLength(50);
-
                 entity.Property(e => e.Title).HasMaxLength(50);
 
                 entity.Property(e => e.UserId).HasColumnName("UserID");
@@ -146,11 +144,12 @@ namespace Types.DatabaseContext
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
-                entity.Property(e => e.Description).HasMaxLength(50);
+                entity.Property(e => e.Title).HasMaxLength(50);
 
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.Subcategories)
                     .HasForeignKey(d => d.CategoryId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Subcategory_Category");
             });
 
@@ -164,9 +163,19 @@ namespace Types.DatabaseContext
 
                 entity.Property(e => e.Difficulty).HasMaxLength(20);
 
+                entity.Property(e => e.ExaminerId).HasColumnName("ExaminerID");
+
+                entity.Property(e => e.Subcategories).HasMaxLength(50);
+
                 entity.Property(e => e.Subject).HasMaxLength(50);
 
                 entity.Property(e => e.Title).HasMaxLength(50);
+
+                entity.HasOne(d => d.Examiner)
+                    .WithMany(p => p.Tests)
+                    .HasForeignKey(d => d.ExaminerId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_Test_User");
             });
 
             modelBuilder.Entity<TestQuestion>(entity =>

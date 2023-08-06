@@ -59,7 +59,8 @@ builder.Services.AddControllers()
     .AddApplicationPart(typeof(CategoriesController).Assembly)
     .AddApplicationPart(typeof(QuestionsController).Assembly)
     .AddApplicationPart(typeof(SubcategoriesController).Assembly)
-    .AddApplicationPart(typeof(UserController).Assembly);
+    .AddApplicationPart(typeof(UserController).Assembly)
+    .AddApplicationPart(typeof(TestsController).Assembly);
     
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

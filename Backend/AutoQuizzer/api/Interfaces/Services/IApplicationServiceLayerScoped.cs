@@ -6,5 +6,6 @@
         ICategoryService CategoryService { get; }
         ISubcategoryService SubategoryService { get; }
         IQuestionService QuestionService { get; }
+        ITestService TestService { get; }
     }
 }

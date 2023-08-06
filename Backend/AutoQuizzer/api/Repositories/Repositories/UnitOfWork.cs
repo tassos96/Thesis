@@ -10,6 +10,7 @@ namespace Repositories
         public ICategoryRepository CategoryRepository => new CategoryRepository(_context);
         public ISubcategoryRepository SubcategoryRepository => new SubcategoryRepository(_context);
         public IQuestionRepository QuestionRepository => new QuestionRepository(_context);
+        public ITestRepository TestRepository => new TestRepository(_context);
 
         public UnitOfWork(AutoQuizzerContext context)
         {

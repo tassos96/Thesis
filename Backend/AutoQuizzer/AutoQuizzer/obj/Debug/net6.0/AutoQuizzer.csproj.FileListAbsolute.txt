@@ -42,12 +42,6 @@ C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuiz
 C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.pdb
 C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.genruntimeconfig.cache
 C:\Users\Aantonopoulos\Desktop\Master\Thesis\Development\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\ref\AutoQuizzer.dll
-C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.csproj.AssemblyReference.cache
-C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.AssemblyInfoInputs.cache
-C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.AssemblyInfo.cs
-C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.csproj.CoreCompileInputs.cache
-C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\bin\Debug\net6.0\appsettings.Development.json
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\bin\Debug\net6.0\appsettings.json
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\bin\Debug\net6.0\AutoQuizzer.staticwebassets.runtime.json
@@ -115,6 +109,13 @@ C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\bin\
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\bin\Debug\net6.0\Types.pdb
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\bin\Debug\net6.0\Mapper.pdb
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\bin\Debug\net6.0\Security.pdb
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.csproj.AssemblyReference.cache
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.AssemblyInfoInputs.cache
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.AssemblyInfo.cs
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.csproj.CoreCompileInputs.cache
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\staticwebassets\msbuild.AutoQuizzer.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\staticwebassets\msbuild.build.AutoQuizzer.props
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\staticwebassets\msbuild.buildMultiTargeting.AutoQuizzer.props

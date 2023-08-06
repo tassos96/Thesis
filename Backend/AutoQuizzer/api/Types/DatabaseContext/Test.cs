@@ -17,7 +17,10 @@ namespace Types.DatabaseContext
         public string Difficulty { get; set; } = null!;
         public int QuestionsNumber { get; set; }
         public string Categories { get; set; } = null!;
+        public string Subcategories { get; set; } = null!;
+        public int ExaminerId { get; set; }
 
+        public virtual User Examiner { get; set; } = null!;
         public virtual ICollection<Exam> Exams { get; set; }
         public virtual ICollection<TestQuestion> TestQuestions { get; set; }
     }

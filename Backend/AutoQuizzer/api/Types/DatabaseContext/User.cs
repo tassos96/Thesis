@@ -9,6 +9,7 @@ namespace Types.DatabaseContext
         {
             Categories = new HashSet<Category>();
             Exams = new HashSet<Exam>();
+            Tests = new HashSet<Test>();
         }
 
         public int UserId { get; set; }
@@ -23,5 +24,6 @@ namespace Types.DatabaseContext
 
         public virtual ICollection<Category> Categories { get; set; }
         public virtual ICollection<Exam> Exams { get; set; }
+        public virtual ICollection<Test> Tests { get; set; }
     }
 }

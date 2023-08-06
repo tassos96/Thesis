@@ -1,18 +1,7 @@
-import React from "react";
 import "../css/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Layout from "./Layout";
-// import Home from "../pages/Home/MainPage/Home";
-// import NoPage from "../pages/NoPage/MainPage/NoPage";
-// import Products from "../pages/Products/MainPage/Products";
-// import FavoriteOrderPage from "../pages/Orders/FavoriteOrder/FavoriteOrderPage";
-// import HistoryOrderPage from "../pages/Orders/HistoryOrder/HistoryOrderPage";
-// import Cart from "../pages/Cart/MainPage/Cart";
-// import AccountInfoPage from "../pages/AccountPage/AccountInfo/AccountInfoPage";
-// import LoginPage from "../pages/AccountPage/LoginPage/LoginPage";
-// import SignupPage from "../pages/AccountPage/SignUpPage/SignupPage";
 import { AppRoutes } from "../helpers/AppConstants";
-// import { ShoppingCartProvider } from "../context/ShoppingCartContext";
 import { UserContextProvider } from "../context/UserContext";
 import Home from "../pages/Home/Home";
 import NoPage from "../pages/NoPage/NoPage";
@@ -23,8 +12,7 @@ import AccountInfoPage from "../pages/AccountPage/AccountInfo/AccountInfoPage";
 import CategoriesPage from "../pages/Repos/Categories/CategoriesPage";
 import SubcategoriesPage from "../pages/Repos/Subcategories/Subcategories";
 import QuestionsPage from "../pages/Repos/Questions/QuestionsPage";
-// import LogOutPage from "../pages/LogoutPage/LogOutPage";
-// import CompleteOrderPage from "../pages/Cart/CompleteOrderPage";
+import TestsPage from "../pages/Tests/TestsPage";
 
 const App = () => {
   return (
@@ -34,15 +22,15 @@ const App = () => {
           <Route path="/" element={<Layout />}>
             <Route index element={<Home />} />
             <Route path={AppRoutes.Home} element={<Home />} />
+            <Route path={AppRoutes.Test} element={<TestsPage />} />
             <Route path={AppRoutes.Categories} element={<CategoriesPage />} />
             <Route path={AppRoutes.Subcategories} element={<SubcategoriesPage />} />
             <Route path={AppRoutes.Questions} element={<QuestionsPage />} />
-              
-              <Route path={AppRoutes.Login} element={<LoginPage />} />
-              <Route path={AppRoutes.Signup} element={<SignupPage />} />
-              <Route path={AppRoutes.Logout} element={<LogOutPage />} />
-              <Route path={AppRoutes.AccountInfo} element={<AccountInfoPage />} />
-              <Route path="*" element={<NoPage />} />
+            <Route path={AppRoutes.Login} element={<LoginPage />} />
+            <Route path={AppRoutes.Signup} element={<SignupPage />} />
+            <Route path={AppRoutes.Logout} element={<LogOutPage />} />
+            <Route path={AppRoutes.AccountInfo} element={<AccountInfoPage />} />
+            <Route path="*" element={<NoPage />} />
           </Route>
         </Routes>
       </BrowserRouter>

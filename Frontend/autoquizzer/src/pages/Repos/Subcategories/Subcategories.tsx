@@ -1,4 +1,4 @@
-import { Button, Card, Form, Input, List, Modal, Popconfirm, Select, Space, message } from "antd";
+import { Button, Card, Form, Input, List, Modal, Select, Space, message } from "antd";
 import AppBreadcrumb from "../../../components/Breadcrumb/AppBreadcrumb";
 import "./Subcategories.css";
 import { AppRoutes, showErrorMessage } from "../../../helpers/AppConstants";
@@ -23,6 +23,7 @@ export interface ISubcategoriesPageState {
     updateSubcategoryId: number;
     categoriesOptions: IOption[];
     selectedCategoryId: number;
+    isModalSelectDisabled: boolean;
 }
 
 export interface IOption {
@@ -46,10 +47,21 @@ const SubcategoriesPage = () => {
         isUpdateSubcategory: false,
         updateSubcategoryId: 0,
         categoriesOptions: [],
-        selectedCategoryId: 0
+        selectedCategoryId: 0,
+        isModalSelectDisabled: false
     });
 
     const showModal = () => {
+        if(state.isUpdateSubcategory === false && state.selectedCategoryId !== 0) {
+            form.setFieldsValue({categoryId: state.selectedCategoryId});
+            setState((prev) => {
+                return {
+                    ...prev,
+                    isModalSelectDisabled: true
+                }
+            })    
+        }
+
         setState((prev) => {
             return {
                 ...prev,
@@ -94,7 +106,8 @@ const SubcategoriesPage = () => {
                             isUpdateSubcategory: false,
                             updateSubcategoryId: 0,
                             modalLoading: false,
-                            openModal: false
+                            openModal: false,
+                            isModalSelectDisabled: false
                         };
                     });
                 });
@@ -130,7 +143,8 @@ const SubcategoriesPage = () => {
                             isUpdateSubcategory: false,
                             updateSubcategoryId: 0,
                             modalLoading: false,
-                            openModal: false
+                            openModal: false,
+                            isModalSelectDisabled: false
                         };
                     });
                 });
@@ -157,7 +171,8 @@ const SubcategoriesPage = () => {
                 ...prev,
                 openModal: false,
                 isUpdateSubcategory: false,
-                updateSubcategoryId: 0
+                updateSubcategoryId: 0,
+                isModalSelectDisabled: false
             }
         })
       };
@@ -205,7 +220,7 @@ const SubcategoriesPage = () => {
         .catch((error) => {
             showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
         });
-    }, []);
+    }, [messageApi, searchParams]);
 
     const deleteSubcategory = (id: number) => {
         confirm({
@@ -296,15 +311,19 @@ const SubcategoriesPage = () => {
             <AppBreadcrumb path="Αρχική/Υποκατηγορίες" />
             {state.isLoading === false ? (
             <div className="cardListWrapper">
-                <Space style={{width: "100%"}}>
-                    <Select
-                    style={{ width: 300,marginBottom: "20%", marginTop: "5%" }}
-                    size= {"middle"}
-                    value={state.selectedCategoryId}
-                    placeholder="Επέλεξε κατηγορία για να φιλτράρεις"
-                    onChange={(values) => handleChange(values)}
-                    options={state.categoriesOptions}
-                    />
+                <Space style={{width: "100%"}} wrap>
+                    <Form layout="vertical">
+                        <Form.Item label="Κατηγορία">
+                            <Select
+                                style={{ width: 300,marginBottom: "2%" }}
+                                size= {"middle"}
+                                value={state.selectedCategoryId}
+                                placeholder="Επέλεξε κατηγορία για να φιλτράρεις"
+                                onChange={(values) => handleChange(values)}
+                                options={state.categoriesOptions}
+                            />
+                        </Form.Item>
+                    </Form>
                 </Space>
                 <List
                     grid={{
@@ -404,6 +423,7 @@ const SubcategoriesPage = () => {
                                     size={"middle"}
                                     placeholder="Επέλεξε κατηγορία στην οποία ανήκει."
                                     options={state.categoriesOptions.slice(1)}
+                                    disabled={state.isModalSelectDisabled}
                                 />
                             </Form.Item>
                             <Space wrap>

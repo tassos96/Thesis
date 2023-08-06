@@ -6,6 +6,7 @@
         public ICategoryRepository CategoryRepository { get;}
         public ISubcategoryRepository SubcategoryRepository { get;}
         public IQuestionRepository QuestionRepository { get;}
+        public ITestRepository TestRepository { get;}
 
         Task<bool> SaveAsync();
     }
