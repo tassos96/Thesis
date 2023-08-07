@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Interfaces.Repositories;
 using Interfaces.Services;
+using Types.DatabaseContext;
 using Types.DTOs;
 using Types.TestService;
 
@@ -32,6 +33,18 @@ namespace ApplicationService
         public async Task<List<TestDTO>> FetchTestsAsync(int userId, string difficulty)
         {
             return await _unitOfWork.TestRepository.FetchTestsAsync(userId, difficulty);
+        }
+
+        public async Task<bool> UpdateTestAsync(UpdateTestRequest request, int userId)
+        {
+            await _unitOfWork.TestRepository.UpdateTestAsync(request, userId);
+            return await _unitOfWork.SaveAsync();
+        }
+
+        public async Task<bool> DeleteTestAsync(int testId, int userId)
+        {
+            await _unitOfWork.TestRepository.DeleteTestAsync(testId, userId);
+            return await _unitOfWork.SaveAsync();
         }
     }
 }

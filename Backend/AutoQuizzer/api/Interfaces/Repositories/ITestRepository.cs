@@ -11,5 +11,7 @@ namespace Interfaces.Repositories
         Task<bool> AssignTestAsync(string[] usersToAssing, Test test);
         Task<bool> AssignTestAsync(AssignTestRequest request, int userId);
         Task<List<TestDTO>> FetchTestsAsync(int userId, string difficulty);
+        Task<bool> UpdateTestAsync(UpdateTestRequest request, int userId);
+        Task<bool> DeleteTestAsync(int testId, int userId);
     }
 }

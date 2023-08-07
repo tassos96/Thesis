@@ -16,6 +16,7 @@ import { QuestionDTO } from "../DTO/QuestionsPage/QuestionDTO";
 import { IQuestionUpdateDTO } from "../DTO/QuestionsPage/IQuestionUpdateDTO";
 import { IDifficultyEnum } from "../DTO/IDifficultyEnum";
 import { ITestDTO } from "../DTO/TestsPage/ITestDTO";
+import { IUpdateTestDTO } from "../DTO/TestsPage/IUpdateTestDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -165,3 +166,20 @@ export const fetchTests = async (difficulty: IDifficultyEnum) => {
       },
     });
 };
+
+export const updateTest = async (body: IUpdateTestDTO) => {
+  console.log(Appsettings.BaseUrl + "tests/updateTest");
+  return await axios.post<IUpdateTestDTO>(Appsettings.BaseUrl + "tests/updateTest", body, {
+    headers: authorizationHeader(),
+  });
+}
+
+export const deleteTestRequest = async (testId: number) => {
+  console.log(Appsettings.BaseUrl + "tests/deleteTest");
+  return await axios.delete<boolean>(Appsettings.BaseUrl + "tests/deleteTest", {
+    params: {
+      testId: testId
+    }, 
+    headers: authorizationHeader()}
+  );
+}

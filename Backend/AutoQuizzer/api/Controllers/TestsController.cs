@@ -39,5 +39,21 @@ namespace Controllers
             var list = await _applicationService.TestService.FetchTestsAsync(base.AppUser.Id, difficulty);
             return list;
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<IActionResult> UpdateTestAsync(UpdateTestRequest request)
+        {
+            var result = await _applicationService.TestService.UpdateTestAsync(request, base.AppUser.Id);
+            return result ? Ok() : BadRequest();
+        }
+
+        [HttpDelete]
+        [Authorize]
+        public async Task<IActionResult> DeleteTestAsync(int testId)
+        {
+            var result = await _applicationService.TestService.DeleteTestAsync(testId, base.AppUser.Id);
+            return result ? Ok(result) : BadRequest();
+        }
     }
 }

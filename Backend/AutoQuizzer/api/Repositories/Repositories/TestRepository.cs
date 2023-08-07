@@ -196,5 +196,28 @@ namespace Repositories
 
             return testsDTO;
         }
+
+        public async Task<bool> UpdateTestAsync(UpdateTestRequest request, int userId)
+        {
+            var test = await _context.Tests.FirstOrDefaultAsync(x => x.TestId == request.TestId && x.ExaminerId == userId);
+            if (test == null)
+                return false;
+
+            test.Title = request.Title;
+            test.Subject = request.Subject;
+
+            _context.Tests.Update(test);
+            return true;
+        }
+
+        public async Task<bool> DeleteTestAsync(int testId, int userId)
+        {
+            var test = await _context.Tests.FirstOrDefaultAsync(x => x.TestId == testId && x.ExaminerId == userId);
+            if (test == null) { return false; }
+
+            _context.Tests.Remove(test);
+            _context.Exams.RemoveRange(test.Exams.Where(x => x.TestId == test.TestId));
+            return true;
+        }
     }
 }
