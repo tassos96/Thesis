@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Interfaces.Repositories;
 using Interfaces.Services;
+using Types.DatabaseContext;
 using Types.DTOs;
 using Types.SubcategoryService;
 
@@ -36,6 +37,11 @@ namespace ApplicationService
         {
             await _unitOfWork.SubcategoryRepository.DeleteSubcategoryAsync(subcategoryId, userId);
             return await _unitOfWork.SaveAsync();
+        }
+
+        public async Task<List<SubcategoryDTO>> GetSubcategoriesByCategoriesAsync(int userId, FetchSubcategoriesByCategoriesRequest request)
+        {
+            return await _unitOfWork.SubcategoryRepository.GetSubcategoriesByCategoriesAsync(userId, request);
         }
     }
 }

@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
 import AppBreadcrumb from "../../components/Breadcrumb/AppBreadcrumb";
 import Loader from "../../components/Loader/Loader";
-import { Button, Form, Input, List, Modal, Select, Space, message } from "antd";
+import { Button, Form, Input, InputNumber, List, Modal, Select, Slider, Space, message } from "antd";
 import { IDifficultyEnum } from "../../DTO/IDifficultyEnum";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { deleteTestRequest, fetchTests, updateTest } from "../../httpServices/HttpServices";
+import { assignTestRequest, createTestRequest, deleteTestRequest, fetcSubcategoriesByCategoriesRequest, fetchTests, getCategories, updateTest } from "../../httpServices/HttpServices";
 import { ITestDTO } from "../../DTO/TestsPage/ITestDTO";
 import { showErrorMessage } from "../../helpers/AppConstants";
-import { ExclamationCircleFilled, InfoCircleTwoTone } from "@ant-design/icons";
+import { ExclamationCircleFilled, InfoCircleTwoTone, MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 import { IUpdateTestDTO } from "../../DTO/TestsPage/IUpdateTestDTO";
 import { stat } from "fs";
+import { IAssignTestDTO } from "../../DTO/TestsPage/IAssignTestDTO";
+import { IFetchSubcategoriesByCategoriesRequest } from "../../DTO/TestsPage/IFetchSubcategoriesByCategories";
+import { ICreateTestDTO } from "../../DTO/TestsPage/ICreateTestDTO";
 
 export interface ITestPageState {
     isLoading: boolean;
@@ -21,6 +24,16 @@ export interface ITestPageState {
     modalLoading: boolean;
     updateTestId: number;
 
+    openAssignTestModal: boolean;
+    assignTestId: number;
+
+    openCreateTestModal: boolean;
+    categories?: IOption[];
+    subcategories?: IOption[];
+    selectedCategoriesId?: number[];
+    selectedSubcategoriesId?: number[];
+    isSubcategoriesDisabled: boolean;
+
     effect: boolean;
 }
 
@@ -29,10 +42,17 @@ export interface IOptionDifficulty {
     label: string;
 }
 
+export interface IOption {
+    value: number;
+    label: string;
+}
+
 const TestsPage = () => { 
 
     const [searchParams] = useSearchParams();
     const [updateTestForm] = Form.useForm();
+    const [assignTestForm] = Form.useForm();
+    const [createTestForm] = Form.useForm();
     const [messageApi, contextHolder] = message.useMessage();
     const { confirm } = Modal;
     const navigate = useNavigate();
@@ -43,6 +63,13 @@ const TestsPage = () => {
         openUpdateTestModal: false,
         modalLoading: false,
         updateTestId: 0,
+
+        openAssignTestModal: false,
+        assignTestId: 0,
+
+        openCreateTestModal: false,
+        isSubcategoriesDisabled: true,
+
         effect: false,
     });
 
@@ -96,6 +123,27 @@ const TestsPage = () => {
                 selectedDifficultyFilter: selectedDifficultyFilter
             }
         })
+
+        getCategories().then((res) => {
+            const categoriesOptions = res.data.map((x) => {
+                const optionDTO: IOption = {
+                  value: x.categoryId,
+                  label: x.title,
+                };
+                return optionDTO;
+              });
+            
+            setState((prev) => {
+                return {
+                    ...prev,
+                    categories: categoriesOptions,
+                };
+            });
+        })
+        .catch((error) => {
+            showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+        });
+
     }, [state.effect]);
 
     const handleDifficultyChange = (value : IDifficultyEnum) => {
@@ -165,7 +213,13 @@ const TestsPage = () => {
     };
 
     const assignTest = (test: ITestDTO) => {
-        
+        setState((prev) => {
+            return {
+                ...prev,
+                openAssignTestModal: true,
+                assignTestId: test.testId
+            }
+        });
     };
 
     const handleUpdateTestModalOk = (values: any) => {
@@ -191,6 +245,7 @@ const TestsPage = () => {
 
     const handleUpdateTestModalCancel = () => {
         updateTestForm.resetFields();
+        
         setState((prev) => {
             return {
                 ...prev,
@@ -199,6 +254,172 @@ const TestsPage = () => {
             }
         })
     };
+
+    const handleAssignTestModalCancel = () => {
+        console.log("cancel-assign")
+        assignTestForm.resetFields();
+        setState((prev) => {
+            return {
+                ...prev,
+                openAssignTestModal: false,
+                assignTestId: 0
+            }
+        })
+    };
+
+    const handleAssignTestModalOk = (values: any) => {
+        console.log("1:" + values.users);
+        const lines = values.users.split('\n').map((line:string) => line.trim());
+        const assignTestDTO: IAssignTestDTO = {
+            testId: state.assignTestId,
+            usersToAssign: lines
+        }
+
+        console.log(assignTestDTO);
+
+        assignTestRequest(assignTestDTO).then((resp) => {
+            setState((prev) => {
+                return {
+                    ...prev,
+                    modalLoading: true,
+                    assignTestId: 0,
+                    openAssignTestModal: false,
+                    effect: !state.effect
+                }
+            })
+        })
+        .catch((error) => {
+            showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+        });
+
+        assignTestForm.resetFields();
+
+        setState((prev) => {
+            return {
+                ...prev,
+                openAssignTestModal: false,
+                assignTestId: 0
+            }
+        })
+    };
+
+    const createTest = () => {
+        setState((prev) => {
+            return {
+                ...prev,
+                openCreateTestModal: true
+            }
+        });
+    };
+
+    const handleCategoriesChange = (selectedCategories: number[]) => {
+        console.log(selectedCategories)
+
+        const request: IFetchSubcategoriesByCategoriesRequest = {
+            categories: selectedCategories
+        }
+
+        if(selectedCategories.length === 0)
+        {
+            setState((prev) => {
+                return {
+                    ...prev,
+                    subcategories: [],
+                    isSubcategoriesDisabled: true
+                };
+            });
+        }
+        else 
+        {
+            fetcSubcategoriesByCategoriesRequest(request).then((res) => {
+                const subcategoriesOptions = res.data.map((x) => {
+                    const optionDTO: IOption = {
+                        value: x.subcategoryId,
+                        label: x.title,
+                    };
+                    return optionDTO;
+                });
+    
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        subcategories: subcategoriesOptions,
+                        isSubcategoriesDisabled: false
+                    };
+                });
+    
+            }).catch((error) => {
+                showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+            });
+        }
+    };
+
+    const handleCreateTestModalCancel = () => {
+        createTestForm.resetFields();
+        
+        setState((prev) => {
+            return {
+                ...prev,
+                openCreateTestModal: false,
+            }
+        })
+    }
+
+    const handleCreateTestModalOk = (values: any) => {
+        console.log(values)
+        const usersToAssign = values.users?.split('\n').map((line:string) => line.trim());
+        const createRequest : ICreateTestDTO = {
+            title: values.title,
+            subject: values.subject,
+            questionsNumber: values.questionsNumber,
+            difficulty: values.difficulty,
+            categories: values.categories,
+            subcategories: values.subcategories,
+            usersToAssign: usersToAssign !== undefined ? usersToAssign : []
+        };
+
+        createTestRequest(createRequest).then((res) => {
+            setState((prev) => {
+                return {
+                    ...prev,
+                    modalLoading: true,
+                    openCreateTestModal: false,
+                    effect: !state.effect
+                }
+            })
+
+            let selectedDifficultyFilter = searchParams.get('difficulty') as IDifficultyEnum;
+            if(selectedDifficultyFilter === null)
+            {
+                selectedDifficultyFilter = IDifficultyEnum.None;
+            }
+
+            console.log(selectedDifficultyFilter)
+            fetchTests(selectedDifficultyFilter).then((res2) => {
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        tests: res2.data
+                    }
+                });
+            })
+            .catch((error2) => {
+                showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+            });
+        })
+        .catch((error) => {
+            showErrorMessage(messageApi, "Η διαδικασία απέτυχε.")
+        });
+
+        createTestForm.resetFields();
+
+        setState((prev) => {
+            return {
+                ...prev,
+                openCreateTestModal: false,
+            }
+        })
+    }
 
     return (
         <>
@@ -255,7 +476,7 @@ const TestsPage = () => {
                                 <Button
                                     type="primary"
                                     className="add-category-button"
-                                    onClick={() => {}}
+                                    onClick={() => {createTest()}}
                                 >
                                     Δημιουργία Τεστ
                                 </Button>
@@ -319,6 +540,168 @@ const TestsPage = () => {
                             </Form.Item>
                             </Space>
                         </Form>
+                    </Modal>
+
+                    <Modal
+                        open={state.openAssignTestModal}
+                        title={"Ανάθεση Τεστ"}
+                        onOk={handleAssignTestModalOk}
+                        onCancel={handleAssignTestModalCancel}
+                        footer={[]}
+                    >
+                        <Form
+                            form={assignTestForm}
+                            name="assignTestForm"
+                            layout="vertical"
+                            onFinish={handleAssignTestModalOk}
+                            style={{ maxWidth: 600 }}
+                            autoComplete="off"
+                        >
+                            <Form.Item label="Χρήστες" name="users">
+                                <TextArea 
+                                    placeholder="Email/Username.
+Διαχωρισμός χρηστών με enter"
+                                    autoSize={{ minRows: 3, maxRows: 5 }} 
+                                />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">
+                                    Ανάθεση
+                                </Button>
+                            </Form.Item>
+                        </Form>    
+                    </Modal>
+
+                    <Modal
+                        open={state.openCreateTestModal}
+                        title={"Δημιουργία Τεστ"}
+                        onOk={handleCreateTestModalOk}
+                        onCancel={handleCreateTestModalCancel}
+                        footer={[]}
+                    >
+                        <Form
+                            form={createTestForm}
+                            name="createTestForm"
+                            layout="vertical"
+                            onFinish={handleCreateTestModalOk}
+                            style={{ maxWidth: 600 }}
+                            autoComplete="off"
+                        >
+                            <Form.Item
+                                className="form-input"
+                                name="title"
+                                label="Τίτλος"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε το τίτλο."
+                                    }
+                                ]}
+                            >
+                                <Input />
+                            </Form.Item>
+                            <Form.Item
+                                className="form-input"
+                                name="subject"
+                                label="Περιγραφή"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε τη περιγραφή."
+                                    }
+                                ]}
+                            >
+                                <TextArea rows={4} />
+                            </Form.Item>
+                            <Form.Item
+                                className="form-input"
+                                name="questionsNumber"
+                                label="Πλήθος ερωτήσεων"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε το πλήθος ερωτήσεων."
+                                    }
+                                ]}
+                            >
+                                <Slider min={5} max={20}/>
+                            </Form.Item>
+                            <Form.Item 
+                                label="Δυσκολία"
+                                name="difficulty"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε τη δυσκολία."
+                                    }
+                                ]}
+                            >
+                                <Select
+                                    size= {"middle"}
+                                    placeholder="Επέλεξε δυσκολία."
+                                    options={defaultDifficultyFilters.slice(1)}
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                className="form-input"
+                                name="categories"
+                                label="Κατηγορίες"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε τις κατηγορίες."
+                                    }
+                                ]}
+                            >
+                                <Select
+                                    mode="multiple"
+                                    allowClear
+                                    style={{ width: '100%' }}
+                                    placeholder="Κατηγορίες"
+                                    options={state.categories}
+                                    onChange={handleCategoriesChange}
+                                />
+                            </Form.Item>
+                            <Form.Item
+                                className="form-input"
+                                name="subcategories"
+                                label="Υποκατηγορίες"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε τις υποκατηγορίες."
+                                    }
+                                ]}
+                            >
+                                <Select
+                                    mode="multiple"
+                                    allowClear
+                                    disabled={state.isSubcategoriesDisabled}
+                                    style={{ width: '100%' }}
+                                    placeholder="Υπόκατηγορίες"
+                                    defaultValue={[]}
+                                    options={state.subcategories}
+                                    filterOption={(input, option) => {
+                                        if(option) {
+                                            return option?.label.toLowerCase().indexOf(input.toLowerCase()) >= 0
+                                        }
+                                        return false;
+                                    }}
+                                />
+                            </Form.Item>
+                            <Form.Item label="Χρήστες" name="users">
+                                <TextArea 
+                                    placeholder="Email/Username.
+Διαχωρισμός χρηστών με enter"
+                                    autoSize={{ minRows: 3, maxRows: 5 }} 
+                                />
+                            </Form.Item>
+                            <Form.Item>
+                                <Button type="primary" htmlType="submit">
+                                    Δημιουργία
+                                </Button>
+                            </Form.Item>
+                        </Form>    
                     </Modal>
             </div>
         ) :

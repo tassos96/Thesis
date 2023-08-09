@@ -30,6 +30,14 @@ namespace Controllers
 
         [HttpPost]
         [Authorize]
+        public async Task<List<SubcategoryDTO>> FetchSubcategoriesByCategoriesAsync(FetchSubcategoriesByCategoriesRequest request)
+        {
+            var list = await _applicationService.SubategoryService.GetSubcategoriesByCategoriesAsync(base.AppUser.Id, request);
+            return list;
+        }
+
+        [HttpPost]
+        [Authorize]
         public async Task<IActionResult> UpdateSubcategoryAsync(UpdateSubcategoryRequest request)
         {
             var result = await _applicationService.SubategoryService.UpdateSubcategoryAsync(request, base.AppUser.Id);

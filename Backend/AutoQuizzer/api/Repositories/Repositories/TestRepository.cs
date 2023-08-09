@@ -25,7 +25,18 @@ namespace Repositories
                 .SelectMany(x => x.Subcategories)
                 .ToListAsync();
 
-            subcategories = subcategories.Where(x => request.Subcategories.Contains(x.SubcategoryId)).ToList();
+            var filteredSubcategories = new List<Subcategory>();
+
+            if(subcategories.Any(x => request.Subcategories.Contains(x.SubcategoryId)))
+            {
+                filteredSubcategories.AddRange(subcategories.Where(x => request.Subcategories.Contains(x.SubcategoryId)));
+            }
+
+            filteredSubcategories.AddRange(subcategories.Where(x => !filteredSubcategories.Any(y => y.CategoryId == x.CategoryId)));
+
+            //subcategories = subcategories.Where(x => request.Subcategories.Contains(x.SubcategoryId)).ToList();
+
+            subcategories = filteredSubcategories;
 
             var questionsByDifficulty = subcategories.SelectMany(x => x.Questions).ToList()
                 .GroupBy(y => y.Difficulty)

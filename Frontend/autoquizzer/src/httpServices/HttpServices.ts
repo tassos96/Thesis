@@ -17,6 +17,9 @@ import { IQuestionUpdateDTO } from "../DTO/QuestionsPage/IQuestionUpdateDTO";
 import { IDifficultyEnum } from "../DTO/IDifficultyEnum";
 import { ITestDTO } from "../DTO/TestsPage/ITestDTO";
 import { IUpdateTestDTO } from "../DTO/TestsPage/IUpdateTestDTO";
+import { IAssignTestDTO } from "../DTO/TestsPage/IAssignTestDTO";
+import { IFetchSubcategoriesByCategoriesRequest } from "../DTO/TestsPage/IFetchSubcategoriesByCategories";
+import { ICreateTestDTO } from "../DTO/TestsPage/ICreateTestDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -180,6 +183,27 @@ export const deleteTestRequest = async (testId: number) => {
     params: {
       testId: testId
     }, 
+    headers: authorizationHeader()}
+  );
+}
+
+export const assignTestRequest = async (body: IAssignTestDTO) => {
+  console.log(Appsettings.BaseUrl + "tests/assignTest");
+  return await axios.post<IAssignTestDTO>(Appsettings.BaseUrl + "tests/assignTest", body, {
+    headers: authorizationHeader()}
+  );
+}
+
+export const fetcSubcategoriesByCategoriesRequest = async (body: IFetchSubcategoriesByCategoriesRequest) => {
+  console.log(Appsettings.BaseUrl + "subcategories/fetchSubcategoriesByCategories");
+  return await axios.post<ISubcategoryDTO[]>(Appsettings.BaseUrl + "subcategories/fetchSubcategoriesByCategories", body, {
+    headers: authorizationHeader()}
+  );
+}
+
+export const createTestRequest = async (body: ICreateTestDTO) => {
+  console.log(Appsettings.BaseUrl + "tests/createTest");
+  return await axios.post<ICreateTestDTO>(Appsettings.BaseUrl + "tests/createTest", body, {
     headers: authorizationHeader()}
   );
 }

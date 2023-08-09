@@ -81,5 +81,26 @@ namespace Repositories
             _context.Subcategories.Remove(subcategory);
             return true;
         }
+
+        public async Task<List<SubcategoryDTO>> GetSubcategoriesByCategoriesAsync(int userId, FetchSubcategoriesByCategoriesRequest request)
+        {
+            var result = new List<SubcategoryDTO>();
+            var subcategories = await _context.Categories.Where(x => x.UserId == userId && request.Categories.Contains(x.CategoryId))
+                .Include(x => x.Subcategories)
+                .SelectMany(x => x.Subcategories)
+                .ToListAsync();
+
+            result.AddRange(subcategories.Select(x => new SubcategoryDTO
+                {
+                    SubcategoryId = x.SubcategoryId,
+                    CategoryId = x.CategoryId,
+                    Title = x.Title,
+                    Description = x.Description
+                })
+             );
+
+            return result.OrderBy(x => x.CategoryId)
+                .ToList();
+        }
     }
 }

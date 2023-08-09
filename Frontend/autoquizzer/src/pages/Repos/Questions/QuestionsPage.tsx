@@ -55,7 +55,7 @@ const QuestionsPage = () => {
         modalLoading: false,
         openModal: false,
         isFormSubcategoriesDisabled: true,
-        isFormCategoriesDisabled: true,
+        isFormCategoriesDisabled: false,
         isQuestionUpdate: false,
         updateQuestionId: 0,
         updateQuestionCatId: 0,
@@ -334,6 +334,12 @@ const QuestionsPage = () => {
         if(state.selectedCategoryId !== 0)
         {
             form.setFieldsValue({categoryId: state.selectedCategoryId})
+            setState((prev) => {
+                return {
+                    ...prev,
+                    isFormCategoriesDisabled: true
+                };
+            });
         }
         if(state.selectedSubcategoryId !== 0)
         {
@@ -537,7 +543,7 @@ const QuestionsPage = () => {
                 modalLoading: false,
                 openModal: false,
                 isFormSubcategoriesDisabled: true,
-                isFormCategoriesDisabled: true,
+                isFormCategoriesDisabled: false,
                 isQuestionUpdate: false,
                 updateQuestionId: 0,
                 updateQuestionCatId: 0,
