@@ -9,5 +9,6 @@ namespace Interfaces.Services
         Task<bool> DeleteQuestionAsync(int userId, int categoryId, int subcategoryId, int questionId);
         Task<bool> CreateCategoryAsync(CreateQuestionRequest request, int userId);
         Task<bool> UpdateCategoryAsync(UpdateQuestionRequest request, int userId);
+        Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersAsync(int testId, int userId);
     }
 }

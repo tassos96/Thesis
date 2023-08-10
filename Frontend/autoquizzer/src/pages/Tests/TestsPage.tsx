@@ -6,7 +6,7 @@ import { IDifficultyEnum } from "../../DTO/IDifficultyEnum";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { assignTestRequest, createTestRequest, deleteTestRequest, fetcSubcategoriesByCategoriesRequest, fetchTests, getCategories, updateTest } from "../../httpServices/HttpServices";
 import { ITestDTO } from "../../DTO/TestsPage/ITestDTO";
-import { showErrorMessage } from "../../helpers/AppConstants";
+import { AppRoutes, showErrorMessage } from "../../helpers/AppConstants";
 import { ExclamationCircleFilled, InfoCircleTwoTone, MinusCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import TextArea from "antd/es/input/TextArea";
 import { IUpdateTestDTO } from "../../DTO/TestsPage/IUpdateTestDTO";
@@ -57,7 +57,7 @@ const TestsPage = () => {
     const { confirm } = Modal;
     const navigate = useNavigate();
     const [state, setState] = useState<ITestPageState>({
-        isLoading: false,
+        isLoading: true,
         selectedDifficultyFilter: IDifficultyEnum.None,
 
         openUpdateTestModal: false,
@@ -120,6 +120,7 @@ const TestsPage = () => {
             return {
                 ...prev,
                 modalLoading: false,
+                isLoading: false,
                 selectedDifficultyFilter: selectedDifficultyFilter
             }
         })
@@ -466,7 +467,7 @@ const TestsPage = () => {
                         >
                             <List.Item.Meta
                             avatar={<InfoCircleTwoTone />}
-                            title={<a onClick={() => {}}>{item.title}</a>}
+                            title={<a href= {AppRoutes.TestInfo +"?testId=" + item.testId}>{item.title}</a>}
                             description={item.subject}
                             />
                         </List.Item>

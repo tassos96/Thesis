@@ -13,5 +13,7 @@ namespace Interfaces.Repositories
         Task<List<TestDTO>> FetchTestsAsync(int userId, string difficulty);
         Task<bool> UpdateTestAsync(UpdateTestRequest request, int userId);
         Task<bool> DeleteTestAsync(int testId, int userId);
+        Task<List<TestUsersDTO>> FetchTestUsersAsync(int userId, int testId);
+        Task<bool> DeleteTestAssignmentAsync(DeleteTestAssignmentRequest request, int userId);
     }
 }

@@ -9,5 +9,6 @@ namespace Interfaces.Repositories
         Task<bool> DeleteQuestionAsync(int userId, int categoryId, int subcategoryId, int questionId);
         Task<bool> CreateQuestionAsync(CreateQuestionRequest request, int userId);
         Task<bool> UpdateQuestionAsync(UpdateQuestionRequest request, int userId);
+        Task<List<QuestionDTO>> FetchQuestionsWithAnswersAsync(int userId, int testId);
     }
 }

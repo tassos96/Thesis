@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Interfaces.Repositories;
 using Interfaces.Services;
+using Types.DatabaseContext;
 using Types.DTOs;
 using Types.QuestionService;
 
@@ -38,6 +39,11 @@ namespace ApplicationService
         {
             await _unitOfWork.QuestionRepository.UpdateQuestionAsync(request, userId);
             return await _unitOfWork.SaveAsync();
+        }
+
+        public async Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersAsync(int testId, int userId)
+        {
+            return await _unitOfWork.QuestionRepository.FetchQuestionsWithAnswersAsync(userId, testId);
         }
     }
 }

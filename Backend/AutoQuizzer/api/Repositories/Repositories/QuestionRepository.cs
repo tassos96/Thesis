@@ -1,6 +1,5 @@
 ﻿using Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
-using System.Security.Cryptography.X509Certificates;
 using Types.DatabaseContext;
 using Types.DTOs;
 using Types.Enums;
@@ -125,6 +124,44 @@ namespace Repositories
 
             _context.Questions.Update(question);
             return true;
+        }
+
+        public async Task<List<QuestionDTO>> FetchQuestionsWithAnswersAsync(int userId, int testId)
+        {
+            var testQuestions = await _context.Tests.Where(x => x.ExaminerId == userId && x.TestId == testId)
+                .Include(x => x.TestQuestions)
+                .ThenInclude(x => x.Question)
+                .ThenInclude(x => x.QuestionAnswers)
+                .SelectMany(x => x.TestQuestions)
+                .ToListAsync();
+
+            var list = new List<QuestionDTO>();
+
+            if (!testQuestions.Any())
+                return list;
+
+            foreach(var testQuestion in testQuestions)
+            {
+                var question = new QuestionDTO
+                {
+                    QuestionId = testQuestion.Question.QuestionId,
+                    CategoryId = 0,
+                    Difficulty = Enum.Parse<Difficulty>(testQuestion.Question.Difficulty),
+                    Description = testQuestion.Question.Description,
+                    SubcategoryId = testQuestion.Question.SubcategoryId,
+                    QuestionAnswers = testQuestion.Question.QuestionAnswers.Select(y => new AnswerDTO
+                    {
+                        AnswerId = y.AnswerId,
+                        QuestionId = y.QuestionId,
+                        Description = y.Description,
+                        IsCorrect = Convert.ToBoolean(y.IsCorrect)
+                    }).ToList()
+                };
+
+                list.Add(question);
+            }
+
+            return list;
         }
     }
 }

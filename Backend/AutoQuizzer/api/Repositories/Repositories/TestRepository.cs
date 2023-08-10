@@ -153,8 +153,10 @@ namespace Repositories
         {
             var users = await _context.Users.Where(user => (usersToAssign.Contains(user.Username) 
                 || usersToAssign.Contains(user.Email)) 
-                && user.UserRole == UserRole.Student.ToString())
+                && user.UserRole == UserRole.Student.ToString()).Include(x => x.Exams)
                 .ToListAsync();
+
+            users = users.Where(x => x.Exams.Count == 0).ToList();
 
             if (!users.Any())
                 return false;
@@ -228,6 +230,36 @@ namespace Repositories
 
             _context.Tests.Remove(test);
             _context.Exams.RemoveRange(test.Exams.Where(x => x.TestId == test.TestId));
+            return true;
+        }
+
+        public async Task<List<TestUsersDTO>> FetchTestUsersAsync(int userId, int testId)
+        {
+            var users = await _context.Tests.Where(x => x.TestId == testId && x.ExaminerId == userId)
+                .Include(x => x.Exams).ThenInclude(x => x.User).SelectMany(x => x.Exams).ToListAsync();
+
+            return users.Select(x => new TestUsersDTO
+            {
+                TestId = testId,
+                ExamId = x.ExamId,
+                AssignmentDate = x.AssignmentDate,
+                ResolvedDate = x.ResolvedDate,
+                Grade = x.Grade,
+                UserId = Convert.ToInt32(x.UserId),
+                Email = x.User.Email,
+                Fullname = x.User.FirstName + " " + x.User.LastName,
+                UserName = x.User.Username
+            }).ToList();
+        }
+
+        public async Task<bool> DeleteTestAssignmentAsync(DeleteTestAssignmentRequest request, int userId)
+        {
+            var test = await _context.Tests.Where(x => x.TestId == request.TestId && x.ExaminerId == userId).Include(x => x.Exams).FirstOrDefaultAsync();
+            if (test == null) { return false; }
+
+            var exam = test.Exams.Where(x => x.UserId == request.UserId && x.ExamId == request.ExamId).FirstOrDefault();
+
+            _context.Exams.Remove(exam);
             return true;
         }
     }

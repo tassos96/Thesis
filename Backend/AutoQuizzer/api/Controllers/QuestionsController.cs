@@ -44,5 +44,13 @@ namespace Controllers
             var result = await _applicationService.QuestionService.UpdateCategoryAsync(request, base.AppUser.Id);
             return result ? Ok(result) : BadRequest();
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersAsync(int testId)
+        {
+            var result = await _applicationService.QuestionService.FetchTestQuestionsWithAnswersAsync(testId, base.AppUser.Id);
+            return result;
+        }
     }
 }

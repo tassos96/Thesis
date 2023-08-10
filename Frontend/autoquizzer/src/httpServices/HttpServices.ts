@@ -20,6 +20,9 @@ import { IUpdateTestDTO } from "../DTO/TestsPage/IUpdateTestDTO";
 import { IAssignTestDTO } from "../DTO/TestsPage/IAssignTestDTO";
 import { IFetchSubcategoriesByCategoriesRequest } from "../DTO/TestsPage/IFetchSubcategoriesByCategories";
 import { ICreateTestDTO } from "../DTO/TestsPage/ICreateTestDTO";
+import { ITestUsersDTO } from "../DTO/TestsPage/ITestUsersDTO";
+import { IStatisticsDTO } from "../DTO/TestsPage/IStatisticsDTO";
+import { IDeleteAssignmentDTO } from "../DTO/TestsPage/IDeleteAssignmentDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -207,3 +210,44 @@ export const createTestRequest = async (body: ICreateTestDTO) => {
     headers: authorizationHeader()}
   );
 }
+
+export const getQuestionsWithAnswers = async (testId: number) => {
+  console.log(Appsettings.BaseUrl + "questions/fetchTestQuestionsWithAnswers");
+  return await axios.get<QuestionDTO[]>(
+    Appsettings.BaseUrl + "questions/fetchTestQuestionsWithAnswers", {
+      headers: authorizationHeader(),
+      params: {
+        testId: testId
+      },
+    });
+};
+
+export const getTestUsers = async (testId: number) => {
+  console.log(Appsettings.BaseUrl + "tests/fetchTestUsers");
+  return await axios.get<ITestUsersDTO[]>(
+    Appsettings.BaseUrl + "tests/fetchTestUsers", {
+      headers: authorizationHeader(),
+      params: {
+        testId: testId
+      },
+    });
+};
+
+export const getTestStatistics = async (testId: number) => {
+  console.log(Appsettings.BaseUrl + "tests/fetchTestStatistics");
+  return await axios.get<IStatisticsDTO>(
+    Appsettings.BaseUrl + "tests/fetchTestStatistics", {
+      headers: authorizationHeader(),
+      params: {
+        testId: testId
+      },
+    });
+};
+
+export const deleteTestAssignmentRequest = async (body: IDeleteAssignmentDTO) => {
+  console.log(Appsettings.BaseUrl + "tests/deleteTestAssignment");
+  return await axios.post<IDeleteAssignmentDTO>(
+    Appsettings.BaseUrl + "tests/deleteTestAssignment", body, {
+      headers: authorizationHeader()
+    });
+};

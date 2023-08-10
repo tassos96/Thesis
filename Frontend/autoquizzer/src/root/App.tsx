@@ -13,6 +13,7 @@ import CategoriesPage from "../pages/Repos/Categories/CategoriesPage";
 import SubcategoriesPage from "../pages/Repos/Subcategories/Subcategories";
 import QuestionsPage from "../pages/Repos/Questions/QuestionsPage";
 import TestsPage from "../pages/Tests/TestsPage";
+import TestInfoPage from "../pages/TestInfo/TestInfoPage";
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
             <Route index element={<Home />} />
             <Route path={AppRoutes.Home} element={<Home />} />
             <Route path={AppRoutes.Test} element={<TestsPage />} />
+            <Route path={AppRoutes.TestInfo} element={<TestInfoPage />} />
             <Route path={AppRoutes.Categories} element={<CategoriesPage />} />
             <Route path={AppRoutes.Subcategories} element={<SubcategoriesPage />} />
             <Route path={AppRoutes.Questions} element={<QuestionsPage />} />
