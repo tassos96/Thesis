@@ -12,7 +12,8 @@ export const AppRoutes = {
     Categories: "categories",
     DeleteCategory: "delete-category",
     Subcategories: "subcategories",
-    TestInfo: "test/testInfo"
+    TestInfo: "test/testInfo",
+    ResolveExam: "test/resolveExam"
 }
 
 export const GoogleApiKey = "AIzaSyDvsZeg-SYJ5brphnTl1w_Zi9H994uT-w0";

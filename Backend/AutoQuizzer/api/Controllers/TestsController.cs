@@ -79,5 +79,21 @@ namespace Controllers
             var result = await _applicationService.TestService.DeleteTestAssignmentAsync(request, base.AppUser.Id);
             return result ? Ok(result) : BadRequest();
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<List<UserExamsDTO>> FetchUserExamsAsync(string difficulty)
+        {
+            var list = await _applicationService.TestService.FetchUserExamsAsync(base.AppUser.Id, difficulty);
+            return list;
+        }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int examId)
+        {
+            var list = await _applicationService.TestService.FetchExamQuestionsAsync(base.AppUser.Id, examId);
+            return list;
+        }
     }
 }

@@ -23,6 +23,8 @@ import { ICreateTestDTO } from "../DTO/TestsPage/ICreateTestDTO";
 import { ITestUsersDTO } from "../DTO/TestsPage/ITestUsersDTO";
 import { IStatisticsDTO } from "../DTO/TestsPage/IStatisticsDTO";
 import { IDeleteAssignmentDTO } from "../DTO/TestsPage/IDeleteAssignmentDTO";
+import { IExamDTO } from "../DTO/TestsPage/IExamDTO";
+import { IExamQuestionDTO } from "../DTO/TestsPage/IExamQuestionDTO";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -249,5 +251,27 @@ export const deleteTestAssignmentRequest = async (body: IDeleteAssignmentDTO) =>
   return await axios.post<IDeleteAssignmentDTO>(
     Appsettings.BaseUrl + "tests/deleteTestAssignment", body, {
       headers: authorizationHeader()
+    });
+};
+
+export const fetchUserExams = async (difficulty: IDifficultyEnum) => {
+  console.log(Appsettings.BaseUrl + "tests/fetchUserExams");
+  return await axios.get<IExamDTO[]>(
+    Appsettings.BaseUrl + "tests/fetchUserExams", {
+      headers: authorizationHeader(),
+      params: {
+        difficulty: difficulty
+      },
+    });
+};
+
+export const fetchExamQuestions = async (examId: number) => {
+  console.log(Appsettings.BaseUrl + "tests/fetchExamQuestions");
+  return await axios.get<IExamQuestionDTO[]>(
+    Appsettings.BaseUrl + "tests/fetchExamQuestions", {
+      headers: authorizationHeader(),
+      params: {
+        examId: examId
+      },
     });
 };

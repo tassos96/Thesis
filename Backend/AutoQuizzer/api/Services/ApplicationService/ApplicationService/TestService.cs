@@ -2,6 +2,7 @@
 using Interfaces.Repositories;
 using Interfaces.Services;
 using Types.DTOs;
+using Types.Enums;
 using Types.TestService;
 
 namespace ApplicationService
@@ -102,6 +103,16 @@ namespace ApplicationService
         {
             await _unitOfWork.TestRepository.DeleteTestAssignmentAsync(request, userId);
             return await _unitOfWork.SaveAsync();
+        }
+
+        public async Task<List<UserExamsDTO>> FetchUserExamsAsync(int userId, string difficulty)
+        {
+            return await _unitOfWork.TestRepository.FetchUserExamsAsync(userId, difficulty);
+        }
+
+        public async Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int userId, int examId)
+        {
+            return await _unitOfWork.TestRepository.FetchExamQuestionsAsync(userId, examId);
         }
     }
 }

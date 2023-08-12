@@ -14,6 +14,8 @@ import { stat } from "fs";
 import { IAssignTestDTO } from "../../DTO/TestsPage/IAssignTestDTO";
 import { IFetchSubcategoriesByCategoriesRequest } from "../../DTO/TestsPage/IFetchSubcategoriesByCategories";
 import { ICreateTestDTO } from "../../DTO/TestsPage/ICreateTestDTO";
+import { useUserContext } from "../../context/UserContext";
+import TestPageStudent from "./TestPageStudent";
 
 export interface ITestPageState {
     isLoading: boolean;
@@ -35,6 +37,7 @@ export interface ITestPageState {
     isSubcategoriesDisabled: boolean;
 
     effect: boolean;
+    
 }
 
 export interface IOptionDifficulty {
@@ -49,6 +52,8 @@ export interface IOption {
 
 const TestsPage = () => { 
 
+    const currentUserContext = useUserContext();
+    const isUserTeacher = currentUserContext.isUserTeacher();
     const [searchParams] = useSearchParams();
     const [updateTestForm] = Form.useForm();
     const [assignTestForm] = Form.useForm();
@@ -108,7 +113,8 @@ const TestsPage = () => {
             setState((prev) => {
                 return {
                     ...prev,
-                    tests: res.data
+                    tests: res.data,
+                    isLoading: false,
                 }
             });
         })
@@ -120,7 +126,6 @@ const TestsPage = () => {
             return {
                 ...prev,
                 modalLoading: false,
-                isLoading: false,
                 selectedDifficultyFilter: selectedDifficultyFilter
             }
         })
@@ -426,7 +431,7 @@ const TestsPage = () => {
         <>
         <AppBreadcrumb path="Αρχική/Τεστ" />
         {contextHolder}
-        {state.isLoading === false ? (
+        {state.isLoading === false && isUserTeacher && (
             <div>
                 <Space style={{width: "100%", marginTop: '1%'}} wrap>
                     <Form layout="vertical">
@@ -705,8 +710,12 @@ const TestsPage = () => {
                         </Form>    
                     </Modal>
             </div>
-        ) :
-        (
+        )}
+        {state.isLoading === false && isUserTeacher === false && (
+            <TestPageStudent />
+        )}
+        {state.isLoading === true && (
+        
             <Loader/>
         )}
         </>

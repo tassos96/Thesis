@@ -13,5 +13,7 @@ namespace Interfaces.Services
         Task<List<TestUsersDTO>> FetchTestUsersAsync(int id, int testId);
         Task<TestStatisticsDTO> FetchTestStatisticsAsync(int id, int testId);
         Task<bool> DeleteTestAssignmentAsync(DeleteTestAssignmentRequest request, int userId);
+        Task<List<UserExamsDTO>> FetchUserExamsAsync(int userId, string difficulty);
+        Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int userId, int examId);
     }
 }

@@ -14,6 +14,7 @@ import SubcategoriesPage from "../pages/Repos/Subcategories/Subcategories";
 import QuestionsPage from "../pages/Repos/Questions/QuestionsPage";
 import TestsPage from "../pages/Tests/TestsPage";
 import TestInfoPage from "../pages/TestInfo/TestInfoPage";
+import ResolveExam from "../pages/ResolveExam/ResolveTest";
 
 const App = () => {
   return (
@@ -25,6 +26,7 @@ const App = () => {
             <Route path={AppRoutes.Home} element={<Home />} />
             <Route path={AppRoutes.Test} element={<TestsPage />} />
             <Route path={AppRoutes.TestInfo} element={<TestInfoPage />} />
+            <Route path={AppRoutes.ResolveExam} element={<ResolveExam />} />
             <Route path={AppRoutes.Categories} element={<CategoriesPage />} />
             <Route path={AppRoutes.Subcategories} element={<SubcategoriesPage />} />
             <Route path={AppRoutes.Questions} element={<QuestionsPage />} />

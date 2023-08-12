@@ -16,7 +16,8 @@ const breadcrumbNameMap: Record<string, string> = {
   '/subcategories': 'Υπόκατηγορίες',
   '/questions': 'Ερωτήσεις',
   '/test': 'Τεστ',
-  '/test/testInfo': 'Πληροφορίες Τεστ'
+  '/test/testInfo': 'Πληροφορίες Τεστ',
+  '/test/resolveExam': 'Επίλυση Τεστ'
 };
 
 const AppBreadcrumb = (props: IAppBreadcrumbProps) => {

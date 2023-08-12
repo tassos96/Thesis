@@ -262,5 +262,66 @@ namespace Repositories
             _context.Exams.Remove(exam);
             return true;
         }
+
+        public async Task<List<UserExamsDTO>> FetchUserExamsAsync(int userId, string difficulty)
+        {
+            var exams = await _context.Exams.Where(x => x.UserId == userId)
+                .Include(x => x.Test).ToListAsync();
+
+            if(difficulty != "None")
+                exams = exams.Where(x => x.Test.Difficulty == difficulty).ToList();
+
+            return exams.Select(x => new UserExamsDTO
+            {
+                ExamId = x.ExamId,
+                AssignmentDate = x.AssignmentDate,
+                ResolvedDate = x.ResolvedDate,
+                Grade = x.Grade,
+                Test = new TestDTO
+                {
+                    TestId = x.Test.TestId,
+                    Difficulty = Enum.Parse<Difficulty>(x.Test.Difficulty),
+                    QuestionsNumber = x.Test.QuestionsNumber,
+                    Categories = x.Test.Categories,
+                    Subcategories = x.Test.Subcategories,
+                    Subject = x.Test.Subject,
+                    Title = x.Test.Title
+                }
+            }).ToList();
+        }
+
+        public async Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int userId, int examId)
+        {
+            var testQuestions = await _context.Exams.Where(x => x.UserId == userId && x.ExamId == examId)
+                .Include(x => x.Test)
+                .ThenInclude(x => x.TestQuestions)
+                .ThenInclude(x => x.Question)
+                .ThenInclude(x => x.QuestionAnswers)
+                .SelectMany(x => x.Test.TestQuestions)
+                .ToListAsync();
+
+            var list = new List<QuestionFullDTO>();
+            if (!testQuestions.Any())
+                return list;
+
+            foreach (var testQuestion in testQuestions)
+            {
+                var question = new QuestionFullDTO
+                {
+                    QuestionId = testQuestion.Question.QuestionId,
+                    Description = testQuestion.Question.Description,
+                    Difficulty = Enum.Parse<Difficulty>(testQuestion.Question.Difficulty),
+                    Choises = testQuestion.Question.QuestionAnswers.Select(y => new QuestionAnswerChoicesDTO
+                    {
+                        AnswerId = y.AnswerId,
+                        Description = y.Description
+                    }).ToList()
+                };
+
+                list.Add(question);
+            }
+
+            return list;
+        }
     }
 }
