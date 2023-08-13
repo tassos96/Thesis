@@ -100,6 +100,15 @@ const TestInfoPage = () => {
         setState((prev) => {
             return {
                 ...prev,
+                openAssignTestModal: false
+            };
+        });
+    }
+
+    const handleStatisticsModalCancel = () => {
+        setState((prev) => {
+            return {
+                ...prev,
                 showStatisticsModal: false
             };
         });
@@ -273,7 +282,7 @@ const TestInfoPage = () => {
                 <Modal
                     open={state.showStatisticsModal}
                     title={"Στατιστικά χρηστών"}
-                    onCancel={handleAssignTestModalCancel}
+                    onCancel={handleStatisticsModalCancel}
                     footer={[
                     ]}
                 >
