@@ -7,6 +7,7 @@ import { fetchUserExams } from "../../httpServices/HttpServices";
 import { IExamDTO } from "../../DTO/TestsPage/IExamDTO";
 import { IOptionDifficulty } from "./TestsPage";
 import { InfoCircleTwoTone } from "@ant-design/icons";
+import "./TestsPage.css"
 
 export interface ITestPageStudentProps {
 
@@ -113,8 +114,8 @@ const TestPageStudent = (props: ITestPageStudentProps) => {
         });
     };
 
-    const solveTest = (testId: number) => {
-        navigate("/test/resolveTest?testId=" + testId);
+    const solveTest = (examId: number) => {
+        navigate("/test/resolveExam?examId=" + examId);
     };
 
     return (
@@ -150,19 +151,25 @@ const TestPageStudent = (props: ITestPageStudentProps) => {
                         actions=
                         {[
                             <Space wrap>
-                                <Button type="primary" onClick={() => solveTest(item.test.testId)} disabled={item.resolvedDate === null}>Επίλυση</Button>
+                                <Button type="primary" onClick={() => solveTest(item.examId)} disabled={item.resolvedDate !== undefined}>Επίλυση</Button>
                             </Space>
                         ]}
                     >
                         <List.Item.Meta
                         avatar={<InfoCircleTwoTone />}
-                        title={<a href= {AppRoutes.ResolveExam +"?examId=" + item.examId}>{item.test.title}</a>}
+                        title={<a href= {item.resolvedDate !== undefined ? AppRoutes.TestInfo +"?testId=" + item.test.testId : ""}>{item.test.title}</a>}
                         description={
-                            <div>
-                                <p><b>Δυσκολία:</b> {item.test.difficulty}</p>
-                                <p><b>Ημ/νία Ανάθεσης:</b> {item.assignmentDate}</p>
-                                <p><b>Ημ/νία Επίλυσης:</b> {item.resolvedDate}</p>
-                                <p><b>Βαθμός:</b> {item.grade}</p>
+                            <div className= "container">
+                                <div className="div1">
+                                    <p><b>Εξεταστής:</b> {item.examinerFullname}</p>
+                                    <p><b>Δυσκολία:</b> {item.test.difficulty}</p>
+                                    <p><b>Ημ/νία Ανάθεσης:</b> {item.assignmentDate}</p>
+                                </div>
+                                <div className="div2">
+                                    {item.resolvedDate !== undefined && (<p><b>Ημ/νία Επίλυσης:</b> {item.resolvedDate}</p>)}
+                                    {item.grade !== undefined && (<p><b>Βαθμός:</b> {item.grade}%</p>)}
+                                    {item.standing !== undefined && (<p><b>Κατάταξη:</b> {item.standing}</p>)}
+                                </div>
                             </div>
                         }
                         />

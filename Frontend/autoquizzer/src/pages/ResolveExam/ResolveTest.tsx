@@ -1,23 +1,27 @@
 import { useEffect, useState } from 'react'
 import './ResolveTest.css'
 import { QuestionDTO } from '../../DTO/QuestionsPage/QuestionDTO';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { IChoiseDTO, IExamQuestionDTO } from '../../DTO/TestsPage/IExamQuestionDTO';
-import { fetchExamQuestions, updateCategory } from '../../httpServices/HttpServices';
-import { Button, Card, Divider, Radio, Space, message } from 'antd';
+import { fetchExamQuestions, updateCategory, validateExamAnswersRequest } from '../../httpServices/HttpServices';
+import { Button, Card, Divider, Radio, Result, Space, message } from 'antd';
 import { showErrorMessage } from '../../helpers/AppConstants';
 import AppBreadcrumb from '../../components/Breadcrumb/AppBreadcrumb';
+import { IExamResult } from '../../DTO/TestsPage/IExamResult';
 
 export interface IResolveExamState {
   examId?: number;
   questions?: IExamQuestionDTO[];
   questionsNumber: number;
   userAnswers?: IUserQuestionAnswer[];
+  examResult?: IExamResult;
 
   currentQuestion: number;
   effect: boolean;
 
   selectedAnswer?: IChoiseDTO;
+
+  showResult: boolean;
 }
 
 export interface IUserQuestionAnswer {
@@ -30,10 +34,12 @@ const ResolveExam = () => {
 
   const [messageApi, contextHolder] = message.useMessage();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [state, setState] = useState<IResolveExamState>({
     currentQuestion: 0,
     effect: false,
-    questionsNumber: 0
+    questionsNumber: 0,
+    showResult: false
   });
 
   
@@ -107,10 +113,25 @@ const ResolveExam = () => {
     else
     {
       // Quiz finished
-      //submit
-      console.log(state.currentQuestion)
-      console.log(state.userAnswers)
-      // alert(`Quiz finished! Your score: ${score} out of ${quizData.length}`);
+      if(state.userAnswers)
+      {
+        validateExamAnswersRequest(state.userAnswers).then((res) => {
+          const result : IExamResult = {
+            examId: res.data.examId,
+            grade: res.data.grade,
+            correctAnswers: res.data.correctAnswers,
+            standing: res.data.standing
+          }
+
+          setState((prev) => {
+            return {
+              ...prev,
+              showResult: true,
+              examResult: result
+            };
+          });
+        })
+      }
     }
   };
 
@@ -129,6 +150,7 @@ const ResolveExam = () => {
     <>
     <AppBreadcrumb path="Αρχική/Τεστ/Επίλυση Τεστ" />
     {contextHolder}
+    {state.showResult === false ? (
     <div style={{ paddingLeft: '30%', paddingRight: '30%', marginTop: '3%' }}>
       <Card title={`${state.currentQuestion + 1}/${state.questionsNumber}: ${state.questions?.at(state.currentQuestion)?.description}`}>
         <Space direction="vertical">
@@ -152,7 +174,7 @@ const ResolveExam = () => {
               onClick={handlePreviousQuestion}
               disabled={state.currentQuestion === 0}
             >
-              Previous
+              Προηγούμενο
             </Button>
 
             <Button
@@ -161,12 +183,38 @@ const ResolveExam = () => {
               onClick={handleNextQuestion}
               disabled={state.currentQuestion === state.questionsNumber - 1 && state.userAnswers?.some(answer => answer.userOption === -1)}
             >
-              {state.currentQuestion === (state.questions?.length ?? 0) - 1 ? 'Finish' : 'Next'}
+              {state.currentQuestion === (state.questions?.length ?? 0) - 1 ? 'Τέλος' : 'Επόμενο'}
             </Button>
           </Space>
         </Space>
       </Card>
     </div>
+    ) : 
+    (
+      <div style={{ textAlign: "center"}}>
+      <Result
+        status="success"
+        title="Συγχαρητήρια οι απαντήσεις σου καταχωρήθηκαν με επιτυχία."
+        subTitle=
+        {
+          <div>
+            <h2>Η βαθμολογία σου είναι: </h2>
+            <p><b>Βαθμός:</b> {state.examResult?.grade}%</p>
+            <p><b>Σωστές απαντήσεις:</b> {state.examResult?.correctAnswers}/{state.questionsNumber}</p>
+            <p><b>Κατάταξη:</b> {state.examResult?.standing}</p>
+          </div>
+        }
+      />
+      
+      <Button
+          type="primary"
+          onClick={() => {navigate("/test", {replace: true})}}
+        >
+          Επιστροφή στα τεστ
+      </Button>
+      </div>
+    )
+    }
     </>
   );
 }

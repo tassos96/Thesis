@@ -25,6 +25,8 @@ import { IStatisticsDTO } from "../DTO/TestsPage/IStatisticsDTO";
 import { IDeleteAssignmentDTO } from "../DTO/TestsPage/IDeleteAssignmentDTO";
 import { IExamDTO } from "../DTO/TestsPage/IExamDTO";
 import { IExamQuestionDTO } from "../DTO/TestsPage/IExamQuestionDTO";
+import { IUserQuestionAnswer } from "../pages/ResolveExam/ResolveTest";
+import { IExamResult } from "../DTO/TestsPage/IExamResult";
 // import Geocode from "react-geocode";
 // import { IUserSignupDTO } from "../DTO/IUserSignupDTO";
 // import { IOrderPricingInfoResponseDTO } from "../DTO/OrderPricingResponse/IOrderPricingInfoResponseDTO";
@@ -272,6 +274,25 @@ export const fetchExamQuestions = async (examId: number) => {
       headers: authorizationHeader(),
       params: {
         examId: examId
+      },
+    });
+};
+
+export const validateExamAnswersRequest = async (body: IUserQuestionAnswer[]) => {
+  console.log(Appsettings.BaseUrl + "tests/validateExamAnswers");
+  return await axios.post<IExamResult>(
+    Appsettings.BaseUrl + "tests/validateExamAnswers", body, {
+      headers: authorizationHeader()
+    });
+};
+
+export const getQuestionsWithAnswersForUser = async (testId: number) => {
+  console.log(Appsettings.BaseUrl + "questions/fetchTestQuestionsWithAnswersForUser");
+  return await axios.get<QuestionDTO[]>(
+    Appsettings.BaseUrl + "questions/fetchTestQuestionsWithAnswersForUser", {
+      headers: authorizationHeader(),
+      params: {
+        testId: testId
       },
     });
 };

@@ -10,5 +10,6 @@ namespace Interfaces.Services
         Task<bool> CreateCategoryAsync(CreateQuestionRequest request, int userId);
         Task<bool> UpdateCategoryAsync(UpdateQuestionRequest request, int userId);
         Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersAsync(int testId, int userId);
+        Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersForUserAsync(int testId, int userId);
     }
 }

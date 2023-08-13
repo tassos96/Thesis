@@ -95,5 +95,13 @@ namespace Controllers
             var list = await _applicationService.TestService.FetchExamQuestionsAsync(base.AppUser.Id, examId);
             return list;
         }
+
+        [HttpPost]
+        [Authorize]
+        public async Task<ExamResultDTO> ValidateExamAnswersAsync(List<UserAnswer> request)
+        {
+            var list = await _applicationService.TestService.ValidateExamAnswersAsync(base.AppUser.Id, request);
+            return list;
+        }
     }
 }

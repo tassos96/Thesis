@@ -1,0 +1,28 @@
+.container {
+    text-align: left; /* Optional: Center-align the divs within the container */
+}
+
+.div1, .div2 {
+    width: 38%; /* Adjust the width as needed */
+    display: inline-block;
+    vertical-align: top; /* Adjust vertical alignment as needed */
+    box-sizing: border-box;
+    
+    padding: 10px; /* Optional: Add padding for spacing */
+    margin: 5px; /* Optional: Add margin for spacing */
+}
+
+.container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.div1, .div2 {
+    width: 38%; /* Adjust the width as needed */
+    float: left;
+    box-sizing: border-box;
+    
+    padding: 10px; /* Optional: Add padding for spacing */
+    margin: 5px; /* Optional: Add margin for spacing */
+}

@@ -52,5 +52,13 @@ namespace Controllers
             var result = await _applicationService.QuestionService.FetchTestQuestionsWithAnswersAsync(testId, base.AppUser.Id);
             return result;
         }
+
+        [HttpGet]
+        [Authorize]
+        public async Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersForUserAsync(int testId)
+        {
+            var result = await _applicationService.QuestionService.FetchTestQuestionsWithAnswersForUserAsync(testId, base.AppUser.Id);
+            return result;
+        }
     }
 }

@@ -163,5 +163,47 @@ namespace Repositories
 
             return list;
         }
+
+        public async Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersForUserAsync(int userId, int testId)
+        {
+            var testQuestions = await _context.Exams.Where(x => x.UserId== userId && x.TestId == testId && x.ResolvedDate != null && x.Grade != null)
+                .Include(x => x.Test)
+                .ThenInclude(x => x.TestQuestions)
+                .ThenInclude(x => x.Question)
+                .ThenInclude(x => x.QuestionAnswers)
+                .SelectMany(x => x.Test.TestQuestions)
+                .ToListAsync();
+
+
+
+            var list = new List<QuestionDTO>();
+
+            if (!testQuestions.Any())
+                return list;
+
+            foreach (var testQuestion in testQuestions)
+            {
+                var question = new QuestionDTO
+                {
+                    QuestionId = testQuestion.Question.QuestionId,
+                    CategoryId = 0,
+                    Difficulty = Enum.Parse<Difficulty>(testQuestion.Question.Difficulty),
+                    Description = testQuestion.Question.Description,
+                    SubcategoryId = testQuestion.Question.SubcategoryId,
+                    UserChoise = _context.ExamDetails.FirstOrDefault(x => x.TestQuestionId == testQuestion.TestQuestionId)?.UserQuestionAnswer,
+                    QuestionAnswers = testQuestion.Question.QuestionAnswers.Select(y => new AnswerDTO
+                    {
+                        AnswerId = y.AnswerId,
+                        QuestionId = y.QuestionId,
+                        Description = y.Description,
+                        IsCorrect = Convert.ToBoolean(y.IsCorrect)
+                    }).ToList()
+                };
+
+                list.Add(question);
+            }
+
+            return list;
+        }
     }
 }

@@ -11,5 +11,6 @@ namespace Types.DTOs
         public int QuestionsNumber { get; set; }
         public string Categories { get; set; }
         public string Subcategories { get; set; }
+        public int ExaminerId { get; set; }
     }
 }

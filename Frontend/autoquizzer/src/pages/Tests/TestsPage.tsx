@@ -711,7 +711,7 @@ const TestsPage = () => {
                     </Modal>
             </div>
         )}
-        {state.isLoading === false && isUserTeacher === false && (
+        {isUserTeacher === false && (
             <TestPageStudent />
         )}
         {state.isLoading === true && (

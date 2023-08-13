@@ -17,5 +17,6 @@ namespace Interfaces.Repositories
         Task<bool> DeleteTestAssignmentAsync(DeleteTestAssignmentRequest request, int userId);
         Task<List<UserExamsDTO>> FetchUserExamsAsync(int userId, string difficulty);
         Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int userId, int examId);
+        Task<ExamResultDTO> ValidateExamAnswersAsync(int userId, List<UserAnswer> request);
     }
 }

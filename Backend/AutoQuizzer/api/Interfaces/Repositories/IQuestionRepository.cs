@@ -10,5 +10,6 @@ namespace Interfaces.Repositories
         Task<bool> CreateQuestionAsync(CreateQuestionRequest request, int userId);
         Task<bool> UpdateQuestionAsync(UpdateQuestionRequest request, int userId);
         Task<List<QuestionDTO>> FetchQuestionsWithAnswersAsync(int userId, int testId);
+        Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersForUserAsync(int userId, int testId);
     }
 }

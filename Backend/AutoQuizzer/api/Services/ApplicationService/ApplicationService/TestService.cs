@@ -85,7 +85,7 @@ namespace ApplicationService
 
             while (bottomRange < 100 && bottomRange >= 0)
             {
-                int countInRange = grades.Count(grade => grade <= topRange && grade > bottomRange);
+                int countInRange = grades.Count(grade => grade <= topRange && grade >= bottomRange);
                 if (bottomRange == 0)
                     countInRange += grades.Where(x => x == 0).Count();
                 int percentage = ((int)countInRange / totalGrades) * 100;
@@ -113,6 +113,14 @@ namespace ApplicationService
         public async Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int userId, int examId)
         {
             return await _unitOfWork.TestRepository.FetchExamQuestionsAsync(userId, examId);
+        }
+
+        public async Task<ExamResultDTO> ValidateExamAnswersAsync(int userId, List<UserAnswer> request)
+        {
+            var list = await _unitOfWork.TestRepository.ValidateExamAnswersAsync(userId, request);
+            await _unitOfWork.SaveAsync();
+
+            return list;
         }
     }
 }

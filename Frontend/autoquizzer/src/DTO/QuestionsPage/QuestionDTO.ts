@@ -8,4 +8,5 @@ export interface QuestionDTO {
     subcategoryId: number;
     categoryId: number;
     questionAnswers: QuestionAnswerDTO[];
+    userChoise?: number;
 }

@@ -71,6 +71,7 @@ namespace Types.DatabaseContext
                 entity.HasOne(d => d.Test)
                     .WithMany(p => p.Exams)
                     .HasForeignKey(d => d.TestId)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Assignment_Test");
 
                 entity.HasOne(d => d.User)
@@ -125,8 +126,6 @@ namespace Types.DatabaseContext
                 entity.ToTable("QuestionAnswer");
 
                 entity.Property(e => e.AnswerId).HasColumnName("AnswerID");
-
-                entity.Property(e => e.Description).HasMaxLength(50);
 
                 entity.Property(e => e.QuestionId).HasColumnName("QuestionID");
 
@@ -191,13 +190,12 @@ namespace Types.DatabaseContext
                 entity.HasOne(d => d.Question)
                     .WithMany(p => p.TestQuestions)
                     .HasForeignKey(d => d.QuestionId)
-                    .OnDelete(DeleteBehavior.SetNull)
                     .HasConstraintName("FK_TestQuestions_Questions");
 
                 entity.HasOne(d => d.Test)
                     .WithMany(p => p.TestQuestions)
                     .HasForeignKey(d => d.TestId)
-                    .OnDelete(DeleteBehavior.SetNull)
+                    .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_TestQuestions_Tests");
             });
 

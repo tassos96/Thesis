@@ -45,5 +45,10 @@ namespace ApplicationService
         {
             return await _unitOfWork.QuestionRepository.FetchQuestionsWithAnswersAsync(userId, testId);
         }
+
+        public async Task<List<QuestionDTO>> FetchTestQuestionsWithAnswersForUserAsync(int testId, int userId)
+        {
+            return await _unitOfWork.QuestionRepository.FetchTestQuestionsWithAnswersForUserAsync(userId, testId);
+        }
     }
 }

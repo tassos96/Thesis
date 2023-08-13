@@ -1,5 +1,6 @@
 ﻿using Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 using Types.DatabaseContext;
 using Types.DTOs;
 using Types.Enums;
@@ -156,7 +157,7 @@ namespace Repositories
                 && user.UserRole == UserRole.Student.ToString()).Include(x => x.Exams)
                 .ToListAsync();
 
-            users = users.Where(x => x.Exams.Count == 0).ToList();
+            users = users.Where(x => x.Exams.Where(x => x.TestId == test.TestId).Count() == 0).ToList();
 
             if (!users.Any())
                 return false;
@@ -238,18 +239,32 @@ namespace Repositories
             var users = await _context.Tests.Where(x => x.TestId == testId && x.ExaminerId == userId)
                 .Include(x => x.Exams).ThenInclude(x => x.User).SelectMany(x => x.Exams).ToListAsync();
 
-            return users.Select(x => new TestUsersDTO
+            var orderedStandings = _context.Exams.Where(x => x.Grade != null && x.TestId == testId).ToList()
+                .OrderByDescending(x => x.Grade).ToList();
+
+            var list = new List<TestUsersDTO>();
+            foreach(var user in users)
             {
-                TestId = testId,
-                ExamId = x.ExamId,
-                AssignmentDate = x.AssignmentDate,
-                ResolvedDate = x.ResolvedDate,
-                Grade = x.Grade,
-                UserId = Convert.ToInt32(x.UserId),
-                Email = x.User.Email,
-                Fullname = x.User.FirstName + " " + x.User.LastName,
-                UserName = x.User.Username
-            }).ToList();
+                var index = orderedStandings.IndexOf(orderedStandings.FirstOrDefault(x => x.UserId == user.UserId));
+                int? standing = (index != -1) ? index + 1 : null;
+                var testUser = new TestUsersDTO
+                {
+                    TestId = testId,
+                    ExamId = user.ExamId,
+                    AssignmentDate = user.AssignmentDate,
+                    ResolvedDate = user.ResolvedDate,
+                    Grade = user.Grade,
+                    Standing = standing,
+                    UserId = Convert.ToInt32(user.UserId),
+                    Email = user.User.Email,
+                    Fullname = user.User.FirstName + " " + user.User.LastName,
+                    UserName = user.User.Username
+                };
+
+                list.Add(testUser);
+            }
+
+            return list;
         }
 
         public async Task<bool> DeleteTestAssignmentAsync(DeleteTestAssignmentRequest request, int userId)
@@ -266,12 +281,12 @@ namespace Repositories
         public async Task<List<UserExamsDTO>> FetchUserExamsAsync(int userId, string difficulty)
         {
             var exams = await _context.Exams.Where(x => x.UserId == userId)
-                .Include(x => x.Test).ToListAsync();
+                .Include(x => x.Test).Include(x => x.User).ToListAsync();
 
             if(difficulty != "None")
                 exams = exams.Where(x => x.Test.Difficulty == difficulty).ToList();
 
-            return exams.Select(x => new UserExamsDTO
+            var list = exams.Select(x => new UserExamsDTO
             {
                 ExamId = x.ExamId,
                 AssignmentDate = x.AssignmentDate,
@@ -285,9 +300,26 @@ namespace Repositories
                     Categories = x.Test.Categories,
                     Subcategories = x.Test.Subcategories,
                     Subject = x.Test.Subject,
-                    Title = x.Test.Title
+                    Title = x.Test.Title,
+                    ExaminerId = x.Test.ExaminerId
                 }
             }).ToList();
+
+            foreach(var exam in list)
+            {
+                var examiner = await _context.Users.FirstOrDefaultAsync(x => x.UserId == exam.Test.ExaminerId);
+                var examinerFullName = examiner.FirstName + " " + examiner.LastName;
+
+                exam.ExaminerFullname = examinerFullName;
+
+                var orderedStandings = _context.Exams.Where(x => x.Grade != null && x.TestId == exam.Test.TestId).ToList()
+                .OrderByDescending(x => x.Grade).ToList();
+
+                var index = orderedStandings.IndexOf(orderedStandings.FirstOrDefault(x => x.UserId == userId));
+                exam.Standing = (index != -1) ? index + 1 : null;
+            }
+
+            return list;
         }
 
         public async Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int userId, int examId)
@@ -322,6 +354,63 @@ namespace Repositories
             }
 
             return list;
+        }
+
+        public async Task<ExamResultDTO> ValidateExamAnswersAsync(int userId, List<UserAnswer> request)
+        {
+            var testQuestions = await _context.Exams.Where(x => x.UserId == userId && x.ExamId == request.FirstOrDefault().ExamId)
+                .Include(x => x.Test)
+                .ThenInclude(x => x.TestQuestions)
+                .ThenInclude(x => x.Question)
+                .ThenInclude(x => x.QuestionAnswers)
+                .SelectMany(x => x.Test.TestQuestions)
+                .ToListAsync();
+
+            var result = new ExamResultDTO();
+            if (!testQuestions.Any())
+                return result;
+
+            foreach (var answer in request)
+            {
+                var testQuestion = testQuestions.FirstOrDefault(x => x.QuestionId == answer.QuestionId);
+
+                var correctAnswer = testQuestion.Question?.QuestionAnswers?.FirstOrDefault(x => Convert.ToBoolean(x.IsCorrect))?.AnswerId;
+
+                var wasCorrect = 0;
+                if (correctAnswer == answer.UserOption)
+                {
+                    result.CorrectAnswers += 1;
+                    wasCorrect = 1;
+                }
+
+                var detail = new ExamDetail
+                {
+                    ExamId = answer.ExamId,
+                    TestQuestionId = testQuestion.TestQuestionId,
+                    UserQuestionAnswer = answer.UserOption,
+                    WasCorrect = Convert.ToInt16(wasCorrect)
+                };
+
+                _context.ExamDetails.Add(detail);
+            }
+
+            result.Grade = Convert.ToInt32((result.CorrectAnswers * 100 / testQuestions.Count));
+            result.ExamId = request.FirstOrDefault().ExamId;
+
+            var exam = await _context.Exams.Where(x => x.UserId == userId && x.ExamId == request.FirstOrDefault().ExamId)
+                .Include(x => x.ExamDetails).FirstOrDefaultAsync();
+
+            exam.ResolvedDate = DateTime.Now;
+            exam.Grade = result.Grade;
+            _context.Exams.Update(exam);
+
+            var orderedStandings = _context.Exams.Where(x => x.Grade != null).ToList()
+                .OrderByDescending(x => x.Grade).ToList();
+
+            var index = orderedStandings.IndexOf(orderedStandings.First(x => x.UserId == userId));
+            result.Standing = index + 1;
+
+            return result;
         }
     }
 }

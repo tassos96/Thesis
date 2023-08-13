@@ -8,4 +8,5 @@ export interface ITestUsersDTO {
     userName: string;
     email: string;
     fullname: string;
+    standing?: number;
 }
