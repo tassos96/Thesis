@@ -307,13 +307,22 @@ const TestInfoPage = () => {
                         style={{ maxWidth: 600 }}
                         autoComplete="off"
                     >
-                        <Form.Item label="Χρήστες" name="users">
-                            <TextArea 
-                                placeholder="Email/Username.
-    Διαχωρισμός χρηστών με enter"
-                                autoSize={{ minRows: 3, maxRows: 5 }} 
-                            />
-                        </Form.Item>
+                        <Form.Item 
+                                label="Χρήστες"
+                                name="users"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε τους χρήστες."
+                                    }
+                                ]}
+                            >
+                                <TextArea 
+                                    placeholder="Email/Username.
+Διαχωρισμός χρηστών με enter"
+                                    autoSize={{ minRows: 3, maxRows: 5 }} 
+                                />
+                            </Form.Item>
                         <Form.Item>
                             <Button type="primary" htmlType="submit">
                                 Ανάθεση

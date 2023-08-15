@@ -37,6 +37,7 @@ export interface IQuestionPageState {
 
     hideModalButtons: boolean;
     formDisabled: boolean;
+    isShowInfo: boolean;
 }
 
 export interface IOption {
@@ -66,7 +67,8 @@ const QuestionsPage = () => {
         updateAns4Id: 0,
 
         hideModalButtons: false,
-        formDisabled: false
+        formDisabled: false,
+        isShowInfo: false
     });
 
     const [messageApi, contextHolder] = message.useMessage();
@@ -170,6 +172,12 @@ const QuestionsPage = () => {
                   label: x.title,
                 };
                 return optionDTO;
+            });
+            setState((prev) => {
+                return {
+                    ...prev,
+                    formSubcategories: subcategoriesOptions
+                };
             });
             subcategoriesOptions.push(defaultFilter);
             subcategoriesOptions.sort((a, b) => a.value.toString().localeCompare(b.value.toString()));
@@ -331,6 +339,7 @@ const QuestionsPage = () => {
     };
 
     const showModal = () => {
+        console.log("cat: " + state.selectedCategoryId + " subcat: " + state.selectedSubcategoryId)
         if(state.selectedCategoryId !== 0)
         {
             form.setFieldsValue({categoryId: state.selectedCategoryId})
@@ -341,7 +350,30 @@ const QuestionsPage = () => {
                 };
             });
         }
-        if(state.selectedSubcategoryId !== 0)
+
+        if(state.selectedCategoryId !== 0 && state.selectedSubcategoryId === 0)
+        {
+            getSubcategories(Number(state.selectedCategoryId)).then((res) => {
+                const subcategoriesFormOptions = res.data.map((x) => {
+                    const optionDTO: IOption = {
+                        value: x.subcategoryId,
+                        label: x.title,
+                      };
+                      return optionDTO;
+                });
+                setState((prev) => {
+                    return {
+                        ...prev,
+                        formSubcategories: subcategoriesFormOptions,
+                        isFormSubcategoriesDisabled: false,
+                        isFormCategoriesDisabled: true
+                    };
+                }); 
+            });
+            //form.setFieldsValue({subcategoryId: state.selectedSubcategoryId})
+        }    
+        
+        if(state.selectedCategoryId !== 0 && state.selectedSubcategoryId !== 0)
         {
             getSubcategories(Number(state.selectedCategoryId)).then((res) => {
                 const subcategoriesFormOptions = res.data.map((x) => {
@@ -361,8 +393,8 @@ const QuestionsPage = () => {
                 }); 
             });
             form.setFieldsValue({subcategoryId: state.selectedSubcategoryId})
-        }    
-        
+        }
+
         setState((prev) => {
             return {
                 ...prev,
@@ -372,6 +404,25 @@ const QuestionsPage = () => {
     };
 
     const showInfo = (question : QuestionDTO) => {
+        
+        getSubcategories(Number(question.categoryId)).then((res) => {
+            const subcategoriesFormOptions = res.data.map((x) => {
+                const optionDTO: IOption = {
+                    value: x.subcategoryId,
+                    label: x.title,
+                  };
+                  return optionDTO;
+            });
+            setState((prev) => {
+                return {
+                    ...prev,
+                    formSubcategories: subcategoriesFormOptions,
+                    isFormSubcategoriesDisabled: true,
+                    isFormCategoriesDisabled: true
+                };
+            }); 
+        });
+
         form.setFieldsValue({
             categoryId: question.categoryId,
             subcategoryId: question.subcategoryId,
@@ -389,7 +440,8 @@ const QuestionsPage = () => {
                 ...prev,
                 openModal: true,
                 hideModalButtons: true,
-                formDisabled: true
+                formDisabled: true,
+                isShowInfo: true
             }
         })
     };
@@ -554,7 +606,8 @@ const QuestionsPage = () => {
                 updateAns4Id: 0,
                 formSubcategories: [],
                 hideModalButtons: false,
-                formDisabled: false
+                formDisabled: false,
+                isShowInfo: false
             }
         })
     };
@@ -660,7 +713,7 @@ const QuestionsPage = () => {
             <div className="modal">
                 <Modal
                     open={state.openModal}
-                    title="Προσθήκη ερώτησης"
+                    title={state.isQuestionUpdate ? "Επεξεργασία ερώτησης" : state.isShowInfo ? "Πληροφορίες ερώτησης" : "Προσθήκη ερώτησης"}
                     onOk={handleOk}
                     onCancel={handleCancel}
                     footer={[]}
@@ -799,6 +852,7 @@ const QuestionsPage = () => {
                             </Radio.Group>
                         </Form.Item>
 
+                        {state.isShowInfo === false && (
                         <Space wrap>
                             <Form.Item>
                                 <Button key="back" onClick={handleCancel}>
@@ -810,7 +864,8 @@ const QuestionsPage = () => {
                                     Αποθήκευση
                                 </Button>
                             </Form.Item>
-                            </Space>
+                        </Space>
+                        )}
                         </Form>
                     </Modal>
             </div>

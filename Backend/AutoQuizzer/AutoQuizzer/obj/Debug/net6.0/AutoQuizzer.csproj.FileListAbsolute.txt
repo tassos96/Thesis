@@ -114,6 +114,7 @@ C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.AssemblyInfoInputs.cache
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.AssemblyInfo.cs
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.csproj.CoreCompileInputs.cache
+C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\AutoQuizzer.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\staticwebassets\msbuild.AutoQuizzer.Microsoft.AspNetCore.StaticWebAssets.props
 C:\Users\tasso\Desktop\Master_Thesis\Thesis\Backend\AutoQuizzer\AutoQuizzer\obj\Debug\net6.0\staticwebassets\msbuild.build.AutoQuizzer.props

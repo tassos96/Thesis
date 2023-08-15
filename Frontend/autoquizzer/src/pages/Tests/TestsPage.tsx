@@ -563,7 +563,16 @@ const TestsPage = () => {
                             style={{ maxWidth: 600 }}
                             autoComplete="off"
                         >
-                            <Form.Item label="Χρήστες" name="users">
+                            <Form.Item 
+                                label="Χρήστες"
+                                name="users"
+                                rules={[
+                                    {
+                                        required: true,
+                                        message: "Συμπλήρωσε τους χρήστες."
+                                    }
+                                ]}
+                            >
                                 <TextArea 
                                     placeholder="Email/Username.
 Διαχωρισμός χρηστών με enter"
@@ -695,7 +704,9 @@ const TestsPage = () => {
                                     }}
                                 />
                             </Form.Item>
-                            <Form.Item label="Χρήστες" name="users">
+                            <Form.Item 
+                                label="Χρήστες"
+                                name="users">
                                 <TextArea 
                                     placeholder="Email/Username.
 Διαχωρισμός χρηστών με enter"
