@@ -161,7 +161,7 @@ const TestInfoPage = () => {
         confirm({
             title: 'Προσοχή',
             icon: <ExclamationCircleFilled />,
-            content: 'Είσαι σίγουρος ότι επιθυμείς να διαγραφτεί αυτό το Τέστ;',
+            content: 'Είσαι σίγουρος ότι επιθυμείς να διαγραφτεί αυτή η Ανάθεση;',
             okText: 'Ναί',
             okType: 'danger',
             cancelText: 'Όχι',
