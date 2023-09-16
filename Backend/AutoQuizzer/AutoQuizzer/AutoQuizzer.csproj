@@ -17,10 +17,20 @@
 
   <ItemGroup>
     <ProjectReference Include="..\api\Controllers\Controllers.csproj" />
+    <ProjectReference Include="..\api\Email\Email\Email.csproj" />
     <ProjectReference Include="..\api\Interfaces\Interfaces.csproj" />
     <ProjectReference Include="..\api\Repositories\Repositories\Repositories.csproj" />
     <ProjectReference Include="..\api\Services\ApplicationService\ApplicationService\ApplicationService.csproj" />
     <ProjectReference Include="..\api\Types\Types.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="EmailTemplates\TestAssignmentEmailTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="EmailTemplates\TestResolvedEmailTemplate.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

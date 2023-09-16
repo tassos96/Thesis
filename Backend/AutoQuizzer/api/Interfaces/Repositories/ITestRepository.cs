@@ -1,5 +1,6 @@
 ﻿using Types.DatabaseContext;
 using Types.DTOs;
+using Types.EmailService;
 using Types.TestService;
 
 namespace Interfaces.Repositories
@@ -18,5 +19,8 @@ namespace Interfaces.Repositories
         Task<List<UserExamsDTO>> FetchUserExamsAsync(int userId, string difficulty);
         Task<List<QuestionFullDTO>> FetchExamQuestionsAsync(int userId, int examId);
         Task<ExamResultDTO> ValidateExamAnswersAsync(int userId, List<UserAnswer> request);
+        Task FindEmailInfo(int userId, int examId, TestResolvedEmailContext context);
+        Task FindAssingmentEmailInfo(int userId, AssignTestRequest request, TestAssignmentEmailContext emailInfo);
+        Task FindAssingmentEmailInfo(int userId, string[] usersToAssign, TestAssignmentEmailContext emailInfo);
     }
 }

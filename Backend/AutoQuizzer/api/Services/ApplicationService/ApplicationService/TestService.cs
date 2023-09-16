@@ -2,7 +2,7 @@
 using Interfaces.Repositories;
 using Interfaces.Services;
 using Types.DTOs;
-using Types.Enums;
+using Types.EmailService;
 using Types.TestService;
 
 namespace ApplicationService
@@ -11,23 +11,42 @@ namespace ApplicationService
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private readonly IEmailService _emailService;
 
-        public TestService(IUnitOfWork unitOfWork, IMapper mapper)
+        public TestService(IUnitOfWork unitOfWork, IMapper mapper, IEmailService emailService)
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+            _emailService = emailService;
         }
 
         public async Task<bool> CreateTestAsync(CreateTestRequest request, int userId)
         {
             await _unitOfWork.TestRepository.CreateTestAsync(request, userId);
-            return await _unitOfWork.SaveAsync();
+            var result = await _unitOfWork.SaveAsync();
+
+            var emailInfo = new TestAssignmentEmailContext()
+            {
+                TestTitle = request.Title,
+                TestDetails = request.Subject,
+            };
+
+            await _unitOfWork.TestRepository.FindAssingmentEmailInfo(userId, request.UsersToAssign, emailInfo);
+            await _emailService.SendTestAssignmentEmailAsync(emailInfo);
+
+            return result;
         }
 
         public async Task<bool> AssignTestAsync(AssignTestRequest request, int userId)
         {
             await _unitOfWork.TestRepository.AssignTestAsync(request, userId);
-            return await _unitOfWork.SaveAsync();
+            var result = await _unitOfWork.SaveAsync();
+
+            var emailInfo = new TestAssignmentEmailContext();
+            await _unitOfWork.TestRepository.FindAssingmentEmailInfo(userId, request, emailInfo);
+            await _emailService.SendTestAssignmentEmailAsync(emailInfo);
+
+            return result;
         }
 
         public async Task<List<TestDTO>> FetchTestsAsync(int userId, string difficulty)
@@ -119,6 +138,14 @@ namespace ApplicationService
         {
             var list = await _unitOfWork.TestRepository.ValidateExamAnswersAsync(userId, request);
             await _unitOfWork.SaveAsync();
+
+            var emailContext = new TestResolvedEmailContext
+            {
+                TestGrade = list.Grade.ToString(),
+            };
+
+            await _unitOfWork.TestRepository.FindEmailInfo(userId, list.ExamId, emailContext);
+            await _emailService.SendTestResolvedEmailAsync(emailContext);
 
             return list;
         }

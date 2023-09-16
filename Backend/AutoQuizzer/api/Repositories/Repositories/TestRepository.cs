@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Types.DatabaseContext;
 using Types.DTOs;
+using Types.EmailService;
 using Types.Enums;
 using Types.TestService;
 
@@ -411,6 +412,51 @@ namespace Repositories
             result.Standing = index + 1;
 
             return result;
+        }
+
+        public async Task FindEmailInfo(int userId, int examId, TestResolvedEmailContext context)
+        {
+            var details = await _context.Exams.Where(x => x.UserId == userId && x.ExamId == examId)
+                .Include(x => x.User)
+                .Include(x => x.Test)
+                .FirstOrDefaultAsync();
+
+            context.TestTitle = details.Test.Title;
+            context.TestDetails = details.Test.Subject;
+            context.Username = details.User.FirstName + " " + details.User.LastName;
+            context.UserContactInfo = details.User.Email;
+
+            var examinerDetails = await _context.Users.Where(x => x.UserId == details.Test.ExaminerId).FirstOrDefaultAsync();
+            context.ExaminerEmail = examinerDetails.Email;
+        }
+
+        public async Task FindAssingmentEmailInfo(int userId, AssignTestRequest request, TestAssignmentEmailContext emailInfo)
+        {
+            var details = await _context.Tests.Where(x => x.ExaminerId == userId && x.TestId == request.TestId)
+                .Include(x => x.Examiner)
+                .FirstOrDefaultAsync();
+
+            emailInfo.TestTitle = details.Title;
+            emailInfo.TestDetails = details.Subject;
+            emailInfo.TestExaminer = details.Examiner.FirstName + details.Examiner.LastName;
+            emailInfo.TestExaminerEmail = details.Examiner.Email;
+
+            var users = request.UsersToAssign.ToList();
+            emailInfo.UserEmails = await _context.Users.Where(x => users.Contains(x.Username) || users.Contains(x.Email))
+                .Select(x => x.Email).ToArrayAsync();
+        }
+
+        public async Task FindAssingmentEmailInfo(int userId, string[] usersToAssign, TestAssignmentEmailContext emailInfo)
+        {
+            var details = await _context.Users.Where(x => x.UserId == userId)
+                .FirstOrDefaultAsync();
+
+            emailInfo.TestExaminer = details.FirstName + details.LastName;
+            emailInfo.TestExaminerEmail = details.Email;
+
+            var users = usersToAssign.ToList();
+            emailInfo.UserEmails = await _context.Users.Where(x => users.Contains(x.Username) || users.Contains(x.Email))
+                .Select(x => x.Email).ToArrayAsync();
         }
     }
 }

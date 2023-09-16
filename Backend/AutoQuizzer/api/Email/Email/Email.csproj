@@ -1,0 +1,27 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="EmailTemplates\**" />
+    <EmbeddedResource Remove="EmailTemplates\**" />
+    <None Remove="EmailTemplates\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MailKit" Version="3.4.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Interfaces\Interfaces.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+	<FrameworkReference Include="Microsoft.AspNetCore.App" />
+  </ItemGroup>
+
+</Project>

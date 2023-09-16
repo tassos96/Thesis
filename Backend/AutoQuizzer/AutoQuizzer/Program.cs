@@ -11,6 +11,7 @@ using AutoMapper;
 using Newtonsoft.Json.Converters;
 using AutoQuizzer.Helpers.GlobalException;
 using AutoQuizzer.Helpers.SwaggerHelpers;
+using Email.DiExtentions;
 using Mapper;
 using Controllers;
 
@@ -20,6 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AutoQuizzerContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DBContext")));
 
 builder.Services.AddScoped<IApplicationServiceLayerScoped, ApplicationServiceLayerScoped>();
+builder.Services.AddEmailService(builder);
 builder.Services.AddRepositories();
 
 builder.Services.AddScoped(provider => new MapperConfiguration(cfg =>
